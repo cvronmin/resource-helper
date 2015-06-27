@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1912ECF-F67A-41D8-9730-FDB928C5F0CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EntityTextureCreator</RootNamespace>
+    <AssemblyName>EntityTextureCreator</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DrawFillRectForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DrawFillRectForm.Designer.cs">
+      <DependentUpon>DrawFillRectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DrawRectForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DrawRectForm.Designer.cs">
+      <DependentUpon>DrawRectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DrawOvalForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DrawOvalForm.Designer.cs">
+      <DependentUpon>DrawOvalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DrawLineForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DrawLineForm.Designer.cs">
+      <DependentUpon>DrawLineForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DrawThings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DrawThings.Designer.cs">
+      <DependentUpon>DrawThings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Lite.Designer.cs">
+      <DependentUpon>Lite.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewTexture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewTexture.Designer.cs">
+      <DependentUpon>NewTexture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PixelButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DrawLineForm.zh-Hans.resx">
+      <DependentUpon>DrawLineForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DrawFillRectForm.resx">
+      <DependentUpon>DrawFillRectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DrawFillRectForm.zh-Hans.resx">
+      <DependentUpon>DrawFillRectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DrawRectForm.resx">
+      <DependentUpon>DrawRectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DrawRectForm.zh-Hans.resx">
+      <DependentUpon>DrawRectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DrawOvalForm.resx">
+      <DependentUpon>DrawOvalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DrawLineForm.resx">
+      <DependentUpon>DrawLineForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DrawOvalForm.zh-Hans.resx">
+      <DependentUpon>DrawOvalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DrawThings.resx">
+      <DependentUpon>DrawThings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lite.resx">
+      <DependentUpon>Lite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lite.zh-Hans.resx">
+      <DependentUpon>Lite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lite.zh-Hant.resx">
+      <DependentUpon>Lite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewTexture.resx">
+      <DependentUpon>NewTexture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\newFileMenu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\openFileMenu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\saveFileMenu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\TC.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
