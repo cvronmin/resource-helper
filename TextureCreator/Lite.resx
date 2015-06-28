@@ -173,6 +173,34 @@
   <data name="fileMenu.Text" xml:space="preserve">
     <value>檔案(&amp;F)</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="undoItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="undoItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+Z</value>
+  </data>
+  <data name="undoItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 22</value>
+  </data>
+  <data name="undoItem.Text" xml:space="preserve">
+    <value>復原(&amp;U)</value>
+  </data>
+  <data name="redoItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+Y</value>
+  </data>
+  <data name="redoItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 22</value>
+  </data>
+  <data name="redoItem.Text" xml:space="preserve">
+    <value>重做(&amp;R)</value>
+  </data>
+  <data name="editMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 20</value>
+  </data>
+  <data name="editMenu.Text" xml:space="preserve">
+    <value>編輯(&amp;E)</value>
+  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -182,7 +210,6 @@
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>623, 24</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -201,11 +228,38 @@
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="butScale64.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="butScale64.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 265</value>
+  </data>
+  <data name="butScale64.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 23</value>
+  </data>
+  <data name="butScale64.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="butScale64.Text" xml:space="preserve">
+    <value>轉換至64x64</value>
+  </data>
+  <data name="&gt;&gt;butScale64.Name" xml:space="preserve">
+    <value>butScale64</value>
+  </data>
+  <data name="&gt;&gt;butScale64.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;butScale64.Parent" xml:space="preserve">
+    <value>toolBox</value>
+  </data>
+  <data name="&gt;&gt;butScale64.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="butscale16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="butscale16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 233</value>
+    <value>7, 207</value>
   </data>
   <data name="butscale16.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 23</value>
@@ -226,10 +280,10 @@
     <value>toolBox</value>
   </data>
   <data name="&gt;&gt;butscale16.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="butScale32.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 262</value>
+    <value>7, 236</value>
   </data>
   <data name="butScale32.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 23</value>
@@ -250,7 +304,7 @@
     <value>toolBox</value>
   </data>
   <data name="&gt;&gt;butScale32.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="butRotate270.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -277,7 +331,7 @@
     <value>toolBox</value>
   </data>
   <data name="&gt;&gt;butRotate270.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="butRotate180.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -304,7 +358,7 @@
     <value>toolBox</value>
   </data>
   <data name="&gt;&gt;butRotate180.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="butRotate90.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 294</value>
@@ -328,7 +382,7 @@
     <value>toolBox</value>
   </data>
   <data name="&gt;&gt;butRotate90.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="butFilpY.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -355,7 +409,7 @@
     <value>toolBox</value>
   </data>
   <data name="&gt;&gt;butFilpY.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="butFlipX.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 352</value>
@@ -379,7 +433,7 @@
     <value>toolBox</value>
   </data>
   <data name="&gt;&gt;butFlipX.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="butDrawFillRect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -406,7 +460,7 @@
     <value>toolBox</value>
   </data>
   <data name="&gt;&gt;butDrawFillRect.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="butDrawRect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -433,7 +487,7 @@
     <value>toolBox</value>
   </data>
   <data name="&gt;&gt;butDrawRect.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="butDrawOval.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -460,7 +514,7 @@
     <value>toolBox</value>
   </data>
   <data name="&gt;&gt;butDrawOval.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="butDrawLine.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -487,7 +541,7 @@
     <value>toolBox</value>
   </data>
   <data name="&gt;&gt;butDrawLine.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="toolBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 34</value>
@@ -954,9 +1008,6 @@
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft JhengHei UI, 9pt</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
@@ -969,11 +1020,29 @@
   <data name="&gt;&gt;fileMenu.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;newFileMenu.Name" xml:space="preserve">
+    <value>newFileMenu</value>
+  </data>
+  <data name="&gt;&gt;newFileMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;openFileMenu.Name" xml:space="preserve">
+    <value>openFileMenu</value>
+  </data>
+  <data name="&gt;&gt;openFileMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
     <value>toolStripSeparator1</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;saveFileMenu.Name" xml:space="preserve">
+    <value>saveFileMenu</value>
+  </data>
+  <data name="&gt;&gt;saveFileMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;saveAsMenu.Name" xml:space="preserve">
     <value>saveAsMenu</value>
@@ -1011,22 +1080,22 @@
   <data name="&gt;&gt;openFileDialog1.Type" xml:space="preserve">
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;newFileMenu.Name" xml:space="preserve">
-    <value>newFileMenu</value>
+  <data name="&gt;&gt;editMenu.Name" xml:space="preserve">
+    <value>editMenu</value>
   </data>
-  <data name="&gt;&gt;newFileMenu.Type" xml:space="preserve">
+  <data name="&gt;&gt;editMenu.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;openFileMenu.Name" xml:space="preserve">
-    <value>openFileMenu</value>
+  <data name="&gt;&gt;undoItem.Name" xml:space="preserve">
+    <value>undoItem</value>
   </data>
-  <data name="&gt;&gt;openFileMenu.Type" xml:space="preserve">
+  <data name="&gt;&gt;undoItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;saveFileMenu.Name" xml:space="preserve">
-    <value>saveFileMenu</value>
+  <data name="&gt;&gt;redoItem.Name" xml:space="preserve">
+    <value>redoItem</value>
   </data>
-  <data name="&gt;&gt;saveFileMenu.Type" xml:space="preserve">
+  <data name="&gt;&gt;redoItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

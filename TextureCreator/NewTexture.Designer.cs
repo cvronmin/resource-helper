@@ -32,13 +32,14 @@
             this.lblSize = new System.Windows.Forms.Label();
             this.rBut32 = new System.Windows.Forms.RadioButton();
             this.butCreate = new System.Windows.Forms.Button();
+            this.rBut64 = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // rBut16
             // 
             this.rBut16.AutoSize = true;
             this.rBut16.Checked = true;
-            this.rBut16.Location = new System.Drawing.Point(121, 71);
+            this.rBut16.Location = new System.Drawing.Point(120, 60);
             this.rBut16.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rBut16.Name = "rBut16";
             this.rBut16.Size = new System.Drawing.Size(59, 19);
@@ -50,7 +51,7 @@
             // lblSize
             // 
             this.lblSize.AutoSize = true;
-            this.lblSize.Location = new System.Drawing.Point(119, 52);
+            this.lblSize.Location = new System.Drawing.Point(118, 41);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(30, 15);
             this.lblSize.TabIndex = 1;
@@ -59,7 +60,7 @@
             // rBut32
             // 
             this.rBut32.AutoSize = true;
-            this.rBut32.Location = new System.Drawing.Point(121, 97);
+            this.rBut32.Location = new System.Drawing.Point(120, 86);
             this.rBut32.Name = "rBut32";
             this.rBut32.Size = new System.Drawing.Size(59, 19);
             this.rBut32.TabIndex = 2;
@@ -76,11 +77,23 @@
             this.butCreate.UseVisualStyleBackColor = true;
             this.butCreate.Click += new System.EventHandler(this.butCreate_Click);
             // 
+            // rBut64
+            // 
+            this.rBut64.AutoSize = true;
+            this.rBut64.Location = new System.Drawing.Point(121, 111);
+            this.rBut64.Name = "rBut64";
+            this.rBut64.Size = new System.Drawing.Size(59, 19);
+            this.rBut64.TabIndex = 4;
+            this.rBut64.TabStop = true;
+            this.rBut64.Text = "64x64";
+            this.rBut64.UseVisualStyleBackColor = true;
+            // 
             // NewTexture
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(317, 199);
+            this.Controls.Add(this.rBut64);
             this.Controls.Add(this.butCreate);
             this.Controls.Add(this.rBut32);
             this.Controls.Add(this.lblSize);
@@ -100,5 +113,6 @@
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.RadioButton rBut32;
         private System.Windows.Forms.Button butCreate;
+        private System.Windows.Forms.RadioButton rBut64;
     }
 }

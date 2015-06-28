@@ -31,15 +31,28 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Lite));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.newFileMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.saveFileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolBox = new System.Windows.Forms.GroupBox();
+            this.butscale16 = new System.Windows.Forms.Button();
+            this.butScale32 = new System.Windows.Forms.Button();
+            this.butRotate270 = new System.Windows.Forms.Button();
+            this.butRotate180 = new System.Windows.Forms.Button();
+            this.butRotate90 = new System.Windows.Forms.Button();
+            this.butFilpY = new System.Windows.Forms.Button();
+            this.butFlipX = new System.Windows.Forms.Button();
+            this.butDrawFillRect = new System.Windows.Forms.Button();
             this.butDrawRect = new System.Windows.Forms.Button();
             this.butDrawOval = new System.Windows.Forms.Button();
             this.butDrawLine = new System.Windows.Forms.Button();
             this.designBox = new System.Windows.Forms.GroupBox();
+            this.lblSizex = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.pixelInfo = new System.Windows.Forms.GroupBox();
             this.butColor = new System.Windows.Forms.Button();
             this.AlphaCount = new System.Windows.Forms.TextBox();
@@ -54,19 +67,10 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblSizex = new System.Windows.Forms.Label();
-            this.butDrawFillRect = new System.Windows.Forms.Button();
-            this.newFileMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFileMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveFileMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.butFlipX = new System.Windows.Forms.Button();
-            this.butFilpY = new System.Windows.Forms.Button();
-            this.butRotate90 = new System.Windows.Forms.Button();
-            this.butRotate180 = new System.Windows.Forms.Button();
-            this.butRotate270 = new System.Windows.Forms.Button();
-            this.butScale32 = new System.Windows.Forms.Button();
-            this.butscale16 = new System.Windows.Forms.Button();
+            this.editMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.undoItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.redoItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.butScale64 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.toolBox.SuspendLayout();
             this.designBox.SuspendLayout();
@@ -77,7 +81,8 @@
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileMenu});
+            this.fileMenu,
+            this.editMenu});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
@@ -94,10 +99,31 @@
             this.fileMenu.Name = "fileMenu";
             resources.ApplyResources(this.fileMenu, "fileMenu");
             // 
+            // newFileMenu
+            // 
+            this.newFileMenu.Image = global::TextureCreator.Properties.Resources.newFileMenu;
+            this.newFileMenu.Name = "newFileMenu";
+            resources.ApplyResources(this.newFileMenu, "newFileMenu");
+            this.newFileMenu.Click += new System.EventHandler(this.newFileMenu_Click);
+            // 
+            // openFileMenu
+            // 
+            this.openFileMenu.Image = global::TextureCreator.Properties.Resources.openFileMenu;
+            this.openFileMenu.Name = "openFileMenu";
+            resources.ApplyResources(this.openFileMenu, "openFileMenu");
+            this.openFileMenu.Click += new System.EventHandler(this.openFileMenu_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // saveFileMenu
+            // 
+            this.saveFileMenu.Image = global::TextureCreator.Properties.Resources.saveFileMenu;
+            this.saveFileMenu.Name = "saveFileMenu";
+            resources.ApplyResources(this.saveFileMenu, "saveFileMenu");
+            this.saveFileMenu.Click += new System.EventHandler(this.saveFileMenu_Click);
             // 
             // saveAsMenu
             // 
@@ -118,6 +144,7 @@
             // 
             // toolBox
             // 
+            this.toolBox.Controls.Add(this.butScale64);
             this.toolBox.Controls.Add(this.butscale16);
             this.toolBox.Controls.Add(this.butScale32);
             this.toolBox.Controls.Add(this.butRotate270);
@@ -132,6 +159,62 @@
             resources.ApplyResources(this.toolBox, "toolBox");
             this.toolBox.Name = "toolBox";
             this.toolBox.TabStop = false;
+            // 
+            // butscale16
+            // 
+            resources.ApplyResources(this.butscale16, "butscale16");
+            this.butscale16.Name = "butscale16";
+            this.butscale16.UseVisualStyleBackColor = true;
+            this.butscale16.Click += new System.EventHandler(this.butscale16_Click);
+            // 
+            // butScale32
+            // 
+            resources.ApplyResources(this.butScale32, "butScale32");
+            this.butScale32.Name = "butScale32";
+            this.butScale32.UseVisualStyleBackColor = true;
+            this.butScale32.Click += new System.EventHandler(this.butScale32_Click);
+            // 
+            // butRotate270
+            // 
+            resources.ApplyResources(this.butRotate270, "butRotate270");
+            this.butRotate270.Name = "butRotate270";
+            this.butRotate270.UseVisualStyleBackColor = true;
+            this.butRotate270.Click += new System.EventHandler(this.butRotate270_Click);
+            // 
+            // butRotate180
+            // 
+            resources.ApplyResources(this.butRotate180, "butRotate180");
+            this.butRotate180.Name = "butRotate180";
+            this.butRotate180.UseVisualStyleBackColor = true;
+            this.butRotate180.Click += new System.EventHandler(this.butRotate180_Click);
+            // 
+            // butRotate90
+            // 
+            resources.ApplyResources(this.butRotate90, "butRotate90");
+            this.butRotate90.Name = "butRotate90";
+            this.butRotate90.UseVisualStyleBackColor = true;
+            this.butRotate90.Click += new System.EventHandler(this.butRotate90_Click);
+            // 
+            // butFilpY
+            // 
+            resources.ApplyResources(this.butFilpY, "butFilpY");
+            this.butFilpY.Name = "butFilpY";
+            this.butFilpY.UseVisualStyleBackColor = true;
+            this.butFilpY.Click += new System.EventHandler(this.butFilpY_Click);
+            // 
+            // butFlipX
+            // 
+            resources.ApplyResources(this.butFlipX, "butFlipX");
+            this.butFlipX.Name = "butFlipX";
+            this.butFlipX.UseVisualStyleBackColor = true;
+            this.butFlipX.Click += new System.EventHandler(this.butFlipX_Click);
+            // 
+            // butDrawFillRect
+            // 
+            resources.ApplyResources(this.butDrawFillRect, "butDrawFillRect");
+            this.butDrawFillRect.Name = "butDrawFillRect";
+            this.butDrawFillRect.UseVisualStyleBackColor = true;
+            this.butDrawFillRect.Click += new System.EventHandler(this.butDrawFillRect_Click);
             // 
             // butDrawRect
             // 
@@ -163,6 +246,16 @@
             resources.ApplyResources(this.designBox, "designBox");
             this.designBox.Name = "designBox";
             this.designBox.TabStop = false;
+            // 
+            // lblSizex
+            // 
+            resources.ApplyResources(this.lblSizex, "lblSizex");
+            this.lblSizex.Name = "lblSizex";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
             // 
             // pixelInfo
             // 
@@ -255,92 +348,31 @@
             this.openFileDialog1.SupportMultiDottedExtensions = true;
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
-            // label1
+            // editMenu
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            this.editMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.undoItem,
+            this.redoItem});
+            this.editMenu.Name = "editMenu";
+            resources.ApplyResources(this.editMenu, "editMenu");
             // 
-            // lblSizex
+            // undoItem
             // 
-            resources.ApplyResources(this.lblSizex, "lblSizex");
-            this.lblSizex.Name = "lblSizex";
+            resources.ApplyResources(this.undoItem, "undoItem");
+            this.undoItem.Name = "undoItem";
+            this.undoItem.Click += new System.EventHandler(this.undoItem_Click);
             // 
-            // butDrawFillRect
+            // redoItem
             // 
-            resources.ApplyResources(this.butDrawFillRect, "butDrawFillRect");
-            this.butDrawFillRect.Name = "butDrawFillRect";
-            this.butDrawFillRect.UseVisualStyleBackColor = true;
-            this.butDrawFillRect.Click += new System.EventHandler(this.butDrawFillRect_Click);
+            this.redoItem.Name = "redoItem";
+            resources.ApplyResources(this.redoItem, "redoItem");
             // 
-            // newFileMenu
+            // butScale64
             // 
-            this.newFileMenu.Image = global::TextureCreator.Properties.Resources.newFileMenu;
-            this.newFileMenu.Name = "newFileMenu";
-            resources.ApplyResources(this.newFileMenu, "newFileMenu");
-            this.newFileMenu.Click += new System.EventHandler(this.newFileMenu_Click);
-            // 
-            // openFileMenu
-            // 
-            this.openFileMenu.Image = global::TextureCreator.Properties.Resources.openFileMenu;
-            this.openFileMenu.Name = "openFileMenu";
-            resources.ApplyResources(this.openFileMenu, "openFileMenu");
-            this.openFileMenu.Click += new System.EventHandler(this.openFileMenu_Click);
-            // 
-            // saveFileMenu
-            // 
-            this.saveFileMenu.Image = global::TextureCreator.Properties.Resources.saveFileMenu;
-            this.saveFileMenu.Name = "saveFileMenu";
-            resources.ApplyResources(this.saveFileMenu, "saveFileMenu");
-            this.saveFileMenu.Click += new System.EventHandler(this.saveFileMenu_Click);
-            // 
-            // butFlipX
-            // 
-            resources.ApplyResources(this.butFlipX, "butFlipX");
-            this.butFlipX.Name = "butFlipX";
-            this.butFlipX.UseVisualStyleBackColor = true;
-            this.butFlipX.Click += new System.EventHandler(this.butFlipX_Click);
-            // 
-            // butFilpY
-            // 
-            resources.ApplyResources(this.butFilpY, "butFilpY");
-            this.butFilpY.Name = "butFilpY";
-            this.butFilpY.UseVisualStyleBackColor = true;
-            this.butFilpY.Click += new System.EventHandler(this.butFilpY_Click);
-            // 
-            // butRotate90
-            // 
-            resources.ApplyResources(this.butRotate90, "butRotate90");
-            this.butRotate90.Name = "butRotate90";
-            this.butRotate90.UseVisualStyleBackColor = true;
-            this.butRotate90.Click += new System.EventHandler(this.butRotate90_Click);
-            // 
-            // butRotate180
-            // 
-            resources.ApplyResources(this.butRotate180, "butRotate180");
-            this.butRotate180.Name = "butRotate180";
-            this.butRotate180.UseVisualStyleBackColor = true;
-            this.butRotate180.Click += new System.EventHandler(this.butRotate180_Click);
-            // 
-            // butRotate270
-            // 
-            resources.ApplyResources(this.butRotate270, "butRotate270");
-            this.butRotate270.Name = "butRotate270";
-            this.butRotate270.UseVisualStyleBackColor = true;
-            this.butRotate270.Click += new System.EventHandler(this.butRotate270_Click);
-            // 
-            // butScale32
-            // 
-            resources.ApplyResources(this.butScale32, "butScale32");
-            this.butScale32.Name = "butScale32";
-            this.butScale32.UseVisualStyleBackColor = true;
-            this.butScale32.Click += new System.EventHandler(this.butScale32_Click);
-            // 
-            // butscale16
-            // 
-            resources.ApplyResources(this.butscale16, "butscale16");
-            this.butscale16.Name = "butscale16";
-            this.butscale16.UseVisualStyleBackColor = true;
-            this.butscale16.Click += new System.EventHandler(this.butscale16_Click);
+            resources.ApplyResources(this.butScale64, "butScale64");
+            this.butScale64.Name = "butScale64";
+            this.butScale64.UseVisualStyleBackColor = true;
+            this.butScale64.Click += new System.EventHandler(this.butScale64_Click);
             // 
             // Lite
             // 
@@ -403,6 +435,10 @@
         private System.Windows.Forms.Button butRotate90;
         private System.Windows.Forms.Button butScale32;
         private System.Windows.Forms.Button butscale16;
+        private System.Windows.Forms.ToolStripMenuItem editMenu;
+        private System.Windows.Forms.ToolStripMenuItem undoItem;
+        private System.Windows.Forms.ToolStripMenuItem redoItem;
+        private System.Windows.Forms.Button butScale64;
     }
 }
 

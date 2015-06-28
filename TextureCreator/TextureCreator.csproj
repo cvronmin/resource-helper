@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recorder.cs" />
     <EmbeddedResource Include="DrawLineForm.zh-Hans.resx">
       <DependentUpon>DrawLineForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -17,11 +17,12 @@ namespace TextureCreator
         public static Bitmap map;
         public Graphics gra;
         public string filename;
+        Recorder record = new Recorder();
         public Lite()
         {
             InitializeComponent();
             new16File();
-            initPixels();
+            initCrossPixels();
         }
         public void new16File() {
             pixels = new PixelButton[16, 16];
@@ -35,7 +36,14 @@ namespace TextureCreator
             gra = Graphics.FromImage(map);
             gra.Clear(Color.Transparent);
         }
-        private void initPixels(){
+        public void new64File()
+        {
+            pixels = new PixelButton[64, 64];
+            map = new Bitmap(64, 64);
+            gra = Graphics.FromImage(map);
+            gra.Clear(Color.Transparent);
+        }
+/*        private void initPixels(){
             this.designPanel.Controls.Clear();
             for (int x = 0; x < pixels.GetLength(0);x++ )
             {
@@ -71,7 +79,7 @@ namespace TextureCreator
                 lblSizex.Text = "16x16";
             }
             redrawPixels();
-        }
+        }*/
         private void initCrossPixels()
         {
             this.designPanel.Controls.Clear();
@@ -86,7 +94,11 @@ namespace TextureCreator
                     pixels[y, x].Location = new System.Drawing.Point(0, 0);
                     pixels[y, x].Margin = new System.Windows.Forms.Padding(0);
                     pixels[y, x].Name = "pixel";
-                    if (pixels.GetLength(0) == 32 && pixels.GetLength(1) == 32)
+                    if (pixels.GetLength(0) == 64 && pixels.GetLength(1) == 64)
+                    {
+                        pixels[y, x].Size = new System.Drawing.Size(4, 4);
+                    }
+                    else if (pixels.GetLength(0) == 32 && pixels.GetLength(1) == 32)
                     {
                         pixels[y, x].Size = new System.Drawing.Size(8, 8);
                     }
@@ -101,7 +113,11 @@ namespace TextureCreator
                     this.designPanel.Controls.Add(pixels[y, x]);
                 }
             }
-            if (pixels.GetLength(0) == 32 && pixels.GetLength(1) == 32)
+            if (pixels.GetLength(0) == 64 && pixels.GetLength(1) == 64)
+            {
+                lblSizex.Text = "64x64";
+            }
+            else if (pixels.GetLength(0) == 32 && pixels.GetLength(1) == 32)
             {
                 lblSizex.Text = "32x32";
             }
@@ -131,7 +147,12 @@ namespace TextureCreator
             pixelInfo.Text = "像素資訊" + selectpix.getX() + "," + selectpix.getY();
             }
         }
-        private void pixels_Changed(object sender, EventArgs e) { 
+        private void pixels_Changed(object sender, EventArgs e) {
+ /*           if(map != null){
+            record.addRecord(map);
+            record.saveHistory();
+            undoItem.Enabled = (record.getRecordCount() != 0);
+            }*/
         }
 
         private void AlphaCount_TextChanged(object sender, EventArgs e)
@@ -210,7 +231,7 @@ namespace TextureCreator
         private void newFileMenu_Click(object sender, EventArgs e)
         {
             new NewTexture(this).ShowDialog();
-            initPixels();
+            initCrossPixels();
         }
 
         private void saveFileMenu_Click(object sender, EventArgs e)
@@ -240,7 +261,13 @@ namespace TextureCreator
         {
             filename = openFileDialog1.FileName;
             Image file = Image.FromFile(filename);
-            if (file.Height >= 32 && file.Width >= 32)
+            if (file.Width >= 64 && file.Height >= 64)
+            {
+                pixels = new PixelButton[64, 64];
+                map = new Bitmap(file, new Size(64, 64));
+                initCrossPixels();
+            }
+            else if (file.Height >= 32 && file.Width >= 32 && file.Height < 64 && file.Width < 64)
             {
                 pixels = new PixelButton[32, 32];
                 map = new Bitmap(file, new Size(32, 32));
@@ -314,6 +341,53 @@ namespace TextureCreator
             map.RotateFlip(RotateFlipType.Rotate270FlipNone);
             redrawPixels();
         }
+        private void butScale64_Click(object sender, EventArgs e)
+        {
+            Bitmap scalemap = new Bitmap(64, 64);
+            if (map.Height == 16 && map.Width == 16)
+            {
+                for (int x = 0; x < 16; x++)
+                {
+                    for (int y = 0; y < 16; y++)
+                    {
+                        scalemap.SetPixel(x * 4    , y * 4    , map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4 + 1, y * 4    , map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4    , y * 4 + 1, map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4 + 1, y * 4 + 1, map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4 + 2, y * 4    , map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4    , y * 4 + 2, map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4 + 3, y * 4    , map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4    , y * 4 + 3, map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4 + 1, y * 4 + 1, map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4 + 2, y * 4 + 1, map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4 + 3, y * 4 + 1, map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4 + 1, y * 4 + 2, map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4 + 1, y * 4 + 3, map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4 + 2, y * 4 + 2, map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4 + 2, y * 4 + 3, map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4 + 3, y * 4 + 2, map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 4 + 3, y * 4 + 3, map.GetPixel(x, y));
+                    }
+                }
+                map = scalemap;
+            }
+            if (map.Height == 32 && map.Width == 32)
+            {
+                for (int x = 0; x < 32; x++)
+                {
+                    for (int y = 0; y < 32; y++)
+                    {
+                        scalemap.SetPixel(x * 2    , y * 2    , map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 2 + 1, y * 2    , map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 2    , y * 2 + 1, map.GetPixel(x, y));
+                        scalemap.SetPixel(x * 2 + 1, y * 2 + 1, map.GetPixel(x, y));
+                    }
+                }
+                map = scalemap;
+            }
+            pixels = new PixelButton[64, 64];
+            initCrossPixels();
+        }
 
         private void butScale32_Click(object sender, EventArgs e)
         {
@@ -332,6 +406,17 @@ namespace TextureCreator
                 }
              map = scalemap;
             }
+            if (map.Height == 64 && map.Width == 64)
+            {
+                for (int x = 0; x < 64; x++)
+                {
+                    for (int y = 0; y < 64; y++)
+                    {
+                        scalemap.SetPixel(x / 2, y / 2, map.GetPixel(x, y));
+                    }
+                }
+                map = scalemap;
+            }
             pixels = new PixelButton[32, 32];
             initCrossPixels();
         }
@@ -339,6 +424,17 @@ namespace TextureCreator
         private void butscale16_Click(object sender, EventArgs e)
         {
             Bitmap scalemap = new Bitmap(16, 16);
+            if (map.Height == 64 && map.Width == 64)
+            {
+                for (int x = 0; x < 64; x++)
+                {
+                    for (int y = 0; y < 64; y++)
+                    {
+                        scalemap.SetPixel(x / 4, y / 4, map.GetPixel(x, y));
+                    }
+                }
+                map = scalemap;
+            }
             if(map.Height == 32 && map.Width == 32){
                 for (int x = 0; x < 32; x++)
                 {
@@ -352,5 +448,12 @@ namespace TextureCreator
             pixels = new PixelButton[16, 16];
             initCrossPixels();
         }
+
+        private void undoItem_Click(object sender, EventArgs e)
+        {
+   /*         map = record.getRecord();
+            redrawPixels();*/
+        }
+
     }
 }

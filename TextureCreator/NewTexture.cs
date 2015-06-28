@@ -27,6 +27,10 @@ namespace TextureCreator
             {
                 parent.new32File();
             }
+            else if (rBut64.Checked)
+            {
+                parent.new64File();
+            }
             this.Close();
         }
     }
