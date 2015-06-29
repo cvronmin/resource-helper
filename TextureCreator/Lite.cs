@@ -23,6 +23,7 @@ namespace TextureCreator
             InitializeComponent();
             new16File();
             initCrossPixels();
+            this.Text = filename != null ? "Texture Creator - " + filename : "Texture Creator - Untitled";
         }
         public void new16File() {
             pixels = new PixelButton[16, 16];
@@ -145,6 +146,8 @@ namespace TextureCreator
             BlueCount.Text = (map.GetPixel(selectpix.getX(), selectpix.getY()).B).ToString();
             AlphaCount.Text = (map.GetPixel(selectpix.getX(), selectpix.getY()).A).ToString();
             pixelInfo.Text = "像素資訊" + selectpix.getX() + "," + selectpix.getY();
+            butColor.BackColor = map.GetPixel(selectpix.getX(), selectpix.getY());
+            butClear.Enabled = true;
             }
         }
         private void pixels_Changed(object sender, EventArgs e) {
@@ -155,65 +158,9 @@ namespace TextureCreator
             }*/
         }
 
-        private void AlphaCount_TextChanged(object sender, EventArgs e)
-        {
-            map.SetPixel(selectpix.getX(), selectpix.getY(), Color.FromArgb(
-                    Int32.Parse(AlphaCount.Text) & 255,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).R,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).G,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).B));
-            selectpix.BackColor = Color.FromArgb(
-                    Int32.Parse(AlphaCount.Text) & 255,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).R,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).G,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).B);
-        }
-
-        private void RedCount_TextChanged(object sender, EventArgs e)
-        {
-            map.SetPixel(selectpix.getX(), selectpix.getY(), Color.FromArgb(
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).A,
-                    Int32.Parse(RedCount.Text) & 255,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).G,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).B));
-            selectpix.BackColor = Color.FromArgb(
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).A,
-                    Int32.Parse(RedCount.Text) & 255,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).G,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).B);
-        }
-
-        private void GreenCount_TextChanged(object sender, EventArgs e)
-        {
-            map.SetPixel(selectpix.getX(), selectpix.getY(), Color.FromArgb(
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).A,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).R,
-                    Int32.Parse(GreenCount.Text) & 255,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).B));
-            selectpix.BackColor = Color.FromArgb(
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).A,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).R,
-                    Int32.Parse(GreenCount.Text) & 255,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).B);
-        }
-
-        private void BlueCount_TextChanged(object sender, EventArgs e)
-        {
-            map.SetPixel(selectpix.getX(), selectpix.getY(), Color.FromArgb(
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).A,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).R,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).G,
-                    Int32.Parse(BlueCount.Text) & 255));
-            selectpix.BackColor = Color.FromArgb(
-                map.GetPixel(selectpix.getX(), selectpix.getY()).A,
-                map.GetPixel(selectpix.getX(), selectpix.getY()).R,
-                map.GetPixel(selectpix.getX(), selectpix.getY()).G,
-                Int32.Parse(BlueCount.Text) & 255);
-        }
-
         private void butColor_Click(object sender, EventArgs e)
         {
-            if (AlphaCount.Text != null && RedCount.Text != null && GreenCount.Text != null && BlueCount.Text != null)
+            if (AlphaCount.Text != "" && RedCount.Text != "" && GreenCount.Text != "" && BlueCount.Text != "")
             {
                 colorDialog1.Color = Color.FromArgb(Int32.Parse(AlphaCount.Text), Int32.Parse(RedCount.Text), Int32.Parse(GreenCount.Text), Int32.Parse(BlueCount.Text));
             }
@@ -222,6 +169,9 @@ namespace TextureCreator
                 colorDialog1.Color = Color.Black;
             }
             colorDialog1.ShowDialog();
+            map.SetPixel(selectpix.getX(), selectpix.getY(), colorDialog1.Color);
+            butColor.BackColor = colorDialog1.Color;
+            redrawPixels();
             RedCount.Text = colorDialog1.Color.R.ToString();
             GreenCount.Text = colorDialog1.Color.G.ToString();
             BlueCount.Text = colorDialog1.Color.B.ToString();
@@ -239,6 +189,10 @@ namespace TextureCreator
             if (filename == null) {
                 saveAsMenu_Click(sender, e);
             }
+            else
+            {
+                map.Save(filename);
+            }
         }
 
         private void saveAsMenu_Click(object sender, EventArgs e)
@@ -250,6 +204,7 @@ namespace TextureCreator
         {
             this.filename = saveFileDialog1.FileName;
             map.Save(saveFileDialog1.FileName, System.Drawing.Imaging.ImageFormat.Png);
+            this.Text = filename != null ? "Texture Creator - " + filename : "Texture Creator - Untitled";
         }
 
         private void openFileMenu_Click(object sender, EventArgs e)
@@ -260,6 +215,7 @@ namespace TextureCreator
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             filename = openFileDialog1.FileName;
+            this.Text = filename != null ? "Texture Creator - " + filename : "Texture Creator - Untitled";
             Image file = Image.FromFile(filename);
             if (file.Width >= 64 && file.Height >= 64)
             {
@@ -453,6 +409,12 @@ namespace TextureCreator
         {
    /*         map = record.getRecord();
             redrawPixels();*/
+        }
+
+        private void butClear_Click(object sender, EventArgs e)
+        {
+            map.SetPixel(selectpix.getX(), selectpix.getY(), Color.Transparent);
+            redrawPixels();
         }
 
     }

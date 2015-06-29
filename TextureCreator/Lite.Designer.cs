@@ -38,7 +38,11 @@
             this.saveAsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.editMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.undoItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.redoItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolBox = new System.Windows.Forms.GroupBox();
+            this.butScale64 = new System.Windows.Forms.Button();
             this.butscale16 = new System.Windows.Forms.Button();
             this.butScale32 = new System.Windows.Forms.Button();
             this.butRotate270 = new System.Windows.Forms.Button();
@@ -67,10 +71,7 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.editMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.undoItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.redoItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.butScale64 = new System.Windows.Forms.Button();
+            this.butClear = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.toolBox.SuspendLayout();
             this.designBox.SuspendLayout();
@@ -142,6 +143,25 @@
             resources.ApplyResources(this.exitMenu, "exitMenu");
             this.exitMenu.Click += new System.EventHandler(this.exitMenu_Click);
             // 
+            // editMenu
+            // 
+            this.editMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.undoItem,
+            this.redoItem});
+            this.editMenu.Name = "editMenu";
+            resources.ApplyResources(this.editMenu, "editMenu");
+            // 
+            // undoItem
+            // 
+            resources.ApplyResources(this.undoItem, "undoItem");
+            this.undoItem.Name = "undoItem";
+            this.undoItem.Click += new System.EventHandler(this.undoItem_Click);
+            // 
+            // redoItem
+            // 
+            this.redoItem.Name = "redoItem";
+            resources.ApplyResources(this.redoItem, "redoItem");
+            // 
             // toolBox
             // 
             this.toolBox.Controls.Add(this.butScale64);
@@ -159,6 +179,13 @@
             resources.ApplyResources(this.toolBox, "toolBox");
             this.toolBox.Name = "toolBox";
             this.toolBox.TabStop = false;
+            // 
+            // butScale64
+            // 
+            resources.ApplyResources(this.butScale64, "butScale64");
+            this.butScale64.Name = "butScale64";
+            this.butScale64.UseVisualStyleBackColor = true;
+            this.butScale64.Click += new System.EventHandler(this.butScale64_Click);
             // 
             // butscale16
             // 
@@ -259,6 +286,7 @@
             // 
             // pixelInfo
             // 
+            this.pixelInfo.Controls.Add(this.butClear);
             this.pixelInfo.Controls.Add(this.butColor);
             this.pixelInfo.Controls.Add(this.AlphaCount);
             this.pixelInfo.Controls.Add(this.Alpha);
@@ -284,7 +312,6 @@
             // 
             resources.ApplyResources(this.AlphaCount, "AlphaCount");
             this.AlphaCount.Name = "AlphaCount";
-            this.AlphaCount.TextChanged += new System.EventHandler(this.AlphaCount_TextChanged);
             // 
             // Alpha
             // 
@@ -295,7 +322,6 @@
             // 
             resources.ApplyResources(this.BlueCount, "BlueCount");
             this.BlueCount.Name = "BlueCount";
-            this.BlueCount.TextChanged += new System.EventHandler(this.BlueCount_TextChanged);
             // 
             // Blue
             // 
@@ -306,7 +332,6 @@
             // 
             resources.ApplyResources(this.GreenCount, "GreenCount");
             this.GreenCount.Name = "GreenCount";
-            this.GreenCount.TextChanged += new System.EventHandler(this.GreenCount_TextChanged);
             // 
             // Green
             // 
@@ -317,7 +342,6 @@
             // 
             resources.ApplyResources(this.RedCount, "RedCount");
             this.RedCount.Name = "RedCount";
-            this.RedCount.TextChanged += new System.EventHandler(this.RedCount_TextChanged);
             // 
             // Red
             // 
@@ -348,31 +372,12 @@
             this.openFileDialog1.SupportMultiDottedExtensions = true;
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
-            // editMenu
+            // butClear
             // 
-            this.editMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.undoItem,
-            this.redoItem});
-            this.editMenu.Name = "editMenu";
-            resources.ApplyResources(this.editMenu, "editMenu");
-            // 
-            // undoItem
-            // 
-            resources.ApplyResources(this.undoItem, "undoItem");
-            this.undoItem.Name = "undoItem";
-            this.undoItem.Click += new System.EventHandler(this.undoItem_Click);
-            // 
-            // redoItem
-            // 
-            this.redoItem.Name = "redoItem";
-            resources.ApplyResources(this.redoItem, "redoItem");
-            // 
-            // butScale64
-            // 
-            resources.ApplyResources(this.butScale64, "butScale64");
-            this.butScale64.Name = "butScale64";
-            this.butScale64.UseVisualStyleBackColor = true;
-            this.butScale64.Click += new System.EventHandler(this.butScale64_Click);
+            resources.ApplyResources(this.butClear, "butClear");
+            this.butClear.Name = "butClear";
+            this.butClear.UseVisualStyleBackColor = true;
+            this.butClear.Click += new System.EventHandler(this.butClear_Click);
             // 
             // Lite
             // 
@@ -439,6 +444,7 @@
         private System.Windows.Forms.ToolStripMenuItem undoItem;
         private System.Windows.Forms.ToolStripMenuItem redoItem;
         private System.Windows.Forms.Button butScale64;
+        private System.Windows.Forms.Button butClear;
     }
 }
 
