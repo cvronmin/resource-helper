@@ -53,14 +53,13 @@
             this.lblSize.AutoSize = true;
             this.lblSize.Location = new System.Drawing.Point(118, 29);
             this.lblSize.Name = "lblSize";
-            this.lblSize.Size = new System.Drawing.Size(30, 15);
+            this.lblSize.Size = new System.Drawing.Size(31, 15);
             this.lblSize.TabIndex = 1;
             this.lblSize.Text = "Size";
             // 
             // rBut32
             // 
             this.rBut32.AutoSize = true;
-            this.rBut32.Enabled = false;
             this.rBut32.Location = new System.Drawing.Point(121, 97);
             this.rBut32.Name = "rBut32";
             this.rBut32.Size = new System.Drawing.Size(66, 19);
@@ -99,7 +98,7 @@
             this.Controls.Add(this.rBut32);
             this.Controls.Add(this.lblSize);
             this.Controls.Add(this.rBut16);
-            this.Font = new System.Drawing.Font("Microsoft JhengHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "NewTexture";
             this.Text = "NewTexture";

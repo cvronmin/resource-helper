@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Lite));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,7 +53,6 @@
             this.butDrawLine = new System.Windows.Forms.Button();
             this.designBox = new System.Windows.Forms.GroupBox();
             this.lblSizex = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.pixelInfo = new System.Windows.Forms.GroupBox();
             this.butColor = new System.Windows.Forms.Button();
             this.AlphaCount = new System.Windows.Forms.TextBox();
@@ -64,9 +64,15 @@
             this.RedCount = new System.Windows.Forms.TextBox();
             this.Red = new System.Windows.Forms.Label();
             this.designPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.waitTimer = new System.Windows.Forms.Timer(this.components);
+            this.readingBar = new System.Windows.Forms.ProgressBar();
+            this.waittimer1 = new System.Windows.Forms.Timer(this.components);
+            this.waittimer2 = new System.Windows.Forms.Timer(this.components);
+            this.butClear = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.toolBox.SuspendLayout();
             this.designBox.SuspendLayout();
@@ -243,14 +249,10 @@
             resources.ApplyResources(this.lblSizex, "lblSizex");
             this.lblSizex.Name = "lblSizex";
             // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
             // pixelInfo
             // 
             resources.ApplyResources(this.pixelInfo, "pixelInfo");
+            this.pixelInfo.Controls.Add(this.butClear);
             this.pixelInfo.Controls.Add(this.butColor);
             this.pixelInfo.Controls.Add(this.AlphaCount);
             this.pixelInfo.Controls.Add(this.Alpha);
@@ -275,7 +277,7 @@
             // 
             resources.ApplyResources(this.AlphaCount, "AlphaCount");
             this.AlphaCount.Name = "AlphaCount";
-            this.AlphaCount.TextChanged += new System.EventHandler(this.AlphaCount_TextChanged);
+            this.AlphaCount.TextChanged += new System.EventHandler(this.ColorCount_TextChanged);
             // 
             // Alpha
             // 
@@ -286,7 +288,7 @@
             // 
             resources.ApplyResources(this.BlueCount, "BlueCount");
             this.BlueCount.Name = "BlueCount";
-            this.BlueCount.TextChanged += new System.EventHandler(this.BlueCount_TextChanged);
+            this.BlueCount.TextChanged += new System.EventHandler(this.ColorCount_TextChanged);
             // 
             // Blue
             // 
@@ -297,7 +299,7 @@
             // 
             resources.ApplyResources(this.GreenCount, "GreenCount");
             this.GreenCount.Name = "GreenCount";
-            this.GreenCount.TextChanged += new System.EventHandler(this.GreenCount_TextChanged);
+            this.GreenCount.TextChanged += new System.EventHandler(this.ColorCount_TextChanged);
             // 
             // Green
             // 
@@ -308,7 +310,7 @@
             // 
             resources.ApplyResources(this.RedCount, "RedCount");
             this.RedCount.Name = "RedCount";
-            this.RedCount.TextChanged += new System.EventHandler(this.RedCount_TextChanged);
+            this.RedCount.TextChanged += new System.EventHandler(this.ColorCount_TextChanged);
             // 
             // Red
             // 
@@ -317,9 +319,15 @@
             // 
             // designPanel
             // 
+            this.designPanel.BackColor = System.Drawing.SystemColors.Control;
             this.designPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.designPanel, "designPanel");
             this.designPanel.Name = "designPanel";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
             // 
             // colorDialog1
             // 
@@ -339,10 +347,39 @@
             this.openFileDialog1.SupportMultiDottedExtensions = true;
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
+            // waitTimer
+            // 
+            this.waitTimer.Interval = 1000;
+            this.waitTimer.Tick += new System.EventHandler(this.waitTimer_Tick);
+            // 
+            // readingBar
+            // 
+            resources.ApplyResources(this.readingBar, "readingBar");
+            this.readingBar.Name = "readingBar";
+            this.readingBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            // 
+            // waittimer1
+            // 
+            this.waittimer1.Interval = 1000;
+            this.waittimer1.Tick += new System.EventHandler(this.waittimer1_Tick);
+            // 
+            // waittimer2
+            // 
+            this.waittimer2.Interval = 1000;
+            this.waittimer2.Tick += new System.EventHandler(this.waittimer2_Tick);
+            // 
+            // butClear
+            // 
+            resources.ApplyResources(this.butClear, "butClear");
+            this.butClear.Name = "butClear";
+            this.butClear.UseVisualStyleBackColor = true;
+            this.butClear.Click += new System.EventHandler(this.butClear_Click);
+            // 
             // Lite
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.readingBar);
             this.Controls.Add(this.designBox);
             this.Controls.Add(this.toolBox);
             this.Controls.Add(this.menuStrip1);
@@ -400,6 +437,11 @@
         private System.Windows.Forms.Button butRotate90;
         private System.Windows.Forms.Button butScale42;
         private System.Windows.Forms.Button butscale21;
+        private System.Windows.Forms.Timer waitTimer;
+        private System.Windows.Forms.ProgressBar readingBar;
+        private System.Windows.Forms.Timer waittimer1;
+        private System.Windows.Forms.Timer waittimer2;
+        private System.Windows.Forms.Button butClear;
     }
 }
 

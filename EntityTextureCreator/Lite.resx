@@ -121,84 +121,10 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="newFileMenu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wwAADsMBx2+oZAAAADBJREFUOE9jkJ7P8J8STLkBAvJc/ynBowaMGgDCZBnw/z8DnE1fA0Aa0fFAe4Hr
-        PwDUDFgdIKtt8wAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="newFileMenu.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+N</value>
-  </data>
-  <data name="newFileMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
-  </data>
-  <data name="newFileMenu.Text" xml:space="preserve">
-    <value>開新檔案(&amp;N)</value>
-  </data>
-  <data name="openFileMenu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wwAADsMBx2+oZAAAAHhJREFUOE9jkJ7P8B8fBgIQgRMzCMhz/ceH0TWgY/oawACmEHywGDZNyBiuEItm
-        ECbKAJBmQy9vMA2DJBkAVgikQIbADIKLY9OEjGEKwYqhhqAYAGMQi0cNwMRYBZFx6voN//FhrJqQMUgR
-        0NkYGOQNog3AjTf8BwBUcWUS4PRUjgAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="openFileMenu.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+O</value>
-  </data>
-  <data name="openFileMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
-  </data>
-  <data name="openFileMenu.Text" xml:space="preserve">
-    <value>開啟舊檔(&amp;O)</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 6</value>
-  </data>
-  <data name="saveFileMenu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wwAADsMBx2+oZAAAAGZJREFUOE9jkJ7P8B8fBgIQgRMzCMhz/ceH0TWg45FiAANUPTIECxBrADI29PKG
-        GkgtA2AMYjGFBjD8RzUAwiIRgzTBuPT3AibGKoiMU9dv+I8PY9WEjEGKgM7GwCBvEG0AbrzhPwDID2+z
-        6LLGEQAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="saveFileMenu.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+S</value>
-  </data>
-  <data name="saveFileMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
-  </data>
-  <data name="saveFileMenu.Text" xml:space="preserve">
-    <value>儲存檔案(&amp;S)</value>
-  </data>
-  <data name="saveAsMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
-  </data>
-  <data name="saveAsMenu.Text" xml:space="preserve">
-    <value>另存新檔(&amp;A)</value>
-  </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 6</value>
-  </data>
-  <data name="exitMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
-  </data>
-  <data name="exitMenu.Text" xml:space="preserve">
-    <value>結束(&amp;X)</value>
-  </data>
-  <data name="fileMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 20</value>
-  </data>
-  <data name="fileMenu.Text" xml:space="preserve">
-    <value>檔案(&amp;F)</value>
-  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="menuStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 2, 0, 2</value>
   </data>
@@ -222,6 +148,242 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="fileMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 20</value>
+  </data>
+  <data name="fileMenu.Text" xml:space="preserve">
+    <value>檔案(&amp;F)</value>
+  </data>
+  <data name="newFileMenu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vwAADr8BOAVTJAAAADBJREFUOE9jkJ7P8J8STLkBAvJc/ynBowaMGgDCZBnw/z8DnE1fA0Aa0fFAe4Hr
+        PwDUDFgdIKtt8wAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="newFileMenu.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+N</value>
+  </data>
+  <data name="newFileMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="newFileMenu.Text" xml:space="preserve">
+    <value>開新檔案(&amp;N)</value>
+  </data>
+  <data name="openFileMenu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vwAADr8BOAVTJAAAAHhJREFUOE9jkJ7P8B8fBgIQgRMzCMhz/ceH0TWgY/oawACmEHywGDZNyBiuEItm
+        ECbKAJBmQy9vMA2DJBkAVgikQIbADIKLY9OEjGEKwYqhhqAYAGMQi0cNwMRYBZFx6voN//FhrJqQMUgR
+        0NkYGOQNog3AjTf8BwBUcWUS4PRUjgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="openFileMenu.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+O</value>
+  </data>
+  <data name="openFileMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="openFileMenu.Text" xml:space="preserve">
+    <value>開啟舊檔(&amp;O)</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 6</value>
+  </data>
+  <data name="saveFileMenu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vwAADr8BOAVTJAAAAGZJREFUOE9jkJ7P8B8fBgIQgRMzCMhz/ceH0TWg45FiAANUPTIECxBrADI29PKG
+        GkgtA2AMYjGFBjD8RzUAwiIRgzTBuPT3AibGKoiMU9dv+I8PY9WEjEGKgM7GwCBvEG0AbrzhPwDID2+z
+        6LLGEQAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="saveFileMenu.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+S</value>
+  </data>
+  <data name="saveFileMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="saveFileMenu.Text" xml:space="preserve">
+    <value>儲存檔案(&amp;S)</value>
+  </data>
+  <data name="saveAsMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="saveAsMenu.Text" xml:space="preserve">
+    <value>另存新檔(&amp;A)</value>
+  </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 6</value>
+  </data>
+  <data name="exitMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="exitMenu.Text" xml:space="preserve">
+    <value>結束(&amp;X)</value>
+  </data>
+  <data name="&gt;&gt;butscale21.Name" xml:space="preserve">
+    <value>butscale21</value>
+  </data>
+  <data name="&gt;&gt;butscale21.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;butscale21.Parent" xml:space="preserve">
+    <value>toolBox</value>
+  </data>
+  <data name="&gt;&gt;butscale21.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;butScale42.Name" xml:space="preserve">
+    <value>butScale42</value>
+  </data>
+  <data name="&gt;&gt;butScale42.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;butScale42.Parent" xml:space="preserve">
+    <value>toolBox</value>
+  </data>
+  <data name="&gt;&gt;butScale42.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;butRotate270.Name" xml:space="preserve">
+    <value>butRotate270</value>
+  </data>
+  <data name="&gt;&gt;butRotate270.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;butRotate270.Parent" xml:space="preserve">
+    <value>toolBox</value>
+  </data>
+  <data name="&gt;&gt;butRotate270.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;butRotate180.Name" xml:space="preserve">
+    <value>butRotate180</value>
+  </data>
+  <data name="&gt;&gt;butRotate180.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;butRotate180.Parent" xml:space="preserve">
+    <value>toolBox</value>
+  </data>
+  <data name="&gt;&gt;butRotate180.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;butRotate90.Name" xml:space="preserve">
+    <value>butRotate90</value>
+  </data>
+  <data name="&gt;&gt;butRotate90.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;butRotate90.Parent" xml:space="preserve">
+    <value>toolBox</value>
+  </data>
+  <data name="&gt;&gt;butRotate90.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;butFilpY.Name" xml:space="preserve">
+    <value>butFilpY</value>
+  </data>
+  <data name="&gt;&gt;butFilpY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;butFilpY.Parent" xml:space="preserve">
+    <value>toolBox</value>
+  </data>
+  <data name="&gt;&gt;butFilpY.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;butFlipX.Name" xml:space="preserve">
+    <value>butFlipX</value>
+  </data>
+  <data name="&gt;&gt;butFlipX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;butFlipX.Parent" xml:space="preserve">
+    <value>toolBox</value>
+  </data>
+  <data name="&gt;&gt;butFlipX.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;butDrawFillRect.Name" xml:space="preserve">
+    <value>butDrawFillRect</value>
+  </data>
+  <data name="&gt;&gt;butDrawFillRect.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;butDrawFillRect.Parent" xml:space="preserve">
+    <value>toolBox</value>
+  </data>
+  <data name="&gt;&gt;butDrawFillRect.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;butDrawRect.Name" xml:space="preserve">
+    <value>butDrawRect</value>
+  </data>
+  <data name="&gt;&gt;butDrawRect.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;butDrawRect.Parent" xml:space="preserve">
+    <value>toolBox</value>
+  </data>
+  <data name="&gt;&gt;butDrawRect.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;butDrawOval.Name" xml:space="preserve">
+    <value>butDrawOval</value>
+  </data>
+  <data name="&gt;&gt;butDrawOval.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;butDrawOval.Parent" xml:space="preserve">
+    <value>toolBox</value>
+  </data>
+  <data name="&gt;&gt;butDrawOval.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;butDrawLine.Name" xml:space="preserve">
+    <value>butDrawLine</value>
+  </data>
+  <data name="&gt;&gt;butDrawLine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;butDrawLine.Parent" xml:space="preserve">
+    <value>toolBox</value>
+  </data>
+  <data name="&gt;&gt;butDrawLine.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="toolBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 34</value>
+  </data>
+  <data name="toolBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="toolBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="toolBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 382</value>
+  </data>
+  <data name="toolBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="toolBox.Text" xml:space="preserve">
+    <value>工具箱</value>
+  </data>
+  <data name="&gt;&gt;toolBox.Name" xml:space="preserve">
+    <value>toolBox</value>
+  </data>
+  <data name="&gt;&gt;toolBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="butscale21.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -545,36 +707,6 @@
   <data name="&gt;&gt;butDrawLine.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="toolBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 34</value>
-  </data>
-  <data name="toolBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
-  <data name="toolBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
-  <data name="toolBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 382</value>
-  </data>
-  <data name="toolBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="toolBox.Text" xml:space="preserve">
-    <value>工具箱</value>
-  </data>
-  <data name="&gt;&gt;toolBox.Name" xml:space="preserve">
-    <value>toolBox</value>
-  </data>
-  <data name="&gt;&gt;toolBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolBox.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="lblSizex.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -585,10 +717,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblSizex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>47, 350</value>
+    <value>47, 290</value>
   </data>
   <data name="lblSizex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 15</value>
+    <value>41, 15</value>
   </data>
   <data name="lblSizex.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -611,6 +743,33 @@
   <data name="pixelInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
+  <data name="butClear.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="butClear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>419, 15</value>
+  </data>
+  <data name="butClear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 45</value>
+  </data>
+  <data name="butClear.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="butClear.Text" xml:space="preserve">
+    <value>Clear Colour</value>
+  </data>
+  <data name="&gt;&gt;butClear.Name" xml:space="preserve">
+    <value>butClear</value>
+  </data>
+  <data name="&gt;&gt;butClear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;butClear.Parent" xml:space="preserve">
+    <value>pixelInfo</value>
+  </data>
+  <data name="&gt;&gt;butClear.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="butColor.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -621,10 +780,10 @@
     <value>NoControl</value>
   </data>
   <data name="butColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 17</value>
+    <value>369, 15</value>
   </data>
   <data name="butColor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 43</value>
+    <value>44, 44</value>
   </data>
   <data name="butColor.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -639,13 +798,16 @@
     <value>pixelInfo</value>
   </data>
   <data name="&gt;&gt;butColor.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="AlphaCount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
+  <data name="AlphaCount.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="AlphaCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 36</value>
+    <value>279, 38</value>
   </data>
   <data name="AlphaCount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -654,7 +816,7 @@
     <value>3</value>
   </data>
   <data name="AlphaCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 23</value>
+    <value>84, 21</value>
   </data>
   <data name="AlphaCount.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -669,7 +831,7 @@
     <value>pixelInfo</value>
   </data>
   <data name="&gt;&gt;AlphaCount.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="Alpha.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -681,10 +843,10 @@
     <value>NoControl</value>
   </data>
   <data name="Alpha.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 17</value>
+    <value>276, 19</value>
   </data>
   <data name="Alpha.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 15</value>
+    <value>38, 15</value>
   </data>
   <data name="Alpha.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -702,13 +864,16 @@
     <value>pixelInfo</value>
   </data>
   <data name="&gt;&gt;Alpha.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="BlueCount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
+  <data name="BlueCount.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="BlueCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>188, 35</value>
+    <value>189, 38</value>
   </data>
   <data name="BlueCount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -717,7 +882,7 @@
     <value>3</value>
   </data>
   <data name="BlueCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 23</value>
+    <value>84, 21</value>
   </data>
   <data name="BlueCount.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -732,7 +897,7 @@
     <value>pixelInfo</value>
   </data>
   <data name="&gt;&gt;BlueCount.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="Blue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -741,16 +906,16 @@
     <value>True</value>
   </data>
   <data name="Blue.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft JhengHei UI, 9pt</value>
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="Blue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="Blue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 16</value>
+    <value>186, 19</value>
   </data>
   <data name="Blue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 15</value>
+    <value>32, 15</value>
   </data>
   <data name="Blue.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -768,13 +933,16 @@
     <value>pixelInfo</value>
   </data>
   <data name="&gt;&gt;Blue.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="GreenCount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
+  <data name="GreenCount.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="GreenCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 35</value>
+    <value>99, 38</value>
   </data>
   <data name="GreenCount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -783,7 +951,7 @@
     <value>3</value>
   </data>
   <data name="GreenCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 23</value>
+    <value>84, 21</value>
   </data>
   <data name="GreenCount.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -798,7 +966,7 @@
     <value>pixelInfo</value>
   </data>
   <data name="&gt;&gt;GreenCount.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="Green.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -810,7 +978,7 @@
     <value>NoControl</value>
   </data>
   <data name="Green.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 17</value>
+    <value>96, 20</value>
   </data>
   <data name="Green.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 15</value>
@@ -831,13 +999,16 @@
     <value>pixelInfo</value>
   </data>
   <data name="&gt;&gt;Green.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="RedCount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
+  <data name="RedCount.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="RedCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 35</value>
+    <value>9, 38</value>
   </data>
   <data name="RedCount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -846,7 +1017,7 @@
     <value>3</value>
   </data>
   <data name="RedCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 23</value>
+    <value>84, 21</value>
   </data>
   <data name="RedCount.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -861,7 +1032,7 @@
     <value>pixelInfo</value>
   </data>
   <data name="&gt;&gt;RedCount.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="Red.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -870,13 +1041,13 @@
     <value>True</value>
   </data>
   <data name="Red.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft JhengHei UI, 9pt</value>
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="Red.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="Red.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 16</value>
+    <value>6, 20</value>
   </data>
   <data name="Red.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 15</value>
@@ -897,13 +1068,13 @@
     <value>pixelInfo</value>
   </data>
   <data name="&gt;&gt;Red.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="pixelInfo.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft JhengHei UI, 9pt</value>
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="pixelInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 307</value>
+    <value>9, 309</value>
   </data>
   <data name="pixelInfo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -912,7 +1083,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="pixelInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>421, 67</value>
+    <value>513, 67</value>
   </data>
   <data name="pixelInfo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -966,7 +1137,7 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 350</value>
+    <value>6, 290</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 15</value>
@@ -1017,7 +1188,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;designBox.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>136, 17</value>
@@ -1034,6 +1205,36 @@
   <data name="openFileDialog1.Filter" xml:space="preserve">
     <value>PNG (*.png)|*.png|所有檔案 (*.*)|*.*</value>
   </data>
+  <metadata name="waitTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>551, 17</value>
+  </metadata>
+  <data name="readingBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 423</value>
+  </data>
+  <data name="readingBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>714, 23</value>
+  </data>
+  <data name="readingBar.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;readingBar.Name" xml:space="preserve">
+    <value>readingBar</value>
+  </data>
+  <data name="&gt;&gt;readingBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;readingBar.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;readingBar.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="waittimer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>640, 17</value>
+  </metadata>
+  <metadata name="waittimer2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>729, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1041,10 +1242,10 @@
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>741, 433</value>
+    <value>741, 454</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft JhengHei UI, 9pt</value>
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -1117,6 +1318,24 @@
   </data>
   <data name="&gt;&gt;openFileDialog1.Type" xml:space="preserve">
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;waitTimer.Name" xml:space="preserve">
+    <value>waitTimer</value>
+  </data>
+  <data name="&gt;&gt;waitTimer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;waittimer1.Name" xml:space="preserve">
+    <value>waittimer1</value>
+  </data>
+  <data name="&gt;&gt;waittimer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;waittimer2.Name" xml:space="preserve">
+    <value>waittimer2</value>
+  </data>
+  <data name="&gt;&gt;waittimer2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Lite</value>

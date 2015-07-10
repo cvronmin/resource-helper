@@ -12,11 +12,13 @@ namespace EntityTextureCreator
 {
     public partial class Lite : Form
     {
+        private Processing frame;
         private PixelButton[,] pixels = new PixelButton[64,32];
         private PixelButton selectpix;
         public static Bitmap map;
         public Graphics gra;
         public string filename;
+        public int waity = 0;
         public Lite()
         {
             InitializeComponent();
@@ -44,51 +46,210 @@ namespace EntityTextureCreator
             gra.Clear(Color.Transparent);
         }
         private void initPixels(){
-            /*this.designPanel.Controls.Clear();
-            for (int x = 0; x < pixels.GetLength(0);x++ )
+            if (pixels.GetLength(0) == 128 && pixels.GetLength(1) == 64)
             {
-                for (int y = 0; y < pixels.GetLength(1); y++) {
-                    pixels[x, y] = new PixelButton();
-                    pixels[x, y].BackColor = System.Drawing.Color.Transparent;
-                    pixels[x, y].FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                    pixels[x, y].FlatAppearance.BorderSize = 0;
-                    pixels[x, y].Location = new System.Drawing.Point(0, 0);
-                    pixels[x, y].Margin = new System.Windows.Forms.Padding(0);
-                    pixels[x, y].Name = "pixel";
-                    if (pixels.GetLength(0) == 128 && pixels.GetLength(1) == 64)
-                    {
-                        pixels[x, y].Size = new System.Drawing.Size(4, 4);
-                    }
-                    else if (pixels.GetLength(0) == 64 && pixels.GetLength(1) == 64)
-                    {
-                        pixels[x, y].Size = new System.Drawing.Size(4, 4);
-                    }
-                    else
-                    {
-                        pixels[x, y].Size = new System.Drawing.Size(8, 8);
-                    }
-                    pixels[x, y].UseVisualStyleBackColor = false;
-                    pixels[x, y].setXY(x, y);
-                    pixels[x, y].Click += new System.EventHandler(this.pixels_Click);
-                    pixels[x, y].BackColorChanged += new System.EventHandler(this.pixels_Changed);
-                    this.designPanel.Controls.Add(pixels[x, y]);
+                initTooMuchPixels();
+            }
+            initCrossPixels();
+        }
+        private void initTooMuchPixels() {
+            this.designPanel.Controls.Clear();
+            frame = new Processing("Rendering " + pixels.GetLength(0) + "x" + pixels.GetLength(1) + " Image");
+            frame.ShowInTaskbar = false;
+            frame.Show();
+            frame.Activate();
+            frame.Focus();
+            frame.changeStatus("creating pixel - part 1");
+            for (int x = 0; x < pixels.GetLength(1) / 4; x++)
+            {
+                for (int y = 0; y < pixels.GetLength(0); y++)
+                {
+                    frame.changeStatus("creating pixel" + x + "," + y);
+                    pixels[y, x] = new PixelButton();
+                    pixels[y, x].BackColor = System.Drawing.Color.Transparent;
+                    pixels[y, x].FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                    pixels[y, x].FlatAppearance.BorderSize = 0;
+                    pixels[y, x].Location = new System.Drawing.Point(0, 0);
+                    pixels[y, x].Margin = new System.Windows.Forms.Padding(0);
+                    pixels[y, x].Name = "pixel";
+                    pixels[y, x].Size = new System.Drawing.Size(4, 4);
+                    pixels[y, x].UseVisualStyleBackColor = false;
+                    pixels[y, x].setXY(y, x);
+                    pixels[y, x].Click += new System.EventHandler(this.pixels_Click);
+                    pixels[y, x].BackColorChanged += new System.EventHandler(this.pixels_Changed);
+                    this.designPanel.Controls.Add(pixels[y, x]);
                 }
             }
-            if (pixels.GetLength(0) == 64 && pixels.GetLength(1) == 64)
-            {
-                this.designPanel.Size = new Size(258,258);
-            }
-            else
-            {
-                this.designPanel.Size = new Size(514, 258);
-            }
+            this.designPanel.Size = new Size(514, 258);
             setSizeLabel();
-            redrawPixels();*/
-            initCrossPixels();
+            redrawTooMuchPixels();
+            waitTimer.Start();
+        }
+        private void initTooMuchPixels2()
+        {
+            frame.changeStatus("creating pixel - part 2");
+            frame.Activate();
+            frame.Focus();
+            for (int x = (pixels.GetLength(1) / 4); x < pixels.GetLength(1) / 4 * 2; x++)
+            {
+                for (int y = 0; y < pixels.GetLength(0); y++)
+                {
+                    pixels[y, x] = new PixelButton();
+                    pixels[y, x].BackColor = System.Drawing.Color.Transparent;
+                    pixels[y, x].FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                    pixels[y, x].FlatAppearance.BorderSize = 0;
+                    pixels[y, x].Location = new System.Drawing.Point(0, 0);
+                    pixels[y, x].Margin = new System.Windows.Forms.Padding(0);
+                    pixels[y, x].Name = "pixel";
+                    pixels[y, x].Size = new System.Drawing.Size(4, 4);
+                    pixels[y, x].UseVisualStyleBackColor = false;
+                    pixels[y, x].setXY(y, x);
+                    pixels[y, x].Click += new System.EventHandler(this.pixels_Click);
+                    pixels[y, x].BackColorChanged += new System.EventHandler(this.pixels_Changed);
+                    this.designPanel.Controls.Add(pixels[y, x]);
+                }
+            }
+            redrawTooMuchPixels2();
+            waittimer1.Start();
+        }
+        private void initTooMuchPixels3()
+        {
+            frame.changeStatus("creating pixel - part 3");
+            frame.Activate();
+            frame.Focus();
+            for (int x = (pixels.GetLength(1) / 4 * 2); x < pixels.GetLength(1) / 4 * 3; x++)
+            {
+                for (int y = 0; y < pixels.GetLength(0); y++)
+                {
+                    pixels[y, x] = new PixelButton();
+                    pixels[y, x].BackColor = System.Drawing.Color.Transparent;
+                    pixels[y, x].FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                    pixels[y, x].FlatAppearance.BorderSize = 0;
+                    pixels[y, x].Location = new System.Drawing.Point(0, 0);
+                    pixels[y, x].Margin = new System.Windows.Forms.Padding(0);
+                    pixels[y, x].Name = "pixel";
+                    pixels[y, x].Size = new System.Drawing.Size(4, 4);
+                    pixels[y, x].UseVisualStyleBackColor = false;
+                    pixels[y, x].setXY(y, x);
+                    pixels[y, x].Click += new System.EventHandler(this.pixels_Click);
+                    pixels[y, x].BackColorChanged += new System.EventHandler(this.pixels_Changed);
+                    this.designPanel.Controls.Add(pixels[y, x]);
+                }
+            }
+            redrawTooMuchPixels3();
+            waittimer2.Start();
+        }
+        private void initTooMuchPixels4()
+        {
+            frame.changeStatus("creating pixel - part 4");
+            frame.Activate();
+            frame.Focus();
+            for (int x = (pixels.GetLength(1) / 4 * 3); x < pixels.GetLength(1); x++)
+            {
+                for (int y = 0; y < pixels.GetLength(0); y++)
+                {
+                    pixels[y, x] = new PixelButton();
+                    pixels[y, x].BackColor = System.Drawing.Color.Transparent;
+                    pixels[y, x].FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                    pixels[y, x].FlatAppearance.BorderSize = 0;
+                    pixels[y, x].Location = new System.Drawing.Point(0, 0);
+                    pixels[y, x].Margin = new System.Windows.Forms.Padding(0);
+                    pixels[y, x].Name = "pixel";
+                    pixels[y, x].Size = new System.Drawing.Size(4, 4);
+                    pixels[y, x].UseVisualStyleBackColor = false;
+                    pixels[y, x].setXY(y, x);
+                    pixels[y, x].Click += new System.EventHandler(this.pixels_Click);
+                    pixels[y, x].BackColorChanged += new System.EventHandler(this.pixels_Changed);
+                    this.designPanel.Controls.Add(pixels[y, x]);
+                }
+            }
+            redrawTooMuchPixels4();
+        }
+        private void redrawTooMuchPixels()
+        {
+            frame.changeStatus("rendering pixel - part1");
+            for (int x = 0; x < pixels.GetLength(1) / 4; x++)
+            {
+                for (int y = 0; y < pixels.GetLength(0); y++)
+                {
+                    pixels[y, x].BackColor = map.GetPixel(pixels[y, x].getX(), pixels[y, x].getY());
+                }
+            }
+        }
+        private void redrawTooMuchPixels2()
+        {
+            frame.changeStatus("rendering pixel - part2");
+            for (int x = (pixels.GetLength(1) / 4); x < (pixels.GetLength(1) / 4 * 2); x++)
+            {
+                for (int y = 0; y < pixels.GetLength(0); y++)
+                {
+                    pixels[y, x].BackColor = map.GetPixel(pixels[y, x].getX(), pixels[y, x].getY());
+                }
+            }
+        }
+        private void redrawTooMuchPixels3()
+        {
+            frame.changeStatus("rendering pixel - part3");
+            for (int x = pixels.GetLength(1) / 4 * 2; x < pixels.GetLength(1) / 4 * 3; x++)
+            {
+                for (int y = 0; y < pixels.GetLength(0); y++)
+                {
+                    pixels[y, x].BackColor = map.GetPixel(pixels[y, x].getX(), pixels[y, x].getY());
+                }
+            }
+        }
+        private void redrawTooMuchPixels4()
+        {
+            frame.changeStatus("rendering pixel - part4");
+            for (int x = pixels.GetLength(1) / 4 * 3; x < pixels.GetLength(1); x++)
+            {
+                for (int y = 0; y < pixels.GetLength(0); y++)
+                {
+                    pixels[y, x].BackColor = map.GetPixel(pixels[y, x].getX(), pixels[y, x].getY());
+                }
+            }
+            frame.Topmost = false;
+            frame.Close();
+        }
+        private void waitTimer_Tick(object sender, EventArgs e)
+        {
+            ++waity;
+            if(waity >= 10){
+                waitTimer.Stop();
+                initTooMuchPixels2();
+                waity = 0;
+            }
+        }
+        private void waittimer1_Tick(object sender, EventArgs e)
+        {
+            ++waity;
+            if (waity >= 10)
+            {
+                waittimer1.Stop();
+                    initTooMuchPixels3();
+                waity = 0;
+            }
+        }
+
+        private void waittimer2_Tick(object sender, EventArgs e)
+        {
+            ++waity;
+            if (waity >= 10)
+            {
+                waittimer2.Stop();
+                    initTooMuchPixels4();
+                waity = 0;
+            }
         }
         private void initCrossPixels()
         {
             this.designPanel.Controls.Clear();
+            frame = new Processing("Rendering " + pixels.GetLength(0) + "x" + pixels.GetLength(1) + " Image");
+            frame.ShowInTaskbar = false;
+            frame.Show();
+            frame.Activate();
+            frame.Focus();
+            frame.changeStatus("creating pixel");
             for (int x = 0; x < pixels.GetLength(1); x++)
             {
                 for (int y = 0; y < pixels.GetLength(0); y++)
@@ -100,11 +261,7 @@ namespace EntityTextureCreator
                     pixels[y, x].Location = new System.Drawing.Point(0, 0);
                     pixels[y, x].Margin = new System.Windows.Forms.Padding(0);
                     pixels[y, x].Name = "pixel";
-                    if (pixels.GetLength(0) == 128 && pixels.GetLength(1) == 64)
-                    {
-                        pixels[y, x].Size = new System.Drawing.Size(4, 4);
-                    }
-                    else if (pixels.GetLength(0) == 64 && pixels.GetLength(1) == 64)
+                    if (pixels.GetLength(0) == 64 && pixels.GetLength(1) == 64)
                     {
                         pixels[y, x].Size = new System.Drawing.Size(4, 4);
                     }
@@ -145,6 +302,7 @@ namespace EntityTextureCreator
             }
         }
         private void redrawPixels() {
+            frame.changeStatus("rendering pixel");
             for (int x = 0; x < pixels.GetLength(0); x++)
             {
                 for (int y = 0; y < pixels.GetLength(1); y++)
@@ -152,6 +310,8 @@ namespace EntityTextureCreator
                     pixels[x,y].BackColor = map.GetPixel(pixels[x,y].getX(), pixels[x,y].getY());
                 }
             }
+            frame.Topmost = false;
+            frame.Close();
         }
         private void pixels_Click(object sender, EventArgs e)
         {
@@ -162,65 +322,21 @@ namespace EntityTextureCreator
             BlueCount.Text = (map.GetPixel(selectpix.getX(), selectpix.getY()).B).ToString();
             AlphaCount.Text = (map.GetPixel(selectpix.getX(), selectpix.getY()).A).ToString();
             pixelInfo.Text = "像素資訊" + selectpix.getX() + "," + selectpix.getY();
+            butColor.BackColor = map.GetPixel(selectpix.getX(), selectpix.getY());
+            butClear.Enabled = true;
             }
         }
         private void pixels_Changed(object sender, EventArgs e) { 
         }
-
-        private void AlphaCount_TextChanged(object sender, EventArgs e)
+        private void ColorCount_TextChanged(object sender, EventArgs e)
         {
-            map.SetPixel(selectpix.getX(), selectpix.getY(), Color.FromArgb(
-                    Int32.Parse(AlphaCount.Text) & 255,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).R,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).G,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).B));
-            selectpix.BackColor = Color.FromArgb(
-                    Int32.Parse(AlphaCount.Text) & 255,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).R,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).G,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).B);
-        }
-
-        private void RedCount_TextChanged(object sender, EventArgs e)
-        {
-            map.SetPixel(selectpix.getX(), selectpix.getY(), Color.FromArgb(
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).A,
-                    Int32.Parse(RedCount.Text) & 255,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).G,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).B));
-            selectpix.BackColor = Color.FromArgb(
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).A,
-                    Int32.Parse(RedCount.Text) & 255,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).G,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).B);
-        }
-
-        private void GreenCount_TextChanged(object sender, EventArgs e)
-        {
-            map.SetPixel(selectpix.getX(), selectpix.getY(), Color.FromArgb(
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).A,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).R,
-                    Int32.Parse(GreenCount.Text) & 255,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).B));
-            selectpix.BackColor = Color.FromArgb(
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).A,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).R,
-                    Int32.Parse(GreenCount.Text) & 255,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).B);
-        }
-
-        private void BlueCount_TextChanged(object sender, EventArgs e)
-        {
-            map.SetPixel(selectpix.getX(), selectpix.getY(), Color.FromArgb(
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).A,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).R,
-                    map.GetPixel(selectpix.getX(), selectpix.getY()).G,
-                    Int32.Parse(BlueCount.Text) & 255));
-            selectpix.BackColor = Color.FromArgb(
-                map.GetPixel(selectpix.getX(), selectpix.getY()).A,
-                map.GetPixel(selectpix.getX(), selectpix.getY()).R,
-                map.GetPixel(selectpix.getX(), selectpix.getY()).G,
-                Int32.Parse(BlueCount.Text) & 255);
+/*            if(selectpix != null)
+                try
+                {
+                    map.SetPixel(selectpix.getX(), selectpix.getY(), Color.FromArgb(Int32.Parse(AlphaCount.Text) & 255, Int32.Parse(RedCount.Text) & 255, Int32.Parse(GreenCount.Text) & 255, Int32.Parse(BlueCount.Text) & 255));
+                    selectpix.BackColor = Color.FromArgb(Int32.Parse(AlphaCount.Text) & 255, Int32.Parse(RedCount.Text) & 255, Int32.Parse(GreenCount.Text) & 255, Int32.Parse(BlueCount.Text) & 255);
+                }
+                catch { }*/
         }
 
         private void butColor_Click(object sender, EventArgs e)
@@ -233,12 +349,19 @@ namespace EntityTextureCreator
                 colorDialog1.Color = Color.Black;
             }
             colorDialog1.ShowDialog();
+            map.SetPixel(selectpix.getX(), selectpix.getY(), colorDialog1.Color);
+            butColor.BackColor = colorDialog1.Color;
+            redrawPixels();
             RedCount.Text = colorDialog1.Color.R.ToString();
             GreenCount.Text = colorDialog1.Color.G.ToString();
             BlueCount.Text = colorDialog1.Color.B.ToString();
             AlphaCount.Text = colorDialog1.Color.A.ToString();
         }
-
+        private void butClear_Click(object sender, EventArgs e)
+        {
+            map.SetPixel(selectpix.getX(), selectpix.getY(), Color.Transparent);
+            redrawPixels();
+        }
         private void newFileMenu_Click(object sender, EventArgs e)
         {
             new NewTexture(this).ShowDialog();
@@ -272,26 +395,28 @@ namespace EntityTextureCreator
         {
             filename = openFileDialog1.FileName;
             Image file = Image.FromFile(filename);
-            /*if (file.Width >= 128 && file.Height >= 64)
+            if (file.Width >= 128 && file.Height >= 64)
             {
                 pixels = new PixelButton[128, 64];
                 map = new Bitmap(file, new Size(128, 64));
-                initCrossPixels();
+
+                initTooMuchPixels();
             }
-            else */if (file.Width >= 64 && file.Height >= 64)
+            else if (file.Width >= 64 && file.Height >= 64)
             {
                 pixels = new PixelButton[64, 64];
                 map = new Bitmap(file, new Size(64, 64));
+
                 initCrossPixels();
             }
             else
             {
                 pixels = new PixelButton[64, 32];
                 map = new Bitmap(file, new Size(64, 32));
+
                 initCrossPixels();
             }
             gra = Graphics.FromImage(map);
-            redrawPixels();
         }
 
         private void exitMenu_Click(object sender, EventArgs e)
@@ -390,5 +515,6 @@ namespace EntityTextureCreator
             pixels = new PixelButton[64, 32];
             initCrossPixels();
         }
+
     }
 }
