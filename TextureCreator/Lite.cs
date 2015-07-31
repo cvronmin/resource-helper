@@ -30,12 +30,14 @@ namespace TextureCreator
             map = new Bitmap(16,16);
             gra = Graphics.FromImage(map);
             gra.Clear(Color.Transparent);
+            this.filename = null;
         }
         public void new32File() {
             pixels = new PixelButton[32, 32];
             map = new Bitmap(32, 32);
             gra = Graphics.FromImage(map);
             gra.Clear(Color.Transparent);
+            this.filename = null;
         }
         public void new64File()
         {
@@ -43,6 +45,7 @@ namespace TextureCreator
             map = new Bitmap(64, 64);
             gra = Graphics.FromImage(map);
             gra.Clear(Color.Transparent);
+            this.filename = null;
         }
 /*        private void initPixels(){
             this.designPanel.Controls.Clear();
