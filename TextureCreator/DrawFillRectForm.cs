@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace TextureCreator
 {
-    public partial class DrawFillRectForm : UserControl
+    public partial class DrawFillRectForm : UserControl, Geometry
     {
         Lite parent;
         public DrawFillRectForm(Lite parent)
@@ -17,25 +17,10 @@ namespace TextureCreator
             InitializeComponent();
             this.parent = parent;
         }
-
-        private void butCancel_Click(object sender, EventArgs e)
-        {
-            this.FindForm().Close();
-        }
-
-        private void butOK_Click(object sender, EventArgs e)
-        {
-            int alpha;
-            int red;
-            int green;
-            int blue;
+        void Geometry.draw(int a, int r, int g, int b) {
             int sx, sy, ex, ey;
             try
             {
-                alpha = Int32.Parse(AlphaCount.Text) & 255;
-                red = Int32.Parse(RedCount.Text) & 255;
-                green = Int32.Parse(GreenCount.Text) & 255;
-                blue = Int32.Parse(BlueCount.Text) & 255;
                 sx = Int32.Parse(StartXPos.Text);
                 sy = Int32.Parse(StartYPos.Text);
                 ex = Int32.Parse(EndXPos.Text);
@@ -43,18 +28,23 @@ namespace TextureCreator
             }
             catch
             {
-                alpha = 0;
-                red = 0;
-                green = 0;
-                blue = 0;
                 sx = 0;
                 sy = 0;
                 ex = 0;
                 ey = 0;
+                return;
             }
-            SolidBrush brush = new SolidBrush(Color.FromArgb(alpha, red, green, blue));
+            if(a == 0){
+                for (int x = sx; x <= ex; x++) {
+                    for (int y = sy; y < ey; y++)
+                    {
+                        this.parent.map.SetPixel(x, y, Color.Transparent);
+                    }
+                }
+                return;
+            }
+            SolidBrush brush = new SolidBrush(Color.FromArgb(a, r, g, b));
             this.parent.gra.FillRectangle(brush, sx, sy, ex - sx + 1, ey - sy + 1);
-            this.FindForm().Close();
         }
     }
 }

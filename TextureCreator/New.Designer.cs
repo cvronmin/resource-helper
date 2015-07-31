@@ -37,20 +37,21 @@
             this.saveItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolBar = new System.Windows.Forms.ToolStrip();
-            this.cursorItem = new System.Windows.Forms.ToolStripButton();
-            this.pencilItem = new System.Windows.Forms.ToolStripButton();
-            this.designBox = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.foreColorItem = new System.Windows.Forms.ToolStripButton();
-            this.backColorItem = new System.Windows.Forms.ToolStripButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.foreColorItem = new System.Windows.Forms.ToolStripButton();
+            this.backColorItem = new System.Windows.Forms.ToolStripButton();
+            this.designBox = new System.Windows.Forms.PictureBox();
+            this.cursorItem = new System.Windows.Forms.ToolStripButton();
+            this.pencilItem = new System.Windows.Forms.ToolStripButton();
+            this.ereasorItem = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.toolBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.designBox)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.designBox)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -116,45 +117,13 @@
             this.toolBar.Dock = System.Windows.Forms.DockStyle.Left;
             this.toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cursorItem,
-            this.pencilItem});
+            this.pencilItem,
+            this.ereasorItem});
             this.toolBar.Location = new System.Drawing.Point(0, 24);
             this.toolBar.Name = "toolBar";
-            this.toolBar.Size = new System.Drawing.Size(24, 356);
+            this.toolBar.Size = new System.Drawing.Size(32, 356);
             this.toolBar.TabIndex = 1;
             this.toolBar.Text = "工具";
-            // 
-            // cursorItem
-            // 
-            this.cursorItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.cursorItem.Image = global::TextureCreator.Properties.Resources.Cursor;
-            this.cursorItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.cursorItem.Name = "cursorItem";
-            this.cursorItem.Size = new System.Drawing.Size(21, 20);
-            this.cursorItem.Text = "Cursor";
-            this.cursorItem.Click += new System.EventHandler(this.cursorItem_Click);
-            // 
-            // pencilItem
-            // 
-            this.pencilItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pencilItem.Image = global::TextureCreator.Properties.Resources.Pencil;
-            this.pencilItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pencilItem.Name = "pencilItem";
-            this.pencilItem.Size = new System.Drawing.Size(21, 20);
-            this.pencilItem.Text = "Pencil";
-            this.pencilItem.Click += new System.EventHandler(this.pencilItem_Click);
-            // 
-            // designBox
-            // 
-            this.designBox.BackColor = System.Drawing.Color.White;
-            this.designBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.designBox.Location = new System.Drawing.Point(178, 78);
-            this.designBox.Name = "designBox";
-            this.designBox.Size = new System.Drawing.Size(256, 256);
-            this.designBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.designBox.TabIndex = 2;
-            this.designBox.TabStop = false;
-            this.designBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.designBox_MouseDown);
-            this.designBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.designBox_MouseMove);
             // 
             // toolStrip1
             // 
@@ -162,9 +131,9 @@
             this.toolStripLabel1,
             this.foreColorItem,
             this.backColorItem});
-            this.toolStrip1.Location = new System.Drawing.Point(24, 24);
+            this.toolStrip1.Location = new System.Drawing.Point(32, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(555, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(547, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -173,6 +142,25 @@
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(39, 22);
             this.toolStripLabel1.Text = "Color";
+            // 
+            // colorDialog1
+            // 
+            this.colorDialog1.AnyColor = true;
+            this.colorDialog1.FullOpen = true;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "PNG (*.png)|*.png|所有檔案 (*.*)|*.*";
+            this.openFileDialog1.SupportMultiDottedExtensions = true;
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "png";
+            this.saveFileDialog1.Filter = "PNG (*.png)|*.png|所有檔案 (*.*)|*.*";
+            this.saveFileDialog1.SupportMultiDottedExtensions = true;
+            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
             // foreColorItem
             // 
@@ -196,24 +184,49 @@
             this.backColorItem.Text = "Back Color";
             this.backColorItem.Click += new System.EventHandler(this.backColorItem_Click);
             // 
-            // colorDialog1
+            // designBox
             // 
-            this.colorDialog1.AnyColor = true;
-            this.colorDialog1.FullOpen = true;
+            this.designBox.BackColor = System.Drawing.Color.White;
+            this.designBox.BackgroundImage = global::TextureCreator.Properties.Resources.TranBack;
+            this.designBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.designBox.Location = new System.Drawing.Point(178, 78);
+            this.designBox.Name = "designBox";
+            this.designBox.Size = new System.Drawing.Size(256, 256);
+            this.designBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.designBox.TabIndex = 2;
+            this.designBox.TabStop = false;
+            this.designBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.designBox_MouseDown);
+            this.designBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.designBox_MouseMove);
             // 
-            // openFileDialog1
+            // cursorItem
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "PNG (*.png)|*.png|所有檔案 (*.*)|*.*";
-            this.openFileDialog1.SupportMultiDottedExtensions = true;
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            this.cursorItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.cursorItem.Image = global::TextureCreator.Properties.Resources.Cursor;
+            this.cursorItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cursorItem.Name = "cursorItem";
+            this.cursorItem.Size = new System.Drawing.Size(29, 20);
+            this.cursorItem.Text = "Cursor";
+            this.cursorItem.Click += new System.EventHandler(this.cursorItem_Click);
             // 
-            // saveFileDialog1
+            // pencilItem
             // 
-            this.saveFileDialog1.DefaultExt = "png";
-            this.saveFileDialog1.Filter = "PNG (*.png)|*.png|所有檔案 (*.*)|*.*";
-            this.saveFileDialog1.SupportMultiDottedExtensions = true;
-            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
+            this.pencilItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pencilItem.Image = global::TextureCreator.Properties.Resources.Pencil;
+            this.pencilItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pencilItem.Name = "pencilItem";
+            this.pencilItem.Size = new System.Drawing.Size(29, 20);
+            this.pencilItem.Text = "Pencil";
+            this.pencilItem.Click += new System.EventHandler(this.pencilItem_Click);
+            // 
+            // ereasorItem
+            // 
+            this.ereasorItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ereasorItem.Image = global::TextureCreator.Properties.Resources.Ereasor;
+            this.ereasorItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ereasorItem.Name = "ereasorItem";
+            this.ereasorItem.Size = new System.Drawing.Size(29, 20);
+            this.ereasorItem.Text = "Ereasor";
+            this.ereasorItem.Click += new System.EventHandler(this.ereasorItem_Click);
             // 
             // NewTC
             // 
@@ -233,9 +246,9 @@
             this.menuStrip1.PerformLayout();
             this.toolBar.ResumeLayout(false);
             this.toolBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.designBox)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.designBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -261,5 +274,6 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripButton ereasorItem;
     }
 }

@@ -14,7 +14,7 @@ namespace TextureCreator
     {
         private PixelButton[,] pixels = new PixelButton[16,16];
         private PixelButton selectpix;
-        public static Bitmap map;
+        public Bitmap map;
         public Graphics gra;
         public string filename;
         Recorder record = new Recorder();
@@ -84,11 +84,15 @@ namespace TextureCreator
         private void initCrossPixels()
         {
             this.designPanel.Controls.Clear();
+            pixels.Initialize();
             for (int x = 0; x < pixels.GetLength(0); x++)
             {
                 for (int y = 0; y < pixels.GetLength(1); y++)
                 {
-                    pixels[y, x] = new PixelButton();
+                    if (pixels[y, x] == null)
+                    {
+                        pixels[y, x] = new PixelButton();
+                    }
                     pixels[y, x].BackColor = System.Drawing.Color.Transparent;
                     pixels[y, x].FlatStyle = System.Windows.Forms.FlatStyle.Flat;
                     pixels[y, x].FlatAppearance.BorderSize = 0;
@@ -133,7 +137,11 @@ namespace TextureCreator
             {
                 for (int y = 0; y < pixels.GetLength(1); y++)
                 {
-                    pixels[x,y].BackColor = map.GetPixel(pixels[x,y].getX(), pixels[x,y].getY());
+                    if (pixels[x, y].BackColor != map.GetPixel(pixels[x, y].getX(), pixels[x, y].getY()))
+                    {
+                        pixels[x, y].BackColor = map.GetPixel(pixels[x, y].getX(), pixels[x, y].getY());
+                    }
+                    else continue;
                 }
             }
         }
@@ -169,7 +177,10 @@ namespace TextureCreator
                 colorDialog1.Color = Color.Black;
             }
             colorDialog1.ShowDialog();
-            map.SetPixel(selectpix.getX(), selectpix.getY(), colorDialog1.Color);
+            if (selectpix != null)
+            {
+                map.SetPixel(selectpix.getX(), selectpix.getY(), colorDialog1.Color);
+            }
             butColor.BackColor = colorDialog1.Color;
             redrawPixels();
             RedCount.Text = colorDialog1.Color.R.ToString();
@@ -415,6 +426,13 @@ namespace TextureCreator
         {
             map.SetPixel(selectpix.getX(), selectpix.getY(), Color.Transparent);
             redrawPixels();
+        }
+
+        private void AlphaCount_TextChanged(object sender, EventArgs e)
+        {
+            if(selectpix != null){
+                map.SetPixel(selectpix.getX(), selectpix.getY(), Color.FromArgb(Int32.Parse(AlphaCount.Text), Int32.Parse(RedCount.Text), Int32.Parse(GreenCount.Text), Int32.Parse(BlueCount.Text)));
+            }
         }
 
     }

@@ -78,6 +78,7 @@
     <Compile Include="DrawThings.Designer.cs">
       <DependentUpon>DrawThings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Geometry.cs" />
     <Compile Include="Lite.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,8 +179,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Cursor.png" />
+    <Content Include="Resources\Ereasor.png" />
     <Content Include="Resources\Pencil.png" />
     <Content Include="Resources\TC.ico" />
+    <Content Include="Resources\TranBack.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

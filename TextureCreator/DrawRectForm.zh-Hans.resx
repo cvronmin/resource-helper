@@ -117,7 +117,56 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="butOK.Text" xml:space="preserve">
-    <value>确定</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblPixel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 15</value>
+  </data>
+  <data name="PixelCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="StartX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 21</value>
+  </data>
+  <data name="StartX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 15</value>
+  </data>
+  <data name="StartXPos.Location" type="System.Drawing.Point, System.Drawing">
+    <value>64, 18</value>
+  </data>
+  <data name="StartXPos.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="StartYPos.Location" type="System.Drawing.Point, System.Drawing">
+    <value>64, 47</value>
+  </data>
+  <data name="StartYPos.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="StartY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 50</value>
+  </data>
+  <data name="StartY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 15</value>
+  </data>
+  <data name="EndXPos.Location" type="System.Drawing.Point, System.Drawing">
+    <value>64, 76</value>
+  </data>
+  <data name="EndXPos.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="EndX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 79</value>
+  </data>
+  <data name="EndYPos.Location" type="System.Drawing.Point, System.Drawing">
+    <value>64, 105</value>
+  </data>
+  <data name="EndYPos.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="EndY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 108</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 200</value>
   </data>
 </root>

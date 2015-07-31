@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace TextureCreator
 {
-    public partial class DrawLineForm : UserControl
+    public partial class DrawLineForm : UserControl , Geometry
     {
         Lite parent;
         public DrawLineForm(Lite parent)
@@ -18,25 +18,11 @@ namespace TextureCreator
             this.parent = parent;
         }
 
-        private void butCancel_Click(object sender, EventArgs e)
-        {
-            this.FindForm().Close();
-        }
-
-        private void butOK_Click(object sender, EventArgs e)
-        {
-            int alpha;
-            int red;
-            int green;
-            int blue;
+        void Geometry.draw(int a, int r, int g, int b) {
             int pixelsize;
             int sx, sy, ex, ey;
             try
             {
-                alpha = Int32.Parse(AlphaCount.Text) & 255;
-                red = Int32.Parse(RedCount.Text) & 255;
-                green = Int32.Parse(GreenCount.Text) & 255;
-                blue = Int32.Parse(BlueCount.Text) & 255;
                 pixelsize = Int32.Parse(PixelCount.Text);
                 sx = Int32.Parse(StartXPos.Text);
                 sy = Int32.Parse(StartYPos.Text);
@@ -45,19 +31,30 @@ namespace TextureCreator
             }
             catch
             {
-                alpha = 0;
-                red = 0;
-                green = 0;
-                blue = 0;
                 pixelsize = 1;
                 sx = 0;
                 sy = 0;
                 ex = 0;
                 ey = 0;
+                return;
             }
-            Pen pen = new Pen(Color.FromArgb(alpha, red, green, blue), pixelsize);
+            if(a == 0 && (sx == ex || sy == ey)){
+                if (sx == ex) {
+                    for (int y = sy; y <= ey; y++) {
+                        this.parent.map.SetPixel(sx, y, Color.Transparent);
+                    }
+                    return;
+                }
+                if (sy == ey) {
+                    for (int x = sx; x <= ex; x++)
+                    {
+                        this.parent.map.SetPixel(x, sy, Color.Transparent);
+                    }
+                    return;
+                }
+            }
+            Pen pen = new Pen(Color.FromArgb(a, r, g, b), pixelsize);
             this.parent.gra.DrawLine(pen, new Point(sx, sy), new Point(ex, ey));
-            this.FindForm().Close();
         }
     }
 }

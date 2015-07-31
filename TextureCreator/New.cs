@@ -39,6 +39,12 @@ namespace TextureCreator
             graphic = Graphics.FromImage(map);
             graphic.Clear(Color.Transparent);
         }
+        public void new256file()
+        {
+            map = new Bitmap(256, 256);
+            graphic = Graphics.FromImage(map);
+            graphic.Clear(Color.Transparent);
+        }
         private void redraw() {
             graphic = Graphics.FromImage(map);
             designBox.Image = map;
@@ -48,6 +54,7 @@ namespace TextureCreator
             state = -1;
             cursorItem.CheckState = CheckState.Checked;
             pencilItem.CheckState = CheckState.Unchecked;
+            ereasorItem.CheckState = CheckState.Unchecked;
         }
 
         private void pencilItem_Click(object sender, EventArgs e)
@@ -55,6 +62,14 @@ namespace TextureCreator
             state = 1;
             cursorItem.CheckState = CheckState.Unchecked;
             pencilItem.CheckState = CheckState.Checked;
+            ereasorItem.CheckState = CheckState.Unchecked;
+        }
+        private void ereasorItem_Click(object sender, EventArgs e)
+        {
+            state = 2;
+            cursorItem.CheckState = CheckState.Unchecked;
+            pencilItem.CheckState = CheckState.Unchecked;
+            ereasorItem.CheckState = CheckState.Checked;
         }
         private void designBox_MouseDown(object sender, MouseEventArgs e)
         {
@@ -65,12 +80,20 @@ namespace TextureCreator
                 {
                     drawPixel(e.X, e.Y, foreColorItem.BackColor);
                 }
+                if (state == 2)
+                {
+                    ereasePixel(e.X, e.Y);
+                }
             }
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
                 if (state == 1)
                 {
                     drawPixel(e.X, e.Y, backColorItem.BackColor);
+                }
+                if (state == 2)
+                {
+                    ereasePixel(e.X, e.Y);
                 }
             }
             redraw();
@@ -82,12 +105,20 @@ namespace TextureCreator
                 if(state == 1){
                     drawPixel(e.X, e.Y, foreColorItem.BackColor);
                 }
+                if (state == 2)
+                {
+                    ereasePixel(e.X, e.Y);
+                }
             }
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
                 if (state == 1)
                 {
                     drawPixel(e.X, e.Y, backColorItem.BackColor);
+                }
+                if (state == 2)
+                {
+                    ereasePixel(e.X, e.Y);
                 }
             }
             redraw();
@@ -104,6 +135,29 @@ namespace TextureCreator
             else if (map.Width == 64 && map.Height == 64)
             {
                 map.SetPixel(x / (256 / 64), y / (256 / 64), color);
+            }
+            else if (map.Width == 256 && map.Height == 256)
+            {
+                map.SetPixel(x, y, color);
+            }
+        }
+        private void ereasePixel(int x, int y)
+        {
+            if (map.Width == 16 && map.Height == 16)
+            {
+                map.SetPixel((x / (256 / 16)), (y / (256 / 16)), Color.Transparent);
+            }
+            else if (map.Width == 32 && map.Height == 32)
+            {
+                map.SetPixel(x / (256 / 32), y / (256 / 32), Color.Transparent);
+            }
+            else if (map.Width == 64 && map.Height == 64)
+            {
+                map.SetPixel(x / (256 / 64), y / (256 / 64), Color.Transparent);
+            }
+            else if (map.Width == 256 && map.Height == 256)
+            {
+                map.SetPixel(x, y, Color.Transparent);
             }
         }
         private void foreColorItem_Click(object sender, EventArgs e)
@@ -154,7 +208,11 @@ namespace TextureCreator
             filename = openFileDialog1.FileName;
             this.Text = filename != null ? "Texture Creator - " + filename : "Texture Creator - Untitled";
             Image file = Image.FromFile(filename);
-            if (file.Width >= 64 && file.Height >= 64)
+            if (file.Width >= 256 && file.Height >= 256)
+            {
+                map = new Bitmap(file, new Size(256, 256));
+            }
+            else if (file.Width >= 64 && file.Height >= 64 && file.Height < 256 && file.Width < 256)
             {
                 map = new Bitmap(file, new Size(64, 64));
             }

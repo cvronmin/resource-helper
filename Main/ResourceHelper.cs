@@ -16,21 +16,41 @@ namespace Main
         public ResourceHelper()
         {
             InitializeComponent();
+            setEnableState();
         }
-
+        private void setEnableState()
+        {
+            if(System.IO.File.Exists(Environment.CurrentDirectory + @"\ColorConvertor.dll")){
+                button2.Enabled = true;
+            }
+            if (System.IO.File.Exists(Environment.CurrentDirectory + @"\TextureCreator.dll"))
+            {
+                button1.Enabled = true;
+                button4.Enabled = true;
+            }
+            if (System.IO.File.Exists(Environment.CurrentDirectory + @"\EntityTextureCreator.dll"))
+            {
+                button3.Enabled = true;
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
-            new TextureCreator.Lite().ShowDialog();
+            new TextureCreator.Lite().Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new ColorConvertor.Main().ShowDialog();
+            new ColorConvertor.Main().Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            new EntityTextureCreator.Lite().ShowDialog();
+            new EntityTextureCreator.Lite().Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            new TextureCreator.NewTC().Show();
         }
     }
 }

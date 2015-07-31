@@ -58,6 +58,7 @@
             this.lblSizex = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pixelInfo = new System.Windows.Forms.GroupBox();
+            this.butClear = new System.Windows.Forms.Button();
             this.butColor = new System.Windows.Forms.Button();
             this.AlphaCount = new System.Windows.Forms.TextBox();
             this.Alpha = new System.Windows.Forms.Label();
@@ -71,7 +72,6 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.butClear = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.toolBox.SuspendLayout();
             this.designBox.SuspendLayout();
@@ -300,6 +300,13 @@
             this.pixelInfo.Name = "pixelInfo";
             this.pixelInfo.TabStop = false;
             // 
+            // butClear
+            // 
+            resources.ApplyResources(this.butClear, "butClear");
+            this.butClear.Name = "butClear";
+            this.butClear.UseVisualStyleBackColor = true;
+            this.butClear.Click += new System.EventHandler(this.butClear_Click);
+            // 
             // butColor
             // 
             this.butColor.BackColor = System.Drawing.Color.Transparent;
@@ -312,6 +319,7 @@
             // 
             resources.ApplyResources(this.AlphaCount, "AlphaCount");
             this.AlphaCount.Name = "AlphaCount";
+            this.AlphaCount.TextChanged += new System.EventHandler(this.AlphaCount_TextChanged);
             // 
             // Alpha
             // 
@@ -350,6 +358,7 @@
             // 
             // designPanel
             // 
+            this.designPanel.BackgroundImage = global::TextureCreator.Properties.Resources.TranBack;
             this.designPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.designPanel, "designPanel");
             this.designPanel.Name = "designPanel";
@@ -371,13 +380,6 @@
             resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
             this.openFileDialog1.SupportMultiDottedExtensions = true;
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
-            // 
-            // butClear
-            // 
-            resources.ApplyResources(this.butClear, "butClear");
-            this.butClear.Name = "butClear";
-            this.butClear.UseVisualStyleBackColor = true;
-            this.butClear.Click += new System.EventHandler(this.butClear_Click);
             // 
             // Lite
             // 
