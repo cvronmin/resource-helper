@@ -50,7 +50,12 @@ namespace Main
 
         private void button4_Click(object sender, EventArgs e)
         {
-            new TextureCreator.NewTC().Show();
+//            new TextureCreator.NewTC().Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            new TextureComparer.Compare().Show();
         }
     }
 }

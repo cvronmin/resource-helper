@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextureCreator", "TextureCreator\TextureCreator.csproj", "{175609F9-AE14-42CB-B294-99DD32313B2F}"
 EndProject
@@ -9,11 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorConvertor", "ColorConv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main", "Main\Main.csproj", "{9A97E9EF-60E7-49E6-9347-3DE4C6D31B74}"
 	ProjectSection(ProjectDependencies) = postProject
+		{29BE6595-632F-4E79-9EA0-C5C14B67C131} = {29BE6595-632F-4E79-9EA0-C5C14B67C131}
 		{99B708EE-57AA-456B-8F55-64C9AEEAF5EB} = {99B708EE-57AA-456B-8F55-64C9AEEAF5EB}
 		{175609F9-AE14-42CB-B294-99DD32313B2F} = {175609F9-AE14-42CB-B294-99DD32313B2F}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityTextureCreator", "EntityTextureCreator\EntityTextureCreator.csproj", "{A1912ECF-F67A-41D8-9730-FDB928C5F0CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextureComparer", "TextureComparer\TextureComparer.csproj", "{29BE6595-632F-4E79-9EA0-C5C14B67C131}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +40,10 @@ Global
 		{A1912ECF-F67A-41D8-9730-FDB928C5F0CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1912ECF-F67A-41D8-9730-FDB928C5F0CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1912ECF-F67A-41D8-9730-FDB928C5F0CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29BE6595-632F-4E79-9EA0-C5C14B67C131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29BE6595-632F-4E79-9EA0-C5C14B67C131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29BE6595-632F-4E79-9EA0-C5C14B67C131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29BE6595-632F-4E79-9EA0-C5C14B67C131}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

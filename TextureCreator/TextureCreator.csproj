@@ -85,12 +85,6 @@
     <Compile Include="Lite.Designer.cs">
       <DependentUpon>Lite.cs</DependentUpon>
     </Compile>
-    <Compile Include="New.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="New.Designer.cs">
-      <DependentUpon>New.cs</DependentUpon>
-    </Compile>
     <Compile Include="NewTexture.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,9 +132,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Lite.zh-Hant.resx">
       <DependentUpon>Lite.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="New.resx">
-      <DependentUpon>New.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewTexture.resx">
       <DependentUpon>NewTexture.cs</DependentUpon>

@@ -88,6 +88,10 @@
       <Project>{a1912ecf-f67a-41d8-9730-fdb928c5f0cf}</Project>
       <Name>EntityTextureCreator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TextureComparer\TextureComparer.csproj">
+      <Project>{29be6595-632f-4e79-9ea0-c5c14b67c131}</Project>
+      <Name>TextureComparer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TextureCreator\TextureCreator.csproj">
       <Project>{175609f9-ae14-42cb-b294-99dd32313b2f}</Project>
       <Name>TextureCreator</Name>
