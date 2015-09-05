@@ -43,6 +43,7 @@
             // 
             // comp1
             // 
+            this.comp1.AllowDrop = true;
             this.comp1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.comp1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.comp1.Location = new System.Drawing.Point(12, 12);
@@ -51,6 +52,8 @@
             this.comp1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.comp1.TabIndex = 0;
             this.comp1.TabStop = false;
+            this.comp1.DragDrop += new System.Windows.Forms.DragEventHandler(this.comp1_DragDrop);
+            this.comp1.DragEnter += new System.Windows.Forms.DragEventHandler(this.comp1_DragEnter);
             // 
             // comp2
             // 
@@ -124,6 +127,7 @@
             // 
             // Compare
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(623, 431);
@@ -138,6 +142,8 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Compare";
             this.Text = "Comparer";
+            this.Load += new System.EventHandler(this.Compare_Load);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Compare_DragEnter);
             ((System.ComponentModel.ISupportInitialize)(this.comp1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comp2)).EndInit();
             this.ResumeLayout(false);

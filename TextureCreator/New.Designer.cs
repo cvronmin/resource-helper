@@ -42,12 +42,14 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.foreColorItem = new System.Windows.Forms.ToolStripButton();
             this.backColorItem = new System.Windows.Forms.ToolStripButton();
             this.designBox = new System.Windows.Forms.PictureBox();
             this.cursorItem = new System.Windows.Forms.ToolStripButton();
             this.pencilItem = new System.Windows.Forms.ToolStripButton();
             this.ereasorItem = new System.Windows.Forms.ToolStripButton();
+            this.dRectItem = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.toolBar.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -74,41 +76,41 @@
             this.saveItem,
             this.saveAsItem});
             this.檔案FToolStripMenuItem.Name = "檔案FToolStripMenuItem";
-            this.檔案FToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.檔案FToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.檔案FToolStripMenuItem.Text = "檔案(&F)";
             // 
             // newFileItem
             // 
             this.newFileItem.Name = "newFileItem";
             this.newFileItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newFileItem.Size = new System.Drawing.Size(170, 22);
+            this.newFileItem.Size = new System.Drawing.Size(167, 22);
             this.newFileItem.Text = "開新檔案";
             // 
             // openItem
             // 
             this.openItem.Name = "openItem";
             this.openItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openItem.Size = new System.Drawing.Size(170, 22);
+            this.openItem.Size = new System.Drawing.Size(167, 22);
             this.openItem.Text = "開啟舊檔";
             this.openItem.Click += new System.EventHandler(this.openItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(164, 6);
             // 
             // saveItem
             // 
             this.saveItem.Name = "saveItem";
             this.saveItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveItem.Size = new System.Drawing.Size(170, 22);
+            this.saveItem.Size = new System.Drawing.Size(167, 22);
             this.saveItem.Text = "儲存檔案";
             this.saveItem.Click += new System.EventHandler(this.saveItem_Click);
             // 
             // saveAsItem
             // 
             this.saveAsItem.Name = "saveAsItem";
-            this.saveAsItem.Size = new System.Drawing.Size(170, 22);
+            this.saveAsItem.Size = new System.Drawing.Size(167, 22);
             this.saveAsItem.Text = "另存新檔";
             this.saveAsItem.Click += new System.EventHandler(this.saveAsItem_Click);
             // 
@@ -118,7 +120,9 @@
             this.toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cursorItem,
             this.pencilItem,
-            this.ereasorItem});
+            this.ereasorItem,
+            this.toolStripSeparator2,
+            this.dRectItem});
             this.toolBar.Location = new System.Drawing.Point(0, 24);
             this.toolBar.Name = "toolBar";
             this.toolBar.Size = new System.Drawing.Size(32, 356);
@@ -140,7 +144,7 @@
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(39, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(38, 22);
             this.toolStripLabel1.Text = "Color";
             // 
             // colorDialog1
@@ -161,6 +165,11 @@
             this.saveFileDialog1.Filter = "PNG (*.png)|*.png|所有檔案 (*.*)|*.*";
             this.saveFileDialog1.SupportMultiDottedExtensions = true;
             this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(29, 6);
             // 
             // foreColorItem
             // 
@@ -210,6 +219,7 @@
             // 
             // pencilItem
             // 
+            this.pencilItem.BackColor = System.Drawing.SystemColors.Control;
             this.pencilItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.pencilItem.Image = global::TextureCreator.Properties.Resources.Pencil;
             this.pencilItem.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -227,6 +237,15 @@
             this.ereasorItem.Size = new System.Drawing.Size(29, 20);
             this.ereasorItem.Text = "Ereasor";
             this.ereasorItem.Click += new System.EventHandler(this.ereasorItem_Click);
+            // 
+            // dRectItem
+            // 
+            this.dRectItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.dRectItem.Image = global::TextureCreator.Properties.Resources.dRect;
+            this.dRectItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.dRectItem.Name = "dRectItem";
+            this.dRectItem.Size = new System.Drawing.Size(29, 20);
+            this.dRectItem.Text = "draw Rectangle";
             // 
             // NewTC
             // 
@@ -275,5 +294,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripButton ereasorItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton dRectItem;
     }
 }

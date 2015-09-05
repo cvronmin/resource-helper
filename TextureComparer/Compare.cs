@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -12,6 +13,13 @@ namespace TextureComparer
     public partial class Compare : Form
     {
         Bitmap map1, map2, map3, map4, zoomMap1, zoomMap2, zoomMap3, zoomMap4;
+        public override bool AllowDrop { get { return true; } set {} }
+        public Compare()
+        {
+            InitializeComponent();
+            DragEnter += new DragEventHandler(this.Compare_DragEnter);
+            DragDrop += new DragEventHandler(this.Compare_DragDrop);
+        }
 
         private void butReset_Click(object sender, EventArgs e)
         {
@@ -19,6 +27,57 @@ namespace TextureComparer
             comp2.Image = null;
             map1 = null; map2 = null; map3 = null; map4 = null;
             zoomMap1 = null; zoomMap2 = null; zoomMap3 = null; zoomMap4 = null;
+            MessageBox.Show("d");
+        }
+
+        private void comp1_DragDrop(object sender, DragEventArgs e)
+        {
+            MessageBox.Show(e.Data.GetFormats().ToString());
+        }
+
+        private void comp1_DragEnter(object sender, DragEventArgs e)
+        {
+            MessageBox.Show("comp1.dragEnter");
+            object fileNameW = e.Data.GetData("FileNameW");
+            if (fileNameW != null)
+            {
+                string[] fileNames = (string[])fileNameW;
+                if (fileNames.Length == 1)
+                {
+                    string fileName = fileNames[0];
+
+                    if (Path.GetExtension(fileName) == ".png")
+                    {
+                        e.Effect = DragDropEffects.Copy;
+                    }
+                }
+            }
+        }
+
+        private void Compare_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+/*            if (e.Data.GetDataPresent(DataFormats.Bitmap) ||
+               e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }*/
+        }
+        private void Compare_DragDrop(object sender, DragEventArgs e)
+        {
+            MessageBox.Show(e.Data.GetFormats().ToString());
+        }
+
+        private void Compare_Load(object sender, EventArgs e)
+        {
+            this.AllowDrop = true;
+            this.comp1.AllowDrop = true;
+            this.comp2.AllowDrop = true;
+            MessageBox.Show(this.AllowDrop.ToString());
         }
 
         private void butComp_Click(object sender, EventArgs e)
@@ -44,11 +103,6 @@ namespace TextureComparer
             comp1.Image = zoomMap3;
             comp2.Image = zoomMap4;
             label1.Text = "There are " + (map1.Size.Width * map1.Size.Height - count)  + " same pixels and " + count + " different pixels";
-        }
-
-        public Compare()
-        {
-            InitializeComponent();
         }
 
         private void butC1_Click(object sender, EventArgs e)

@@ -383,6 +383,7 @@
             // 
             // Lite
             // 
+            this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.designBox);
@@ -390,6 +391,8 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Lite";
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Lite_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Lite_DragEnter);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolBox.ResumeLayout(false);

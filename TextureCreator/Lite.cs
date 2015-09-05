@@ -438,5 +438,18 @@ namespace TextureCreator
             }
         }
 
+        private void Lite_DragDrop(object sender, DragEventArgs e)
+        {
+            MessageBox.Show(e.Data.GetFormats().ToString());
+        }
+
+        private void Lite_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(Bitmap)))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
     }
 }
+

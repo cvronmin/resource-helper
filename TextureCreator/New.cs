@@ -11,7 +11,7 @@ namespace TextureCreator
 {
     public partial class NewTC : Form
     {
-        public static Bitmap map;
+        public static Bitmap map, zoommap;
         public Graphics graphic;
         public string filename;
         public int state;
@@ -19,8 +19,29 @@ namespace TextureCreator
         {
             InitializeComponent();
             new16file();
-            designBox.Image = map;
+            zoommap = zoom(map);
+            designBox.Image = zoommap;
 //            designBox.Scale(new SizeF(2, 2));
+        }
+        private Bitmap zoom(Bitmap map)
+        {
+            Bitmap scalemap = new Bitmap(256, 256);
+            int scaleX = 256 / map.Size.Width;
+            int scaleY = 256 / map.Size.Height;
+            for (int x = 0; x < map.Size.Width; x++)
+            {
+                for (int y = 0; y < map.Size.Height; y++)
+                {
+                    for (int u = 0; u < scaleX; u++)
+                    {
+                        for (int v = 0; v < scaleY; v++)
+                        {
+                            scalemap.SetPixel(x * scaleX + u, y * scaleY + v, map.GetPixel(x, y));
+                        }
+                    }
+                }
+            }
+            return scalemap;
         }
         public void new16file(){
             map = new Bitmap(16, 16);
@@ -47,7 +68,7 @@ namespace TextureCreator
         }
         private void redraw() {
             graphic = Graphics.FromImage(map);
-            designBox.Image = map;
+            designBox.Image = zoommap;
         }
         private void cursorItem_Click(object sender, EventArgs e)
         {
@@ -123,43 +144,27 @@ namespace TextureCreator
             }
             redraw();
         }
+
         private void drawPixel(int x, int y, Color color) {
-            if (map.Width == 16 && map.Height == 16)
-            {
-                map.SetPixel((x / (256 / 16)), (y / (256 / 16)), color);
-            }
-            else if (map.Width == 32 && map.Height == 32)
-            {
-                map.SetPixel(x / (256 / 32), y / (256 / 32), color);
-            }
-            else if (map.Width == 64 && map.Height == 64)
-            {
-                map.SetPixel(x / (256 / 64), y / (256 / 64), color);
-            }
-            else if (map.Width == 256 && map.Height == 256)
-            {
-                map.SetPixel(x, y, color);
+            map.SetPixel(x / (256 / map.Width), y / (256 / map.Height), color);
+            for (int u = 0; u < (256 / map.Width); u++) {
+                for (int v = 0; v < (256 / map.Height); v++) {
+                    zoommap.SetPixel(x / (256 / map.Width) * (256 / map.Width) + u, y / (256 / map.Height) * (256 / map.Height) + v, color);
+                }
             }
         }
-        private void ereasePixel(int x, int y)
-        {
-            if (map.Width == 16 && map.Height == 16)
+
+        private void ereasePixel(int x, int y){
+            map.SetPixel(x / (256 / map.Width), y / (256 / map.Height), Color.Transparent);
+            for (int u = 0; u < (256 / map.Width); u++)
             {
-                map.SetPixel((x / (256 / 16)), (y / (256 / 16)), Color.Transparent);
-            }
-            else if (map.Width == 32 && map.Height == 32)
-            {
-                map.SetPixel(x / (256 / 32), y / (256 / 32), Color.Transparent);
-            }
-            else if (map.Width == 64 && map.Height == 64)
-            {
-                map.SetPixel(x / (256 / 64), y / (256 / 64), Color.Transparent);
-            }
-            else if (map.Width == 256 && map.Height == 256)
-            {
-                map.SetPixel(x, y, Color.Transparent);
+                for (int v = 0; v < (256 / map.Height); v++)
+                {
+                    zoommap.SetPixel(x / (256 / map.Width) * (256 / map.Width) + u, y / (256 / map.Height) * (256 / map.Height) + v, Color.Transparent);
+                }
             }
         }
+
         private void foreColorItem_Click(object sender, EventArgs e)
         {
             colorDialog1.Color = foreColorItem.BackColor;
