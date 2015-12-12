@@ -44,6 +44,8 @@
             this.butColor4 = new System.Windows.Forms.Button();
             this.butcolor3 = new System.Windows.Forms.Button();
             this.butRGB = new System.Windows.Forms.Button();
+            this.buttonLS = new System.Windows.Forms.Button();
+            this.buttonRS = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Red
@@ -188,11 +190,33 @@
             this.butRGB.UseVisualStyleBackColor = true;
             this.butRGB.Click += new System.EventHandler(this.butRGB_Click);
             // 
+            // buttonLS
+            // 
+            this.buttonLS.Location = new System.Drawing.Point(351, 221);
+            this.buttonLS.Name = "buttonLS";
+            this.buttonLS.Size = new System.Drawing.Size(50, 23);
+            this.buttonLS.TabIndex = 16;
+            this.buttonLS.Text = "<<";
+            this.buttonLS.UseVisualStyleBackColor = true;
+            this.buttonLS.Click += new System.EventHandler(this.buttonLS_Click);
+            // 
+            // buttonRS
+            // 
+            this.buttonRS.Location = new System.Drawing.Point(401, 221);
+            this.buttonRS.Name = "buttonRS";
+            this.buttonRS.Size = new System.Drawing.Size(50, 23);
+            this.buttonRS.TabIndex = 17;
+            this.buttonRS.Text = ">>";
+            this.buttonRS.UseVisualStyleBackColor = true;
+            this.buttonRS.Click += new System.EventHandler(this.buttonRS_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(505, 326);
+            this.Controls.Add(this.buttonRS);
+            this.Controls.Add(this.buttonLS);
             this.Controls.Add(this.butcolor3);
             this.Controls.Add(this.butRGB);
             this.Controls.Add(this.butColor4);
@@ -236,6 +260,8 @@
         private System.Windows.Forms.Button butColor4;
         private System.Windows.Forms.Button butcolor3;
         private System.Windows.Forms.Button butRGB;
+        private System.Windows.Forms.Button buttonLS;
+        private System.Windows.Forms.Button buttonRS;
     }
 }
 

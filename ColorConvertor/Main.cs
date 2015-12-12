@@ -110,5 +110,56 @@ namespace ColorConvertor
             G.Text = gc.ToString();
             B.Text = bc.ToString();
         }
+
+        private void buttonLS_Click(object sender, EventArgs e)
+        {
+            int rgb = 0;
+            try
+            {
+                rgb = Int32.Parse(RGB.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Cannot shift!");
+                RGB.Text = "";
+            }
+            RGB.Text = leftShift(rgb,4).ToString();
+        }
+
+        private void buttonRS_Click(object sender, EventArgs e)
+        {
+            int rgb = 0;
+            try
+            {
+                rgb = Int32.Parse(RGB.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Cannot shift!");
+                RGB.Text = "";
+            }
+            RGB.Text = rightShift(rgb, 4).ToString();
+        }
+        private int leftShift(int par, int dight)
+        {
+            int temp = par << dight;
+            temp = (temp | (par >> (Convert.ToString(0xFFFFFF, 2).Length - dight)));
+            return temp & 0xFFFFFF;
+        }
+        private int rightShift(int par, int dight)
+        {
+            int temp = par >> dight;
+            temp = (temp | ((par << Convert.ToString(0xFFFFFF, 2).Length - dight) & (twoDight(dight) << Convert.ToString(0xFFFFFF, 2).Length - dight)));
+            return temp & 0xFFFFFF;
+        }
+        private int twoDight(int dight)
+        {
+            int temp = 0;
+            for (int i = 0; i < dight; i++)
+            {
+                temp += (int)Math.Pow(2, i);
+            }
+            return temp;
+        }
     }
 }

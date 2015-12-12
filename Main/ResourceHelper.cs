@@ -32,6 +32,10 @@ namespace Main
             {
                 button3.Enabled = true;
             }
+            if (System.IO.File.Exists(Environment.CurrentDirectory + @"\TextureEditor.dll"))
+            {
+                button6.Enabled = true;
+            }
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -56,6 +60,11 @@ namespace Main
         private void button5_Click(object sender, EventArgs e)
         {
             new TextureComparer.Compare().Show();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            new TextureEditor.Form1().Show();
         }
     }
 }

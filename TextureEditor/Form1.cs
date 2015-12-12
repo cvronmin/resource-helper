@@ -1,0 +1,237 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace TextureEditor
+{
+    public partial class Form1 : Form
+    {
+        internal Bitmap map;
+        internal Graphics graphic;
+        string filename;
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void openFileMenu_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            filename = openFileDialog1.FileName;
+            this.Text = filename != null ? "Texture Creator - " + filename : "Texture Creator - Untitled";
+            Image file = Image.FromFile(filename);
+            map = new Bitmap(file);
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = true;
+        }
+
+        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            this.filename = saveFileDialog1.FileName;
+            map.Save(saveFileDialog1.FileName, System.Drawing.Imaging.ImageFormat.Png);
+            this.Text = filename != null ? "Texture Creator - " + filename : "Texture Creator - Untitled";
+        }
+
+        private void saveFileMenu_Click(object sender, EventArgs e)
+        {
+            if (filename == null)
+            {
+                saveAsMenu_Click(sender, e);
+            }
+            else
+            {
+                map.Save(filename);
+            }
+        }
+
+        private void saveAsMenu_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.ShowDialog();
+        }
+
+        private void buttonGray_Click(object sender, EventArgs e)
+        {
+            buttonGray.Enabled = false;
+            for (int x = 0; x < map.Width; x++)
+            {
+                for (int y = 0; y < map.Height; y++)
+                {
+                    map.SetPixel(x,y,Color.FromArgb(map.GetPixel(x,y).A, averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B), averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B), averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B)));
+                }
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            buttonGray.Enabled = true;
+        }
+        public int averageColor(int R, int G, int B) {
+            return (R + G + B) / 3;
+        }
+        public int groupColor(int average) {
+            return average < 127 ? 0 : 255;
+        }
+        public int groupColor(int average, int split)
+        {
+            return average < split ? 0 : 255;
+        }
+        private void buttonBW_Click(object sender, EventArgs e)
+        {
+            buttonBW.Enabled = false;
+            for (int x = 0; x < map.Width; x++)
+            {
+                for (int y = 0; y < map.Height; y++)
+                {
+                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, groupColor(averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B)), groupColor(averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B)), groupColor(averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B))));
+                }
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            buttonBW.Enabled = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            button1.Enabled = false;
+            for (int x = 0; x < map.Width; x++)
+            {
+                for (int y = 0; y < map.Height; y++)
+                {
+                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 16) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 8) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1)) & 255));
+                }
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            button1.Enabled = true;
+        }
+        public int leftShift(int par, int dight) {
+            int temp = par << dight;
+            temp = (temp | (par >> (Convert.ToString(0xFFFFFF, 2).Length - dight)));
+            return temp & 0xFFFFFF;
+        }
+        public int rightShift(int par, int dight)
+        {
+            int temp = par >> dight;
+            temp = (temp | ((par << Convert.ToString(0xFFFFFF, 2).Length - dight) & (twoDight(dight) << Convert.ToString(0xFFFFFF, 2).Length - dight)));
+            return temp & 0xFFFFFF;
+        }
+        [Obsolete]
+        private int leftMove(int par) {
+            return leftMove(par,1);
+        }
+        [Obsolete]
+        private int leftMove(int par, int dight)
+        {
+            int temp = par << dight;
+            temp = (temp | (par >> Convert.ToString(par, 2).Length - dight));
+            return temp & 0xFFFFFF;
+        }
+        [Obsolete]
+        private int rightMove(int par)
+        {
+            return rightMove(par,1);
+        }
+        [Obsolete]
+        private int rightMove(int par, int dight)
+        {
+            int temp = par >> dight;
+            temp = (temp | ((par & temp) << Convert.ToString(par, 2).Length - dight));
+            return temp & 0xFFFFFF;
+        }
+        private int twoDight(int dight) {
+            int temp = 0;
+            for (int i = 0; i < dight; i++)
+            {
+                temp += (int) Math.Pow(2,i);
+            }
+            return temp;
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            button2.Enabled = false;
+            for (int x = 0; x < map.Width; x++)
+            {
+                for (int y = 0; y < map.Height; y++)
+                {
+                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 16) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 8) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1)) & 255));
+                }
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            button2.Enabled = true;
+        }
+
+        private void buttonLH_Click(object sender, EventArgs e)
+        {
+            buttonLH.Enabled = false;
+            for (int x = 0; x < map.Width; x++)
+            {
+                for (int y = 0; y < map.Height; y++)
+                {
+                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 16) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 8) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4)) & 255));
+                }
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            buttonLH.Enabled = true;
+        }
+
+        private void buttonRH_Click(object sender, EventArgs e)
+        {
+            buttonRH.Enabled = false;
+            for (int x = 0; x < map.Width; x++)
+            {
+                for (int y = 0; y < map.Height; y++)
+                {
+                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 16) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 8) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4)) & 255));
+                }
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            buttonRH.Enabled = true;
+        }
+
+        private void buttonLS2_Click(object sender, EventArgs e)
+        {
+            buttonLS2.Enabled = false;
+            for (int x = 0; x < map.Width; x++)
+            {
+                for (int y = 0; y < map.Height; y++)
+                {
+                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 16) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 8) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8)) & 255));
+                }
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            buttonLS2.Enabled = true;
+        }
+
+        private void buttonRS2_Click(object sender, EventArgs e)
+        {
+            buttonRS2.Enabled = false;
+            for (int x = 0; x < map.Width; x++)
+            {
+                for (int y = 0; y < map.Height; y++)
+                {
+                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 16) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 8) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8)) & 255));
+                }
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            buttonRS2.Enabled = true;
+        }
+
+        private void buttonOther_Click(object sender, EventArgs e)
+        {
+            new Form2(this).ShowDialog();
+        }
+    }
+}

@@ -96,6 +96,10 @@
       <Project>{175609f9-ae14-42cb-b294-99dd32313b2f}</Project>
       <Name>TextureCreator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TextureEditor\TextureEditor.csproj">
+      <Project>{c9fb4b41-5247-4053-aa46-f007b985525f}</Project>
+      <Name>TextureEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

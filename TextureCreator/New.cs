@@ -15,6 +15,8 @@ namespace TextureCreator
         public Graphics graphic;
         public string filename;
         public int state;
+        private bool isLockLoc = false;
+        private int locX, locY;
         public NewTC()
         {
             InitializeComponent();
@@ -70,12 +72,17 @@ namespace TextureCreator
             graphic = Graphics.FromImage(map);
             designBox.Image = zoommap;
         }
+        private void redraw(Bitmap map)
+        {
+            designBox.Image = zoom(map);
+        }
         private void cursorItem_Click(object sender, EventArgs e)
         {
             state = -1;
             cursorItem.CheckState = CheckState.Checked;
             pencilItem.CheckState = CheckState.Unchecked;
             ereasorItem.CheckState = CheckState.Unchecked;
+            dRectItem.CheckState = CheckState.Unchecked;
         }
 
         private void pencilItem_Click(object sender, EventArgs e)
@@ -84,6 +91,7 @@ namespace TextureCreator
             cursorItem.CheckState = CheckState.Unchecked;
             pencilItem.CheckState = CheckState.Checked;
             ereasorItem.CheckState = CheckState.Unchecked;
+            dRectItem.CheckState = CheckState.Unchecked;
         }
         private void ereasorItem_Click(object sender, EventArgs e)
         {
@@ -91,58 +99,87 @@ namespace TextureCreator
             cursorItem.CheckState = CheckState.Unchecked;
             pencilItem.CheckState = CheckState.Unchecked;
             ereasorItem.CheckState = CheckState.Checked;
+            dRectItem.CheckState = CheckState.Unchecked;
+        }
+        private void dRectItem_Click(object sender, EventArgs e)
+        {
+            state = 3;
+            cursorItem.CheckState = CheckState.Unchecked;
+            pencilItem.CheckState = CheckState.Unchecked;
+            ereasorItem.CheckState = CheckState.Unchecked;
+            dRectItem.CheckState = CheckState.Checked;
         }
         private void designBox_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.X < 0 || e.X > 255 || e.Y < 0 || e.Y > 255) { return; }
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
-                if (state == 1)
+                switch (state)
                 {
-                    drawPixel(e.X, e.Y, foreColorItem.BackColor);
-                }
-                if (state == 2)
-                {
-                    ereasePixel(e.X, e.Y);
+                    case 1:
+                        drawPixel(e.X, e.Y, foreColorItem.BackColor);
+                        break;
+                    case 2:
+                        ereasePixel(e.X, e.Y);
+                        break;
+                    case 3:
+                        drawRect(e.X, e.Y, false);
+                        break;
+                    default:
+                        break;
                 }
             }
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
-                if (state == 1)
+                switch (state)
                 {
-                    drawPixel(e.X, e.Y, backColorItem.BackColor);
-                }
-                if (state == 2)
-                {
-                    ereasePixel(e.X, e.Y);
+                    case 1:
+                        drawPixel(e.X, e.Y, backColorItem.BackColor);
+                        break;
+                    case 2:
+                        ereasePixel(e.X, e.Y);
+                        break;
+                    case 3:
+                        drawRect(e.X, e.Y, true);
+                        break;
+                    default:
+                        break;
                 }
             }
-            redraw();
         }
         private void designBox_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.X < 0 || e.X > 255 || e.Y < 0 || e.Y > 255) { return; }
-            if(e.Button == System.Windows.Forms.MouseButtons.Left){
-                if(state == 1){
-                    drawPixel(e.X, e.Y, foreColorItem.BackColor);
-                }
-                if (state == 2)
+            if(e.Button == MouseButtons.Left){
+                switch (state)
                 {
-                    ereasePixel(e.X, e.Y);
+                    case 1:
+                        drawPixel(e.X, e.Y, foreColorItem.BackColor);
+                        break;
+                    case 2:
+                        ereasePixel(e.X, e.Y);
+                        break;
+                    case 3:
+                        previewRect(e.X, e.Y);
+                        break;
+                    default:
+                        break;
                 }
             }
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
-                if (state == 1)
+                switch (state)
                 {
-                    drawPixel(e.X, e.Y, backColorItem.BackColor);
-                }
-                if (state == 2)
-                {
-                    ereasePixel(e.X, e.Y);
+                    case 1:
+                        drawPixel(e.X, e.Y, backColorItem.BackColor);
+                        break;
+                    case 3:
+                        previewRect(e.X, e.Y);
+                        break;
+                    default:
+                        break;
                 }
             }
-            redraw();
         }
 
         private void drawPixel(int x, int y, Color color) {
@@ -152,6 +189,7 @@ namespace TextureCreator
                     zoommap.SetPixel(x / (256 / map.Width) * (256 / map.Width) + u, y / (256 / map.Height) * (256 / map.Height) + v, color);
                 }
             }
+            redraw();
         }
 
         private void ereasePixel(int x, int y){
@@ -163,8 +201,37 @@ namespace TextureCreator
                     zoommap.SetPixel(x / (256 / map.Width) * (256 / map.Width) + u, y / (256 / map.Height) * (256 / map.Height) + v, Color.Transparent);
                 }
             }
+            redraw();
         }
 
+        private void drawRect(int x, int y, bool isRightClick) {
+            if (!isLockLoc && !isRightClick)
+            {
+                locX = x;locY = y;
+                isLockLoc = true;
+            }
+            if (isLockLoc)
+            {
+                if (isRightClick)
+                {
+                    locX = 0; locY = 0;
+                    isLockLoc = false;
+                }
+                else
+                {
+                    graphic.DrawRectangle(new Pen(foreColorItem.BackColor), locX, locY, Math.Abs(locX - x), Math.Abs(locY - y));
+                    isLockLoc = false;
+                }
+            }
+            redraw();
+        }
+        private void previewRect(int x, int y) {
+            Bitmap preMap = map;
+            Bitmap preZoomMap = new Bitmap(256,256);
+            Graphics preGraphic = Graphics.FromImage(preMap);
+            preGraphic.DrawRectangle(new Pen(foreColorItem.BackColor), locX, locY, Math.Abs(locX - x), Math.Abs(locY - y));
+            redraw(preMap);
+        }
         private void foreColorItem_Click(object sender, EventArgs e)
         {
             colorDialog1.Color = foreColorItem.BackColor;
