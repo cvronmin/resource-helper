@@ -54,6 +54,8 @@
             this.buttonGray = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.label1 = new System.Windows.Forms.Label();
             this.previewGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -187,6 +189,8 @@
             // 
             this.toolGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.toolGroup.Controls.Add(this.label1);
+            this.toolGroup.Controls.Add(this.progressBar);
             this.toolGroup.Controls.Add(this.buttonOther);
             this.toolGroup.Controls.Add(this.buttonRS2);
             this.toolGroup.Controls.Add(this.buttonLS2);
@@ -316,6 +320,22 @@
             this.openFileDialog1.SupportMultiDottedExtensions = true;
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(7, 321);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(202, 23);
+            this.progressBar.TabIndex = 9;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 303);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 12);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Progress";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -331,6 +351,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolGroup.ResumeLayout(false);
+            this.toolGroup.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,6 +384,8 @@
         private System.Windows.Forms.Button buttonRS2;
         private System.Windows.Forms.Button buttonLS2;
         private System.Windows.Forms.Button buttonOther;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ProgressBar progressBar;
         internal System.Windows.Forms.PictureBox previewBox;
     }
 }

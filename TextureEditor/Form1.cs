@@ -61,17 +61,22 @@ namespace TextureEditor
 
         private void buttonGray_Click(object sender, EventArgs e)
         {
-            buttonGray.Enabled = false;
-            for (int x = 0; x < map.Width; x++)
-            {
-                for (int y = 0; y < map.Height; y++)
-                {
-                    map.SetPixel(x,y,Color.FromArgb(map.GetPixel(x,y).A, averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B), averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B), averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B)));
-                }
-            }
-            graphic = Graphics.FromImage(map);
-            previewBox.Image = map;
-            buttonGray.Enabled = true;
+                        buttonGray.Enabled = false;
+                        for (int x = 0; x < map.Width; x++)
+                        {
+                            for (int y = 0; y < map.Height; y++)
+                            {
+                                map.SetPixel(x,y,Color.FromArgb(map.GetPixel(x,y).A, averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B), averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B), averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B)));
+                            }
+                        }
+                        graphic = Graphics.FromImage(map);
+                        previewBox.Image = map;
+                        buttonGray.Enabled = true;
+ /*           buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+            var thread = new PixelModifyThread(map, 1);
+            thread.ModifyChangingEvent += OnModifyChange;
+            thread.ModifyFinishEvent += OnModifyFinish;
+            thread.Start();*/
         }
         public int averageColor(int R, int G, int B) {
             return (R + G + B) / 3;
@@ -96,21 +101,31 @@ namespace TextureEditor
             graphic = Graphics.FromImage(map);
             previewBox.Image = map;
             buttonBW.Enabled = true;
+/*            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+            var thread = new PixelModifyThread(map, 2);
+            thread.ModifyChangingEvent += OnModifyChange;
+            thread.ModifyFinishEvent += OnModifyFinish;
+            thread.Start();*/
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            button1.Enabled = false;
-            for (int x = 0; x < map.Width; x++)
-            {
-                for (int y = 0; y < map.Height; y++)
-                {
-                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 16) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 8) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1)) & 255));
-                }
-            }
-            graphic = Graphics.FromImage(map);
-            previewBox.Image = map;
-            button1.Enabled = true;
+                        button1.Enabled = false;
+                        for (int x = 0; x < map.Width; x++)
+                        {
+                            for (int y = 0; y < map.Height; y++)
+                            {
+                                map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 16) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 8) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1)) & 255));
+                            }
+                        }
+                        graphic = Graphics.FromImage(map);
+                        previewBox.Image = map;
+                        button1.Enabled = true;
+ /*           buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+            var thread = new PixelModifyThread(map, 3, 1);
+            thread.ModifyChangingEvent += OnModifyChange;
+            thread.ModifyFinishEvent += OnModifyFinish;
+            thread.Start();*/
         }
         public int leftShift(int par, int dight) {
             int temp = par << dight;
@@ -156,82 +171,143 @@ namespace TextureEditor
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            button2.Enabled = false;
-            for (int x = 0; x < map.Width; x++)
-            {
-                for (int y = 0; y < map.Height; y++)
-                {
-                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 16) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 8) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1)) & 255));
-                }
-            }
-            graphic = Graphics.FromImage(map);
-            previewBox.Image = map;
-            button2.Enabled = true;
+                        button2.Enabled = false;
+                        for (int x = 0; x < map.Width; x++)
+                        {
+                            for (int y = 0; y < map.Height; y++)
+                            {
+                                map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 16) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 8) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1)) & 255));
+                            }
+                        }
+                        graphic = Graphics.FromImage(map);
+                        previewBox.Image = map;
+                        button2.Enabled = true;
+ /*           buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+            var thread = new PixelModifyThread(map, 4, 1);
+            thread.ModifyChangingEvent += OnModifyChange;
+            thread.ModifyFinishEvent += OnModifyFinish;
+            thread.Start();*/
         }
 
         private void buttonLH_Click(object sender, EventArgs e)
         {
-            buttonLH.Enabled = false;
-            for (int x = 0; x < map.Width; x++)
-            {
-                for (int y = 0; y < map.Height; y++)
-                {
-                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 16) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 8) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4)) & 255));
-                }
-            }
-            graphic = Graphics.FromImage(map);
-            previewBox.Image = map;
-            buttonLH.Enabled = true;
+                       buttonLH.Enabled = false;
+                        for (int x = 0; x < map.Width; x++)
+                        {
+                            for (int y = 0; y < map.Height; y++)
+                            {
+                                map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 16) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 8) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4)) & 255));
+                            }
+                        }
+                        graphic = Graphics.FromImage(map);
+                        previewBox.Image = map;
+                        buttonLH.Enabled = true;
+ /*           buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+            var thread = new PixelModifyThread(map, 3, 4);
+            thread.ModifyChangingEvent += OnModifyChange;
+            thread.ModifyFinishEvent += OnModifyFinish;
+            thread.Start();*/
         }
 
         private void buttonRH_Click(object sender, EventArgs e)
         {
-            buttonRH.Enabled = false;
-            for (int x = 0; x < map.Width; x++)
-            {
-                for (int y = 0; y < map.Height; y++)
-                {
-                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 16) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 8) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4)) & 255));
-                }
-            }
-            graphic = Graphics.FromImage(map);
-            previewBox.Image = map;
-            buttonRH.Enabled = true;
+                        buttonRH.Enabled = false;
+                        for (int x = 0; x < map.Width; x++)
+                        {
+                            for (int y = 0; y < map.Height; y++)
+                            {
+                                map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 16) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 8) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4)) & 255));
+                            }
+                        }
+                        graphic = Graphics.FromImage(map);
+                        previewBox.Image = map;
+                        buttonRH.Enabled = true;
+ /*           buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+            var thread = new PixelModifyThread(map, 4, 4);
+            thread.ModifyChangingEvent += OnModifyChange;
+            thread.ModifyFinishEvent += OnModifyFinish;
+            thread.Start();*/
         }
 
         private void buttonLS2_Click(object sender, EventArgs e)
         {
-            buttonLS2.Enabled = false;
-            for (int x = 0; x < map.Width; x++)
-            {
-                for (int y = 0; y < map.Height; y++)
-                {
-                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 16) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 8) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8)) & 255));
-                }
-            }
-            graphic = Graphics.FromImage(map);
-            previewBox.Image = map;
-            buttonLS2.Enabled = true;
+                        buttonLS2.Enabled = false;
+                        for (int x = 0; x < map.Width; x++)
+                        {
+                            for (int y = 0; y < map.Height; y++)
+                            {
+                                map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 16) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 8) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8)) & 255));
+                            }
+                        }
+                        graphic = Graphics.FromImage(map);
+                        previewBox.Image = map;
+                        buttonLS2.Enabled = true;
+/*            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+            var thread = new PixelModifyThread(map, 3, 8);
+            thread.ModifyChangingEvent += OnModifyChange;
+            thread.ModifyFinishEvent += OnModifyFinish;
+            thread.Start();*/
         }
 
         private void buttonRS2_Click(object sender, EventArgs e)
         {
-            buttonRS2.Enabled = false;
-            for (int x = 0; x < map.Width; x++)
-            {
-                for (int y = 0; y < map.Height; y++)
-                {
-                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 16) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 8) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8)) & 255));
-                }
-            }
-            graphic = Graphics.FromImage(map);
-            previewBox.Image = map;
-            buttonRS2.Enabled = true;
+                        buttonRS2.Enabled = false;
+                        for (int x = 0; x < map.Width; x++)
+                        {
+                            for (int y = 0; y < map.Height; y++)
+                            {
+                                map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 16) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 8) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8)) & 255));
+                            }
+                        }
+                        graphic = Graphics.FromImage(map);
+                        previewBox.Image = map;
+                        buttonRS2.Enabled = true;
+/*            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+            var thread = new PixelModifyThread(map, 4, 8);
+            thread.ModifyChangingEvent += OnModifyChange;
+            thread.ModifyFinishEvent += OnModifyFinish;
+            thread.Start();*/
         }
 
         private void buttonOther_Click(object sender, EventArgs e)
         {
             new Form2(this).ShowDialog();
+        }
+        private void OnModifyChange(int process, int max) {
+            ProgressBarValueChange(process, max);
+        }
+        private void OnModifyFinish(Bitmap map) {
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = true;
+        }
+        public void ProgressBarValueChange(int process, int max) {
+            progressBar.Maximum = max;
+            progressBar.Value = process;
+            label1.Text = "Process: " + process + "/" + max;
+        }
+        public void BlackWhiteAny(int seperater)
+        {
+            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+            var thread = new PixelModifyThread(map, 2, seperater);
+            thread.ModifyChangingEvent += OnModifyChange;
+            thread.ModifyFinishEvent += OnModifyFinish;
+            thread.Start();
+        }
+        public void leftShiftAny(int shift) {
+            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+            var thread = new PixelModifyThread(map, 3, shift);
+            thread.ModifyChangingEvent += OnModifyChange;
+            thread.ModifyFinishEvent += OnModifyFinish;
+            thread.Start();
+        }
+        public void rightShiftAny(int shift)
+        {
+            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+            var thread = new PixelModifyThread(map, 4, shift);
+            thread.ModifyChangingEvent += OnModifyChange;
+            thread.ModifyFinishEvent += OnModifyFinish;
+            thread.Start();
         }
     }
 }
