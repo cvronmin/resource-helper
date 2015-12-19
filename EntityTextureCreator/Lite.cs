@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace EntityTextureCreator
 {
-    public partial class Lite : Form
+    public partial class Lite : Form, Former
     {
         private Processing frame;
         private PixelButton[,] pixels = new PixelButton[64,32];
@@ -22,26 +22,33 @@ namespace EntityTextureCreator
         public Lite()
         {
             InitializeComponent();
-            new21File();
+            ((Former)this).new21file();
             initPixels();
         }
-        public void new21File() {
+        void Former.new21file() {
             pixels = new PixelButton[64, 32];
             map = new Bitmap(64,32);
             gra = Graphics.FromImage(map);
             gra.Clear(Color.Transparent);
         }
-        public void new22File()
+        public void new22file()
         {
             pixels = new PixelButton[64, 64];
             map = new Bitmap(64, 64);
             gra = Graphics.FromImage(map);
             gra.Clear(Color.Transparent);
         }
-        public void new42File()
+        void Former.new42file()
         {
             pixels = new PixelButton[128, 64];
             map = new Bitmap(128, 64);
+            gra = Graphics.FromImage(map);
+            gra.Clear(Color.Transparent);
+        }
+        void Former.new84file()
+        {
+            pixels = new PixelButton[256, 128];
+            map = new Bitmap(256, 128);
             gra = Graphics.FromImage(map);
             gra.Clear(Color.Transparent);
         }

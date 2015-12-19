@@ -39,7 +39,7 @@ namespace Main
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            new TextureCreator.Lite().Show();
+            new TextureCreator.NewTC().Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -49,7 +49,7 @@ namespace Main
 
         private void button3_Click(object sender, EventArgs e)
         {
-            new EntityTextureCreator.Lite().Show();
+            new EntityTextureCreator.NewTC().Show();
         }
 
         private void button4_Click(object sender, EventArgs e)

@@ -11,8 +11,8 @@ namespace TextureCreator
 {
     public partial class NewTexture : Form
     {
-        private Lite parent;
-        public NewTexture(Lite parent)
+        private Former parent;
+        public NewTexture(Former parent)
         {
             this.parent = parent;
             InitializeComponent();
@@ -21,15 +21,15 @@ namespace TextureCreator
         private void butCreate_Click(object sender, EventArgs e)
         {
             if(rBut16.Checked){
-                parent.new16File();
+                parent.new16file();
             }
             else if (rBut32.Checked)
             {
-                parent.new32File();
+                parent.new32file();
             }
             else if (rBut64.Checked)
             {
-                parent.new64File();
+                parent.new64file();
             }
             this.Close();
         }

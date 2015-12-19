@@ -78,7 +78,7 @@
     <Compile Include="DrawThings.Designer.cs">
       <DependentUpon>DrawThings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Geometry.cs" />
+    <Compile Include="InterFaces.cs" />
     <Compile Include="Lite.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +142,9 @@
     <EmbeddedResource Include="New.resx">
       <DependentUpon>New.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="New.zh-Hant.resx">
+      <DependentUpon>New.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NewTexture.resx">
       <DependentUpon>NewTexture.cs</DependentUpon>
     </EmbeddedResource>
@@ -180,6 +183,9 @@
   <ItemGroup>
     <Content Include="Resources\Cursor.png" />
     <None Include="Resources\dRect.png" />
+    <None Include="Resources\dOval.png" />
+    <None Include="Resources\fOval.png" />
+    <None Include="Resources\fRect.png" />
     <Content Include="Resources\Ereasor.png" />
     <Content Include="Resources\Pencil.png" />
     <Content Include="Resources\TC.ico" />

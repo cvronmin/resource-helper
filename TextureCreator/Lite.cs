@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace TextureCreator
 {
-    public partial class Lite : Form
+    public partial class Lite : Form, Former
     {
         private PixelButton[,] pixels = new PixelButton[16,16];
         private PixelButton selectpix;
@@ -21,25 +21,25 @@ namespace TextureCreator
         public Lite()
         {
             InitializeComponent();
-            new16File();
+            ((Former)this).new16file();
             initCrossPixels();
             this.Text = filename != null ? "Texture Creator - " + filename : "Texture Creator - Untitled";
         }
-        public void new16File() {
+        void Former.new16file() {
             pixels = new PixelButton[16, 16];
             map = new Bitmap(16,16);
             gra = Graphics.FromImage(map);
             gra.Clear(Color.Transparent);
             this.filename = null;
         }
-        public void new32File() {
+        void Former.new32file() {
             pixels = new PixelButton[32, 32];
             map = new Bitmap(32, 32);
             gra = Graphics.FromImage(map);
             gra.Clear(Color.Transparent);
             this.filename = null;
         }
-        public void new64File()
+        void Former.new64file()
         {
             pixels = new PixelButton[64, 64];
             map = new Bitmap(64, 64);

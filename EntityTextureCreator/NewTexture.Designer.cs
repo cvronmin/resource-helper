@@ -32,7 +32,7 @@
             this.lblSize = new System.Windows.Forms.Label();
             this.rBut32 = new System.Windows.Forms.RadioButton();
             this.butCreate = new System.Windows.Forms.Button();
-            this.rBut162 = new System.Windows.Forms.RadioButton();
+            this.rBut64 = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // rBut16
@@ -60,7 +60,7 @@
             // rBut32
             // 
             this.rBut32.AutoSize = true;
-            this.rBut32.Location = new System.Drawing.Point(121, 97);
+            this.rBut32.Location = new System.Drawing.Point(121, 74);
             this.rBut32.Name = "rBut32";
             this.rBut32.Size = new System.Drawing.Size(66, 19);
             this.rBut32.TabIndex = 2;
@@ -77,23 +77,23 @@
             this.butCreate.UseVisualStyleBackColor = true;
             this.butCreate.Click += new System.EventHandler(this.butCreate_Click);
             // 
-            // rBut162
+            // rBut64
             // 
-            this.rBut162.AutoSize = true;
-            this.rBut162.Location = new System.Drawing.Point(121, 72);
-            this.rBut162.Name = "rBut162";
-            this.rBut162.Size = new System.Drawing.Size(59, 19);
-            this.rBut162.TabIndex = 4;
-            this.rBut162.TabStop = true;
-            this.rBut162.Text = "64x64";
-            this.rBut162.UseVisualStyleBackColor = true;
+            this.rBut64.AutoSize = true;
+            this.rBut64.Location = new System.Drawing.Point(121, 100);
+            this.rBut64.Name = "rBut64";
+            this.rBut64.Size = new System.Drawing.Size(73, 19);
+            this.rBut64.TabIndex = 4;
+            this.rBut64.TabStop = true;
+            this.rBut64.Text = "256x128";
+            this.rBut64.UseVisualStyleBackColor = true;
             // 
             // NewTexture
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(317, 199);
-            this.Controls.Add(this.rBut162);
+            this.Controls.Add(this.rBut64);
             this.Controls.Add(this.butCreate);
             this.Controls.Add(this.rBut32);
             this.Controls.Add(this.lblSize);
@@ -113,6 +113,6 @@
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.RadioButton rBut32;
         private System.Windows.Forms.Button butCreate;
-        private System.Windows.Forms.RadioButton rBut162;
+        private System.Windows.Forms.RadioButton rBut64;
     }
 }

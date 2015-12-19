@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
 namespace TextureCreator
 {
-    public partial class NewTC : Form
+    public partial class NewTC : Form, Former
     {
         public static Bitmap map, zoommap;
         public Graphics graphic;
@@ -20,7 +21,7 @@ namespace TextureCreator
         public NewTC()
         {
             InitializeComponent();
-            new16file();
+            ((Former)this).new16file();
             zoommap = zoom(map);
             designBox.Image = zoommap;
 //            designBox.Scale(new SizeF(2, 2));
@@ -45,28 +46,36 @@ namespace TextureCreator
             }
             return scalemap;
         }
-        public void new16file(){
+        void Former.new16file(){
             map = new Bitmap(16, 16);
             graphic = Graphics.FromImage(map);
             graphic.Clear(Color.Transparent);
+            zoommap = zoom(map);
+            redraw();
         }
-        public void new32file()
+        void Former.new32file()
         {
             map = new Bitmap(32, 32);
             graphic = Graphics.FromImage(map);
             graphic.Clear(Color.Transparent);
+            zoommap = zoom(map);
+            redraw();
         }
-        public void new64file()
+        void Former.new64file()
         {
             map = new Bitmap(64, 64);
             graphic = Graphics.FromImage(map);
             graphic.Clear(Color.Transparent);
+            zoommap = zoom(map);
+            redraw();
         }
         public void new256file()
         {
             map = new Bitmap(256, 256);
             graphic = Graphics.FromImage(map);
             graphic.Clear(Color.Transparent);
+            zoommap = zoom(map);
+            redraw();
         }
         private void redraw() {
             graphic = Graphics.FromImage(map);
@@ -74,7 +83,7 @@ namespace TextureCreator
         }
         private void redraw(Bitmap map)
         {
-            designBox.Image = zoom(map);
+            designBox.Image = map;
         }
         private void cursorItem_Click(object sender, EventArgs e)
         {
@@ -83,6 +92,9 @@ namespace TextureCreator
             pencilItem.CheckState = CheckState.Unchecked;
             ereasorItem.CheckState = CheckState.Unchecked;
             dRectItem.CheckState = CheckState.Unchecked;
+            dOvalItem.CheckState = CheckState.Unchecked;
+            fRectItem.CheckState = CheckState.Unchecked;
+            fOvalItem.CheckState = CheckState.Unchecked;
         }
 
         private void pencilItem_Click(object sender, EventArgs e)
@@ -92,6 +104,9 @@ namespace TextureCreator
             pencilItem.CheckState = CheckState.Checked;
             ereasorItem.CheckState = CheckState.Unchecked;
             dRectItem.CheckState = CheckState.Unchecked;
+            dOvalItem.CheckState = CheckState.Unchecked;
+            fRectItem.CheckState = CheckState.Unchecked;
+            fOvalItem.CheckState = CheckState.Unchecked;
         }
         private void ereasorItem_Click(object sender, EventArgs e)
         {
@@ -100,6 +115,9 @@ namespace TextureCreator
             pencilItem.CheckState = CheckState.Unchecked;
             ereasorItem.CheckState = CheckState.Checked;
             dRectItem.CheckState = CheckState.Unchecked;
+            dOvalItem.CheckState = CheckState.Unchecked;
+            fRectItem.CheckState = CheckState.Unchecked;
+            fOvalItem.CheckState = CheckState.Unchecked;
         }
         private void dRectItem_Click(object sender, EventArgs e)
         {
@@ -108,6 +126,43 @@ namespace TextureCreator
             pencilItem.CheckState = CheckState.Unchecked;
             ereasorItem.CheckState = CheckState.Unchecked;
             dRectItem.CheckState = CheckState.Checked;
+            dOvalItem.CheckState = CheckState.Unchecked;
+            fRectItem.CheckState = CheckState.Unchecked;
+            fOvalItem.CheckState = CheckState.Unchecked;
+        }
+        private void dOvalItem_Click(object sender, EventArgs e)
+        {
+            state = 4;
+            cursorItem.CheckState = CheckState.Unchecked;
+            pencilItem.CheckState = CheckState.Unchecked;
+            ereasorItem.CheckState = CheckState.Unchecked;
+            dRectItem.CheckState = CheckState.Unchecked;
+            dOvalItem.CheckState = CheckState.Checked;
+            fRectItem.CheckState = CheckState.Unchecked;
+            fOvalItem.CheckState = CheckState.Unchecked;
+        }
+        private void fRectItem_Click(object sender, EventArgs e)
+        {
+            state = 5;
+            cursorItem.CheckState = CheckState.Unchecked;
+            pencilItem.CheckState = CheckState.Unchecked;
+            ereasorItem.CheckState = CheckState.Unchecked;
+            dRectItem.CheckState = CheckState.Unchecked;
+            dOvalItem.CheckState = CheckState.Unchecked;
+            fRectItem.CheckState = CheckState.Checked;
+            fOvalItem.CheckState = CheckState.Unchecked;
+        }
+
+        private void fOvalItem_Click(object sender, EventArgs e)
+        {
+            state = 6;
+            cursorItem.CheckState = CheckState.Unchecked;
+            pencilItem.CheckState = CheckState.Unchecked;
+            ereasorItem.CheckState = CheckState.Unchecked;
+            dRectItem.CheckState = CheckState.Unchecked;
+            dOvalItem.CheckState = CheckState.Unchecked;
+            fRectItem.CheckState = CheckState.Unchecked;
+            fOvalItem.CheckState = CheckState.Checked;
         }
         private void designBox_MouseDown(object sender, MouseEventArgs e)
         {
@@ -124,6 +179,15 @@ namespace TextureCreator
                         break;
                     case 3:
                         drawRect(e.X, e.Y, false);
+                        break;
+                    case 4:
+                        drawOval(e.X, e.Y, false);
+                        break;
+                    case 5:
+                        fillRect(e.X, e.Y, false);
+                        break;
+                    case 6:
+                        fillOval(e.X, e.Y, false);
                         break;
                     default:
                         break;
@@ -142,6 +206,15 @@ namespace TextureCreator
                     case 3:
                         drawRect(e.X, e.Y, true);
                         break;
+                    case 4:
+                        drawOval(e.X, e.Y, true);
+                        break;
+                    case 5:
+                        fillRect(e.X, e.Y, true);
+                        break;
+                    case 6:
+                        fillOval(e.X, e.Y, true);
+                        break;
                     default:
                         break;
                 }
@@ -159,9 +232,6 @@ namespace TextureCreator
                     case 2:
                         ereasePixel(e.X, e.Y);
                         break;
-                    case 3:
-                        previewRect(e.X, e.Y);
-                        break;
                     default:
                         break;
                 }
@@ -173,12 +243,29 @@ namespace TextureCreator
                     case 1:
                         drawPixel(e.X, e.Y, backColorItem.BackColor);
                         break;
-                    case 3:
-                        previewRect(e.X, e.Y);
+                    case 2:
+                        ereasePixel(e.X, e.Y);
                         break;
                     default:
                         break;
                 }
+            }
+            switch (state)
+            {
+                case 3:
+                    previewRect(e.X, e.Y);
+                    break;
+                case 4:
+                    previewOval(e.X, e.Y);
+                    break;
+                case 5:
+                    previewFillRect(e.X, e.Y);
+                    break;
+                case 6:
+                    previewFillOval(e.X, e.Y);
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -209,6 +296,7 @@ namespace TextureCreator
             {
                 locX = x;locY = y;
                 isLockLoc = true;
+                return;
             }
             if (isLockLoc)
             {
@@ -219,18 +307,127 @@ namespace TextureCreator
                 }
                 else
                 {
-                    graphic.DrawRectangle(new Pen(foreColorItem.BackColor), locX, locY, Math.Abs(locX - x), Math.Abs(locY - y));
+                    graphic.DrawRectangle(new Pen(foreColorItem.BackColor,1), Math.Min(locX,x) / (256 / map.Width), Math.Min(locY,y) / (256 / map.Height), Math.Abs(locX - x) / (256 / map.Width), Math.Abs(locY - y) / (256 / map.Height) );
+                    zoommap = zoom(map);
                     isLockLoc = false;
                 }
             }
             redraw();
         }
         private void previewRect(int x, int y) {
-            Bitmap preMap = map;
-            Bitmap preZoomMap = new Bitmap(256,256);
-            Graphics preGraphic = Graphics.FromImage(preMap);
-            preGraphic.DrawRectangle(new Pen(foreColorItem.BackColor), locX, locY, Math.Abs(locX - x), Math.Abs(locY - y));
-            redraw(preMap);
+            if (isLockLoc)
+            {
+                Bitmap preMap = new Bitmap(map);
+                Graphics preGraphic = Graphics.FromImage(preMap);
+                preGraphic.DrawRectangle(new Pen(foreColorItem.BackColor,1), Math.Min(locX, x) / (256 / map.Width), Math.Min(locY, y) / (256 / map.Height), Math.Abs(locX - x) / (256 / map.Width), Math.Abs(locY - y) / (256 / map.Height));
+                redraw(preMap);
+            }
+        }
+        private void drawOval(int x, int y, bool isRightClick)
+        {
+            if (!isLockLoc && !isRightClick)
+            {
+                locX = x; locY = y;
+                isLockLoc = true;
+                return;
+            }
+            if (isLockLoc)
+            {
+                if (isRightClick)
+                {
+                    locX = 0; locY = 0;
+                    isLockLoc = false;
+                }
+                else
+                {
+                    graphic.DrawEllipse(new Pen(foreColorItem.BackColor, 1), Math.Min(locX, x) / (256 / map.Width), Math.Min(locY, y) / (256 / map.Height), Math.Abs(locX - x) / (256 / map.Width), Math.Abs(locY - y) / (256 / map.Height));
+                    zoommap = zoom(map);
+                    isLockLoc = false;
+                }
+            }
+            redraw();
+        }
+        private void previewOval(int x, int y)
+        {
+            if (isLockLoc)
+            {
+                Bitmap preMap = new Bitmap(map);
+                Graphics preGraphic = Graphics.FromImage(preMap);
+                preGraphic.DrawEllipse(new Pen(foreColorItem.BackColor, 1), Math.Min(locX, x) / (256 / map.Width), Math.Min(locY, y) / (256 / map.Height), Math.Abs(locX - x) / (256 / map.Width), Math.Abs(locY - y) / (256 / map.Height));
+                redraw(preMap);
+            }
+        }
+        private void fillRect(int x, int y, bool isRightClick)
+        {
+            if (!isLockLoc && !isRightClick)
+            {
+                locX = x; locY = y;
+                isLockLoc = true;
+                return;
+            }
+            if (isLockLoc)
+            {
+                if (isRightClick)
+                {
+                    locX = 0; locY = 0;
+                    isLockLoc = false;
+                }
+                else
+                {
+                    graphic.FillRectangle(new SolidBrush(foreColorItem.BackColor), Math.Min(locX, x) / (256 / map.Width), Math.Min(locY, y) / (256 / map.Height), Math.Abs(locX - x) / (256 / map.Width) + 1, Math.Abs(locY - y) / (256 / map.Height) + 1);
+                    graphic.FillRectangle(new SolidBrush(backColorItem.BackColor), Math.Min(locX, x) / (256 / map.Width) + (locX > x ? -1 : 1), Math.Min(locY, y) / (256 / map.Height) + (locY > y ? -1 : 1), (Math.Abs(locX - x) / (256 / map.Width)) + 1 - 2, (Math.Abs(locY - y) / (256 / map.Height)) + 1 - 2);
+                    zoommap = zoom(map);
+                    isLockLoc = false;
+                }
+            }
+            redraw();
+        }
+        private void previewFillRect(int x, int y)
+        {
+            if (isLockLoc)
+            {
+                Bitmap preMap = new Bitmap(map);
+                Graphics preGraphic = Graphics.FromImage(preMap);
+                preGraphic.FillRectangle(new SolidBrush(foreColorItem.BackColor), Math.Min(locX, x) / (256 / map.Width), Math.Min(locY, y) / (256 / map.Height), Math.Abs(locX - x) / (256 / map.Width) + 1, Math.Abs(locY - y) / (256 / map.Height) + 1);
+                preGraphic.FillRectangle(new SolidBrush(backColorItem.BackColor), Math.Min(locX, x) / (256 / map.Width) + (locX > x ? -1 : 1), Math.Min(locY, y) / (256 / map.Height) + (locY > y ? -1 : 1), (Math.Abs(locX - x) / (256 / map.Width)) + 1 - 2, (Math.Abs(locY - y) / (256 / map.Height)) + 1 - 2);
+                redraw(preMap);
+            }
+        }
+        private void fillOval(int x, int y, bool isRightClick)
+        {
+            if (!isLockLoc && !isRightClick)
+            {
+                locX = x; locY = y;
+                isLockLoc = true;
+                return;
+            }
+            if (isLockLoc)
+            {
+                if (isRightClick)
+                {
+                    locX = 0; locY = 0;
+                    isLockLoc = false;
+                }
+                else
+                {
+                    graphic.FillEllipse(new SolidBrush(backColorItem.BackColor), Math.Min(locX, x) / (256 / map.Width), Math.Min(locY, y) / (256 / map.Height), Math.Abs(locX - x) / (256 / map.Width), Math.Abs(locY - y) / (256 / map.Height));
+                    graphic.DrawEllipse(new Pen(foreColorItem.BackColor,1), Math.Min(locX, x) / (256 / map.Width), Math.Min(locY, y) / (256 / map.Height), Math.Abs(locX - x) / (256 / map.Width), Math.Abs(locY - y) / (256 / map.Height));
+                    zoommap = zoom(map);
+                    isLockLoc = false;
+                }
+            }
+            redraw();
+        }
+        private void previewFillOval(int x, int y)
+        {
+            if (isLockLoc)
+            {
+                Bitmap preMap = new Bitmap(map);
+                Graphics preGraphic = Graphics.FromImage(preMap);
+                preGraphic.FillEllipse(new SolidBrush(backColorItem.BackColor), Math.Min(locX, x) / (256 / map.Width), Math.Min(locY, y) / (256 / map.Height), Math.Abs(locX - x) / (256 / map.Width), Math.Abs(locY - y) / (256 / map.Height));
+                preGraphic.DrawEllipse(new Pen(foreColorItem.BackColor, 1), Math.Min(locX, x) / (256 / map.Width), Math.Min(locY, y) / (256 / map.Height), Math.Abs(locX - x) / (256 / map.Width), Math.Abs(locY - y) / (256 / map.Height));
+                redraw(preMap);
+            }
         }
         private void foreColorItem_Click(object sender, EventArgs e)
         {
@@ -268,6 +465,105 @@ namespace TextureCreator
             openFileDialog1.ShowDialog();
         }
 
+        private void newFileItem_Click(object sender, EventArgs e)
+        {
+            new NewTexture(this).ShowDialog();
+            redraw();
+        }
+
+        private void x64Item_Click(object sender, EventArgs e)
+        {
+            scaleBitmap(64);
+        }
+
+        private void x32Item_Click(object sender, EventArgs e)
+        {
+            scaleBitmap(32);
+        }
+        private void scaleBitmap(int side) {
+            Bitmap scalemap = new Bitmap(side, side);
+            if (map.Height < side && map.Width < side)
+            {
+                for (int x = 0; x < map.Width; x++)
+                {
+                    for (int y = 0; y < map.Height; y++)
+                    {
+                        for (int i = 0; i < (side / map.Width); i++)
+                        {
+                            for (int j = 0; j < (side / map.Height); j++)
+                            {
+                                scalemap.SetPixel(x * (side / map.Width) + i, y * (side / map.Height) + j, map.GetPixel(x, y));
+                            }
+                        }
+                    }
+                }
+                map = scalemap;
+            }
+            else if (map.Height > side && map.Width > side)
+            {
+                for (int x = 0; x < map.Width; x++)
+                {
+                    for (int y = 0; y < map.Height; y++)
+                    {
+                        scalemap.SetPixel(x / (map.Width / side), y / (map.Height / side), map.GetPixel(x, y));
+                    }
+                }
+                map = scalemap;
+            }
+            zoommap = zoom(map);
+            redraw();
+        }
+
+        private void x16Item_Click(object sender, EventArgs e)
+        {
+            scaleBitmap(16);
+        }
+
+        private void x128Item_Click(object sender, EventArgs e)
+        {
+            scaleBitmap(128);
+        }
+
+        private void x256Item_Click(object sender, EventArgs e)
+        {
+            scaleBitmap(256);
+        }
+
+        private void C90Item_Click(object sender, EventArgs e)
+        {
+            map.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            zoommap = zoom(map);
+            redraw();
+        }
+
+        private void AC90Item_Click(object sender, EventArgs e)
+        {
+            map.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            zoommap = zoom(map);
+            redraw();
+        }
+
+        private void R180Item_Click(object sender, EventArgs e)
+        {
+            map.RotateFlip(RotateFlipType.Rotate180FlipNone);
+            zoommap = zoom(map);
+            redraw();
+        }
+
+        private void HMItem_Click(object sender, EventArgs e)
+        {
+            map.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            zoommap = zoom(map);
+            redraw();
+        }
+
+        private void VMItem_Click(object sender, EventArgs e)
+        {
+            map.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            zoommap = zoom(map);
+            redraw();
+        }
+
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             this.filename = saveFileDialog1.FileName;
@@ -297,6 +593,7 @@ namespace TextureCreator
                 map = new Bitmap(file, new Size(16, 16));
             }
             graphic = Graphics.FromImage(map);
+            zoommap = zoom(map);
             redraw();
         }
 

@@ -73,6 +73,16 @@ namespace TextureCreator.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap dOval {
+            get {
+                object obj = ResourceManager.GetObject("dOval", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap dRect {
             get {
                 object obj = ResourceManager.GetObject("dRect", resourceCulture);
@@ -86,6 +96,26 @@ namespace TextureCreator.Properties {
         internal static System.Drawing.Bitmap Ereasor {
             get {
                 object obj = ResourceManager.GetObject("Ereasor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap fOval {
+            get {
+                object obj = ResourceManager.GetObject("fOval", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap fRect {
+            get {
+                object obj = ResourceManager.GetObject("fRect", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

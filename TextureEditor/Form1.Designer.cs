@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.previewGroup = new System.Windows.Forms.GroupBox();
             this.previewBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -43,6 +44,8 @@
             this.undoItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolGroup = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.buttonOther = new System.Windows.Forms.Button();
             this.buttonRS2 = new System.Windows.Forms.Button();
             this.buttonLS2 = new System.Windows.Forms.Button();
@@ -54,8 +57,6 @@
             this.buttonGray = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.label1 = new System.Windows.Forms.Label();
             this.previewGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -64,44 +65,29 @@
             // 
             // previewGroup
             // 
-            this.previewGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.previewGroup, "previewGroup");
             this.previewGroup.Controls.Add(this.previewBox);
-            this.previewGroup.Location = new System.Drawing.Point(215, 27);
             this.previewGroup.Name = "previewGroup";
-            this.previewGroup.Size = new System.Drawing.Size(333, 351);
-            this.previewGroup.TabIndex = 0;
             this.previewGroup.TabStop = false;
-            this.previewGroup.Text = "Preview";
             // 
             // previewBox
             // 
-            this.previewBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.previewBox.Location = new System.Drawing.Point(6, 21);
+            resources.ApplyResources(this.previewBox, "previewBox");
             this.previewBox.Name = "previewBox";
-            this.previewBox.Size = new System.Drawing.Size(321, 324);
-            this.previewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.previewBox.TabIndex = 0;
             this.previewBox.TabStop = false;
             // 
             // menuStrip1
             // 
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenu,
             this.editMenu});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(560, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // fileMenu
             // 
+            resources.ApplyResources(this.fileMenu, "fileMenu");
             this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newFileMenu,
             this.openFileMenu,
@@ -111,84 +97,66 @@
             this.toolStripSeparator2,
             this.exitMenu});
             this.fileMenu.Name = "fileMenu";
-            this.fileMenu.Size = new System.Drawing.Size(57, 20);
-            this.fileMenu.Text = "檔案(&F)";
             // 
             // newFileMenu
             // 
-            this.newFileMenu.Enabled = false;
+            resources.ApplyResources(this.newFileMenu, "newFileMenu");
             this.newFileMenu.Name = "newFileMenu";
-            this.newFileMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newFileMenu.Size = new System.Drawing.Size(185, 22);
-            this.newFileMenu.Text = "開新檔案(&N)";
             // 
             // openFileMenu
             // 
+            resources.ApplyResources(this.openFileMenu, "openFileMenu");
             this.openFileMenu.Name = "openFileMenu";
-            this.openFileMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openFileMenu.Size = new System.Drawing.Size(185, 22);
-            this.openFileMenu.Text = "開啟舊檔(&O)";
             this.openFileMenu.Click += new System.EventHandler(this.openFileMenu_Click);
             // 
             // toolStripSeparator1
             // 
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(182, 6);
             // 
             // saveFileMenu
             // 
+            resources.ApplyResources(this.saveFileMenu, "saveFileMenu");
             this.saveFileMenu.Name = "saveFileMenu";
-            this.saveFileMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveFileMenu.Size = new System.Drawing.Size(185, 22);
-            this.saveFileMenu.Text = "儲存檔案(&S)";
             this.saveFileMenu.Click += new System.EventHandler(this.saveFileMenu_Click);
             // 
             // saveAsMenu
             // 
+            resources.ApplyResources(this.saveAsMenu, "saveAsMenu");
             this.saveAsMenu.Name = "saveAsMenu";
-            this.saveAsMenu.Size = new System.Drawing.Size(185, 22);
-            this.saveAsMenu.Text = "另存新檔(&A)";
             this.saveAsMenu.Click += new System.EventHandler(this.saveAsMenu_Click);
             // 
             // toolStripSeparator2
             // 
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(182, 6);
             // 
             // exitMenu
             // 
+            resources.ApplyResources(this.exitMenu, "exitMenu");
             this.exitMenu.Name = "exitMenu";
-            this.exitMenu.Size = new System.Drawing.Size(185, 22);
-            this.exitMenu.Text = "結束(&X)";
             // 
             // editMenu
             // 
+            resources.ApplyResources(this.editMenu, "editMenu");
             this.editMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.undoItem,
             this.redoItem});
             this.editMenu.Name = "editMenu";
-            this.editMenu.Size = new System.Drawing.Size(58, 20);
-            this.editMenu.Text = "編輯(&E)";
             // 
             // undoItem
             // 
-            this.undoItem.Enabled = false;
+            resources.ApplyResources(this.undoItem, "undoItem");
             this.undoItem.Name = "undoItem";
-            this.undoItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoItem.Size = new System.Drawing.Size(157, 22);
-            this.undoItem.Text = "復原(&U)";
             // 
             // redoItem
             // 
+            resources.ApplyResources(this.redoItem, "redoItem");
             this.redoItem.Name = "redoItem";
-            this.redoItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.redoItem.Size = new System.Drawing.Size(157, 22);
-            this.redoItem.Text = "重做(&R)";
             // 
             // toolGroup
             // 
-            this.toolGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            resources.ApplyResources(this.toolGroup, "toolGroup");
             this.toolGroup.Controls.Add(this.label1);
             this.toolGroup.Controls.Add(this.progressBar);
             this.toolGroup.Controls.Add(this.buttonOther);
@@ -200,152 +168,104 @@
             this.toolGroup.Controls.Add(this.button1);
             this.toolGroup.Controls.Add(this.buttonBW);
             this.toolGroup.Controls.Add(this.buttonGray);
-            this.toolGroup.Location = new System.Drawing.Point(0, 27);
             this.toolGroup.Name = "toolGroup";
-            this.toolGroup.Size = new System.Drawing.Size(215, 351);
-            this.toolGroup.TabIndex = 2;
             this.toolGroup.TabStop = false;
-            this.toolGroup.Text = "ToolBox";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // progressBar
+            // 
+            resources.ApplyResources(this.progressBar, "progressBar");
+            this.progressBar.Name = "progressBar";
             // 
             // buttonOther
             // 
-            this.buttonOther.Enabled = false;
-            this.buttonOther.Location = new System.Drawing.Point(7, 140);
+            resources.ApplyResources(this.buttonOther, "buttonOther");
             this.buttonOther.Name = "buttonOther";
-            this.buttonOther.Size = new System.Drawing.Size(156, 23);
-            this.buttonOther.TabIndex = 8;
-            this.buttonOther.Text = "Other...";
             this.buttonOther.UseVisualStyleBackColor = true;
             this.buttonOther.Click += new System.EventHandler(this.buttonOther_Click);
             // 
             // buttonRS2
             // 
-            this.buttonRS2.Enabled = false;
-            this.buttonRS2.Location = new System.Drawing.Point(88, 110);
+            resources.ApplyResources(this.buttonRS2, "buttonRS2");
             this.buttonRS2.Name = "buttonRS2";
-            this.buttonRS2.Size = new System.Drawing.Size(75, 23);
-            this.buttonRS2.TabIndex = 7;
-            this.buttonRS2.Text = "Right 2 hex";
             this.buttonRS2.UseVisualStyleBackColor = true;
             this.buttonRS2.Click += new System.EventHandler(this.buttonRS2_Click);
             // 
             // buttonLS2
             // 
-            this.buttonLS2.Enabled = false;
-            this.buttonLS2.Location = new System.Drawing.Point(7, 110);
+            resources.ApplyResources(this.buttonLS2, "buttonLS2");
             this.buttonLS2.Name = "buttonLS2";
-            this.buttonLS2.Size = new System.Drawing.Size(75, 23);
-            this.buttonLS2.TabIndex = 6;
-            this.buttonLS2.Text = "Left 2 hex";
             this.buttonLS2.UseVisualStyleBackColor = true;
             this.buttonLS2.Click += new System.EventHandler(this.buttonLS2_Click);
             // 
             // buttonRH
             // 
-            this.buttonRH.Enabled = false;
-            this.buttonRH.Location = new System.Drawing.Point(89, 81);
+            resources.ApplyResources(this.buttonRH, "buttonRH");
             this.buttonRH.Name = "buttonRH";
-            this.buttonRH.Size = new System.Drawing.Size(75, 23);
-            this.buttonRH.TabIndex = 5;
-            this.buttonRH.Text = "Right 1 hex";
             this.buttonRH.UseVisualStyleBackColor = true;
             this.buttonRH.Click += new System.EventHandler(this.buttonRH_Click);
             // 
             // buttonLH
             // 
-            this.buttonLH.Enabled = false;
-            this.buttonLH.Location = new System.Drawing.Point(7, 81);
+            resources.ApplyResources(this.buttonLH, "buttonLH");
             this.buttonLH.Name = "buttonLH";
-            this.buttonLH.Size = new System.Drawing.Size(75, 23);
-            this.buttonLH.TabIndex = 4;
-            this.buttonLH.Text = "Left 1 hex";
             this.buttonLH.UseVisualStyleBackColor = true;
             this.buttonLH.Click += new System.EventHandler(this.buttonLH_Click);
             // 
             // button2
             // 
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(89, 51);
+            resources.ApplyResources(this.button2, "button2");
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Right 1 bin";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(7, 51);
+            resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Left 1 bin";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // buttonBW
             // 
-            this.buttonBW.Enabled = false;
-            this.buttonBW.Location = new System.Drawing.Point(89, 21);
+            resources.ApplyResources(this.buttonBW, "buttonBW");
             this.buttonBW.Name = "buttonBW";
-            this.buttonBW.Size = new System.Drawing.Size(75, 23);
-            this.buttonBW.TabIndex = 1;
-            this.buttonBW.Text = "Black White";
             this.buttonBW.UseVisualStyleBackColor = true;
             this.buttonBW.Click += new System.EventHandler(this.buttonBW_Click);
             // 
             // buttonGray
             // 
-            this.buttonGray.Enabled = false;
-            this.buttonGray.Location = new System.Drawing.Point(7, 21);
+            resources.ApplyResources(this.buttonGray, "buttonGray");
             this.buttonGray.Name = "buttonGray";
-            this.buttonGray.Size = new System.Drawing.Size(75, 23);
-            this.buttonGray.TabIndex = 0;
-            this.buttonGray.Text = "Gray";
             this.buttonGray.UseVisualStyleBackColor = true;
             this.buttonGray.Click += new System.EventHandler(this.buttonGray_Click);
             // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "png";
-            this.saveFileDialog1.Filter = "PNG (*.png)|*.png|所有檔案 (*.*)|*.*";
+            resources.ApplyResources(this.saveFileDialog1, "saveFileDialog1");
             this.saveFileDialog1.SupportMultiDottedExtensions = true;
             this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "PNG (*.png)|*.png|所有檔案 (*.*)|*.*";
+            resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
             this.openFileDialog1.SupportMultiDottedExtensions = true;
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
-            // progressBar
-            // 
-            this.progressBar.Location = new System.Drawing.Point(7, 321);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(202, 23);
-            this.progressBar.TabIndex = 9;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 303);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 12);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Progress";
-            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(560, 390);
             this.Controls.Add(this.toolGroup);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.previewGroup);
             this.Name = "Form1";
-            this.Text = "Form1";
             this.previewGroup.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.previewBox)).EndInit();
             this.menuStrip1.ResumeLayout(false);

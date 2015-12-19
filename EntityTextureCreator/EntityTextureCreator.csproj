@@ -82,11 +82,18 @@
     <Compile Include="DrawThings.Designer.cs">
       <DependentUpon>DrawThings.cs</DependentUpon>
     </Compile>
+    <Compile Include="InterFaces.cs" />
     <Compile Include="Lite.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Lite.Designer.cs">
       <DependentUpon>Lite.cs</DependentUpon>
+    </Compile>
+    <Compile Include="New.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="New.Designer.cs">
+      <DependentUpon>New.cs</DependentUpon>
     </Compile>
     <Compile Include="NewTexture.cs">
       <SubType>Form</SubType>
@@ -138,6 +145,12 @@
     <EmbeddedResource Include="Lite.zh-Hant.resx">
       <DependentUpon>Lite.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="New.resx">
+      <DependentUpon>New.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="New.zh-Hant.resx">
+      <DependentUpon>New.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NewTexture.resx">
       <DependentUpon>NewTexture.cs</DependentUpon>
     </EmbeddedResource>
@@ -174,6 +187,14 @@
     <None Include="Resources\saveFileMenu.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\TranBack.png" />
+    <None Include="Resources\Cursor.png" />
+    <None Include="Resources\dOval.png" />
+    <None Include="Resources\dRect.png" />
+    <None Include="Resources\Ereasor.png" />
+    <None Include="Resources\fOval.png" />
+    <None Include="Resources\fRect.png" />
+    <None Include="Resources\Pencil.png" />
     <Content Include="Resources\TC.ico" />
   </ItemGroup>
   <ItemGroup>

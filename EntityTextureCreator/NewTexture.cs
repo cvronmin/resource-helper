@@ -11,8 +11,8 @@ namespace EntityTextureCreator
 {
     public partial class NewTexture : Form
     {
-        private Lite parent;
-        public NewTexture(Lite parent)
+        private Former parent;
+        public NewTexture(Former parent)
         {
             this.parent = parent;
             InitializeComponent();
@@ -21,15 +21,15 @@ namespace EntityTextureCreator
         private void butCreate_Click(object sender, EventArgs e)
         {
             if(rBut16.Checked){
-                parent.new21File();
-            }
-            else if (rBut162.Checked)
-            {
-                parent.new22File();
+                parent.new21file();
             }
             else if (rBut32.Checked)
             {
-                parent.new42File();
+                parent.new42file();
+            }
+            else if (rBut64.Checked)
+            {
+                parent.new84file();
             }
             this.Close();
         }
