@@ -44,6 +44,7 @@
             this.undoItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolGroup = new System.Windows.Forms.GroupBox();
+            this.buttonInvert = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.buttonOther = new System.Windows.Forms.Button();
@@ -157,6 +158,7 @@
             // toolGroup
             // 
             resources.ApplyResources(this.toolGroup, "toolGroup");
+            this.toolGroup.Controls.Add(this.buttonInvert);
             this.toolGroup.Controls.Add(this.label1);
             this.toolGroup.Controls.Add(this.progressBar);
             this.toolGroup.Controls.Add(this.buttonOther);
@@ -170,6 +172,13 @@
             this.toolGroup.Controls.Add(this.buttonGray);
             this.toolGroup.Name = "toolGroup";
             this.toolGroup.TabStop = false;
+            // 
+            // buttonInvert
+            // 
+            resources.ApplyResources(this.buttonInvert, "buttonInvert");
+            this.buttonInvert.Name = "buttonInvert";
+            this.buttonInvert.UseVisualStyleBackColor = true;
+            this.buttonInvert.Click += new System.EventHandler(this.buttonInvert_Click);
             // 
             // label1
             // 
@@ -307,6 +316,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ProgressBar progressBar;
         internal System.Windows.Forms.PictureBox previewBox;
+        private System.Windows.Forms.Button buttonInvert;
     }
 }
 

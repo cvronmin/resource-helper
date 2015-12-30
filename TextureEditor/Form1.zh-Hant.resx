@@ -121,6 +121,12 @@
     <value>預覽</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="fileMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 20</value>
+  </data>
+  <data name="fileMenu.Text" xml:space="preserve">
+    <value>檔案(&amp;F) </value>
+  </data>
   <data name="newFileMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>188, 22</value>
   </data>
@@ -157,11 +163,11 @@
   <data name="exitMenu.Text" xml:space="preserve">
     <value>結束(&amp;X) </value>
   </data>
-  <data name="fileMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 20</value>
+  <data name="editMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
   </data>
-  <data name="fileMenu.Text" xml:space="preserve">
-    <value>檔案(&amp;F) </value>
+  <data name="editMenu.Text" xml:space="preserve">
+    <value>編輯(&amp;E) </value>
   </data>
   <data name="undoItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 22</value>
@@ -175,11 +181,14 @@
   <data name="redoItem.Text" xml:space="preserve">
     <value>重做(&amp;R) </value>
   </data>
-  <data name="editMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 20</value>
+  <data name="toolGroup.Text" xml:space="preserve">
+    <value>工具箱</value>
   </data>
-  <data name="editMenu.Text" xml:space="preserve">
-    <value>編輯(&amp;E) </value>
+  <data name="buttonInvert.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 23</value>
+  </data>
+  <data name="buttonInvert.Text" xml:space="preserve">
+    <value>反轉</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 12</value>
@@ -187,8 +196,11 @@
   <data name="label1.Text" xml:space="preserve">
     <value>進度</value>
   </data>
+  <data name="buttonOther.Location" type="System.Drawing.Point, System.Drawing">
+    <value>111, 140</value>
+  </data>
   <data name="buttonOther.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 23</value>
+    <value>98, 23</value>
   </data>
   <data name="buttonOther.Text" xml:space="preserve">
     <value>其他...</value>
@@ -258,8 +270,5 @@
   </data>
   <data name="buttonGray.Text" xml:space="preserve">
     <value>灰階</value>
-  </data>
-  <data name="toolGroup.Text" xml:space="preserve">
-    <value>工具箱</value>
   </data>
 </root>

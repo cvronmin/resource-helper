@@ -124,14 +124,11 @@
   <data name="&gt;&gt;undoItem.Name" xml:space="preserve">
     <value>undoItem</value>
   </data>
-  <data name="&gt;&gt;saveFileMenu.Name" xml:space="preserve">
-    <value>saveFileMenu</value>
+  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;previewBox.Name" xml:space="preserve">
     <value>previewBox</value>
-  </data>
-  <data name="&gt;&gt;fileMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonBW.Size" type="System.Drawing.Size, System.Drawing">
@@ -150,10 +147,13 @@
     <value>buttonBW</value>
   </data>
   <data name="&gt;&gt;buttonLH.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
-  <data name="&gt;&gt;previewGroup.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;buttonGray.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="button2.Text" xml:space="preserve">
+    <value>Right 1 bin</value>
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -162,20 +162,26 @@
   <data name="saveFileMenu.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+S</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="buttonLS2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 110</value>
+  </data>
+  <data name="buttonLS2.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;openFileDialog1.Name" xml:space="preserve">
     <value>openFileDialog1</value>
   </data>
-  <data name="undoItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
+  <data name="&gt;&gt;fileMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="editMenu.Text" xml:space="preserve">
     <value>Edit (&amp;E)</value>
   </data>
   <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 51</value>
+  </data>
+  <data name="&gt;&gt;buttonGray.Name" xml:space="preserve">
+    <value>buttonGray</value>
   </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>560, 24</value>
@@ -184,22 +190,16 @@
     <value>172, 22</value>
   </data>
   <data name="&gt;&gt;buttonRS2.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;previewGroup.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 12</value>
+  <data name="toolGroup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
   </data>
   <data name="buttonGray.Text" xml:space="preserve">
     <value>Gray</value>
-  </data>
-  <data name="buttonGray.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;saveAsMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolGroup.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -207,11 +207,14 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>560, 390</value>
   </data>
-  <data name="buttonLS2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 110</value>
+  <data name="toolGroup.Text" xml:space="preserve">
+    <value>ToolBox</value>
   </data>
   <data name="buttonRH.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
+  </data>
+  <data name="fileMenu.Text" xml:space="preserve">
+    <value>File (&amp;F)</value>
   </data>
   <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -225,26 +228,29 @@
   <data name="progressBar.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="toolGroup.Text" xml:space="preserve">
-    <value>ToolBox</value>
+  <data name="&gt;&gt;saveFileDialog1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="editMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 20</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
+  <data name="&gt;&gt;toolGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonRH.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;buttonRH.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonRH.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 81</value>
   </data>
-  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="buttonLS2.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="openFileDialog1.Filter" xml:space="preserve">
     <value>PNG (*.png)|*.png|所有檔案 (*.*)|*.*</value>
@@ -252,8 +258,8 @@
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 6</value>
   </data>
-  <data name="&gt;&gt;buttonGray.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="buttonInvert.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 140</value>
   </data>
   <data name="previewGroup.Text" xml:space="preserve">
     <value>Preview</value>
@@ -273,6 +279,9 @@
   <data name="&gt;&gt;saveFileDialog1.Name" xml:space="preserve">
     <value>saveFileDialog1</value>
   </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
   <data name="buttonBW.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 21</value>
   </data>
@@ -285,9 +294,6 @@
   <data name="previewBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
   </data>
-  <data name="&gt;&gt;buttonOther.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="&gt;&gt;newFileMenu.Name" xml:space="preserve">
     <value>newFileMenu</value>
   </data>
@@ -297,14 +303,14 @@
   <data name="&gt;&gt;buttonRS2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;progressBar.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;buttonLS2.Name" xml:space="preserve">
+    <value>buttonLS2</value>
   </data>
   <data name="&gt;&gt;toolGroup.Name" xml:space="preserve">
     <value>toolGroup</value>
   </data>
-  <data name="buttonGray.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 21</value>
+  <data name="toolGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 27</value>
   </data>
   <data name="previewBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -324,14 +330,20 @@
   <data name="previewGroup.Location" type="System.Drawing.Point, System.Drawing">
     <value>215, 27</value>
   </data>
-  <data name="buttonLS2.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="buttonOther.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="&gt;&gt;buttonBW.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
   <data name="&gt;&gt;saveAsMenu.Name" xml:space="preserve">
     <value>saveAsMenu</value>
+  </data>
+  <data name="&gt;&gt;progressBar.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="previewGroup.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -341,6 +353,9 @@
   </data>
   <data name="saveAsMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 22</value>
+  </data>
+  <data name="buttonOther.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
   <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -372,11 +387,8 @@
   <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 321</value>
   </data>
-  <data name="&gt;&gt;undoItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="toolGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 27</value>
+  <data name="&gt;&gt;buttonInvert.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="undoItem.Text" xml:space="preserve">
     <value>Undo (&amp;U)</value>
@@ -390,14 +402,14 @@
   <data name="&gt;&gt;progressBar.Parent" xml:space="preserve">
     <value>toolGroup</value>
   </data>
-  <data name="buttonLS2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="&gt;&gt;undoItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonRS2.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="newFileMenu.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="buttonInvert.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="redoItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+Y</value>
@@ -411,11 +423,14 @@
   <data name="buttonOther.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
   <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonRH.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;buttonLH.Parent" xml:space="preserve">
     <value>toolGroup</value>
@@ -427,13 +442,10 @@
     <value>Other...</value>
   </data>
   <data name="buttonOther.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 140</value>
+    <value>88, 140</value>
   </data>
   <data name="buttonLH.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 81</value>
-  </data>
-  <data name="&gt;&gt;editMenu.Name" xml:space="preserve">
-    <value>editMenu</value>
   </data>
   <data name="buttonRS2.Text" xml:space="preserve">
     <value>Right 2 hex</value>
@@ -444,8 +456,14 @@
   <data name="buttonLH.Text" xml:space="preserve">
     <value>Left 1 hex</value>
   </data>
-  <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 23</value>
+  <data name="&gt;&gt;previewGroup.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonLS2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;progressBar.Name" xml:space="preserve">
+    <value>progressBar</value>
   </data>
   <data name="openFileMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 22</value>
@@ -459,26 +477,20 @@
   <data name="&gt;&gt;openFileMenu.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;openFileMenu.Name" xml:space="preserve">
-    <value>openFileMenu</value>
+  <data name="&gt;&gt;editMenu.Name" xml:space="preserve">
+    <value>editMenu</value>
   </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="buttonGray.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="openFileMenu.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+O</value>
+  <data name="&gt;&gt;saveAsMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="newFileMenu.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+N</value>
   </data>
   <data name="exitMenu.Text" xml:space="preserve">
     <value>Exit (&amp;X)</value>
-  </data>
-  <data name="&gt;&gt;exitMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -489,17 +501,11 @@
   <data name="redoItem.Text" xml:space="preserve">
     <value>Redo (&amp;R)</value>
   </data>
-  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;buttonRS2.Parent" xml:space="preserve">
-    <value>toolGroup</value>
-  </data>
   <data name="buttonLH.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="buttonOther.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 23</value>
+  <data name="&gt;&gt;previewGroup.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="button1.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -508,22 +514,16 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
-  <data name="toolGroup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
-  </data>
-  <data name="&gt;&gt;toolGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 23</value>
   </data>
   <data name="undoItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+Z</value>
   </data>
   <data name="buttonBW.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="&gt;&gt;redoItem.Name" xml:space="preserve">
-    <value>redoItem</value>
   </data>
   <data name="button1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -534,8 +534,8 @@
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 6</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>toolGroup</value>
+  <data name="&gt;&gt;openFileMenu.Name" xml:space="preserve">
+    <value>openFileMenu</value>
   </data>
   <data name="previewBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 21</value>
@@ -543,20 +543,17 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonLS2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;buttonOther.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;buttonInvert.Name" xml:space="preserve">
+    <value>buttonInvert</value>
   </data>
   <data name="&gt;&gt;button1.Name" xml:space="preserve">
     <value>button1</value>
   </data>
   <data name="button2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
-  </data>
-  <data name="buttonRH.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
   </data>
   <data name="&gt;&gt;buttonRH.Name" xml:space="preserve">
     <value>buttonRH</value>
@@ -567,8 +564,11 @@
   <data name="newFileMenu.Text" xml:space="preserve">
     <value>New (&amp;N)</value>
   </data>
-  <data name="buttonLS2.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="buttonLH.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 12</value>
   </data>
   <data name="buttonLH.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -576,32 +576,44 @@
   <data name="buttonBW.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;saveFileMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Progress</value>
   </data>
-  <data name="buttonRH.Text" xml:space="preserve">
-    <value>Right 1 hex</value>
+  <data name="&gt;&gt;buttonRS2.Parent" xml:space="preserve">
+    <value>toolGroup</value>
   </data>
-  <data name="&gt;&gt;buttonGray.Name" xml:space="preserve">
-    <value>buttonGray</value>
+  <data name="&gt;&gt;saveFileMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button2.Name" xml:space="preserve">
     <value>button2</value>
   </data>
-  <data name="fileMenu.Text" xml:space="preserve">
-    <value>File (&amp;F)</value>
-  </data>
-  <data name="menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="buttonLH.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="buttonLS2.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
+  <data name="&gt;&gt;buttonLH.Name" xml:space="preserve">
+    <value>buttonLH</value>
+  </data>
+  <data name="buttonGray.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 21</value>
+  </data>
+  <data name="newFileMenu.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;buttonRS2.Name" xml:space="preserve">
+    <value>buttonRS2</value>
+  </data>
+  <data name="&gt;&gt;saveFileMenu.Name" xml:space="preserve">
+    <value>saveFileMenu</value>
+  </data>
   <data name="&gt;&gt;buttonBW.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
+  </data>
+  <data name="buttonGray.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;buttonGray.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="&gt;&gt;previewBox.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -615,8 +627,8 @@
   <data name="&gt;&gt;buttonLS2.Parent" xml:space="preserve">
     <value>toolGroup</value>
   </data>
-  <data name="&gt;&gt;progressBar.Name" xml:space="preserve">
-    <value>progressBar</value>
+  <data name="openFileMenu.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+O</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
     <value>toolStripSeparator1</value>
@@ -624,17 +636,20 @@
   <data name="&gt;&gt;buttonOther.Name" xml:space="preserve">
     <value>buttonOther</value>
   </data>
-  <data name="&gt;&gt;buttonLS2.Name" xml:space="preserve">
-    <value>buttonLS2</value>
+  <data name="buttonRH.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="buttonInvert.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;newFileMenu.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="button2.Text" xml:space="preserve">
-    <value>Right 1 bin</value>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>toolGroup</value>
   </data>
-  <data name="buttonOther.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="&gt;&gt;buttonLS2.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="buttonRS2.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -645,8 +660,8 @@
   <data name="previewBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;saveFileDialog1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="buttonInvert.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <data name="&gt;&gt;button2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -654,8 +669,11 @@
   <data name="&gt;&gt;fileMenu.Name" xml:space="preserve">
     <value>fileMenu</value>
   </data>
-  <data name="&gt;&gt;buttonRS2.Name" xml:space="preserve">
-    <value>buttonRS2</value>
+  <data name="buttonGray.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;buttonBW.Parent" xml:space="preserve">
     <value>toolGroup</value>
@@ -672,14 +690,17 @@
   <data name="previewGroup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
-    <value>menuStrip1</value>
+  <data name="&gt;&gt;buttonInvert.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="undoItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 22</value>
   </data>
   <data name="&gt;&gt;openFileDialog1.Type" xml:space="preserve">
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonGray.ZOrder" xml:space="preserve">
-    <value>10</value>
+  <data name="buttonInvert.Text" xml:space="preserve">
+    <value>Invert</value>
   </data>
   <data name="buttonGray.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -687,17 +708,23 @@
   <data name="buttonRS2.Location" type="System.Drawing.Point, System.Drawing">
     <value>88, 110</value>
   </data>
-  <data name="&gt;&gt;previewGroup.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="buttonRH.Text" xml:space="preserve">
+    <value>Right 1 hex</value>
   </data>
-  <data name="&gt;&gt;buttonLS2.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;exitMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonLH.Name" xml:space="preserve">
-    <value>buttonLH</value>
+  <data name="&gt;&gt;buttonInvert.Parent" xml:space="preserve">
+    <value>toolGroup</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;redoItem.Name" xml:space="preserve">
+    <value>redoItem</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

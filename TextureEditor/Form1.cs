@@ -32,7 +32,7 @@ namespace TextureEditor
             map = new Bitmap(file);
             graphic = Graphics.FromImage(map);
             previewBox.Image = map;
-            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = true;
+            buttonInvert.Enabled = buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = true;
         }
 
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
@@ -308,6 +308,21 @@ namespace TextureEditor
             thread.ModifyChangingEvent += OnModifyChange;
             thread.ModifyFinishEvent += OnModifyFinish;
             thread.Start();
+        }
+
+        private void buttonInvert_Click(object sender, EventArgs e)
+        {
+            buttonInvert.Enabled = false;
+            for (int x = 0; x < map.Width; x++)
+            {
+                for (int y = 0; y < map.Height; y++)
+                {
+                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, ~(map.GetPixel(x, y).R) & 255, ~(map.GetPixel(x, y).G) & 255, ~(map.GetPixel(x, y).B) & 255));
+                }
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            buttonInvert.Enabled = true;
         }
     }
 }
