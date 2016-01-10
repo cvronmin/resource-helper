@@ -58,6 +58,8 @@
             this.buttonGray = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.previewGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -79,16 +81,15 @@
             // 
             // menuStrip1
             // 
-            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenu,
             this.editMenu});
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
             // fileMenu
             // 
-            resources.ApplyResources(this.fileMenu, "fileMenu");
             this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newFileMenu,
             this.openFileMenu,
@@ -98,6 +99,7 @@
             this.toolStripSeparator2,
             this.exitMenu});
             this.fileMenu.Name = "fileMenu";
+            resources.ApplyResources(this.fileMenu, "fileMenu");
             // 
             // newFileMenu
             // 
@@ -106,44 +108,44 @@
             // 
             // openFileMenu
             // 
-            resources.ApplyResources(this.openFileMenu, "openFileMenu");
             this.openFileMenu.Name = "openFileMenu";
+            resources.ApplyResources(this.openFileMenu, "openFileMenu");
             this.openFileMenu.Click += new System.EventHandler(this.openFileMenu_Click);
             // 
             // toolStripSeparator1
             // 
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
             // saveFileMenu
             // 
-            resources.ApplyResources(this.saveFileMenu, "saveFileMenu");
             this.saveFileMenu.Name = "saveFileMenu";
+            resources.ApplyResources(this.saveFileMenu, "saveFileMenu");
             this.saveFileMenu.Click += new System.EventHandler(this.saveFileMenu_Click);
             // 
             // saveAsMenu
             // 
-            resources.ApplyResources(this.saveAsMenu, "saveAsMenu");
             this.saveAsMenu.Name = "saveAsMenu";
+            resources.ApplyResources(this.saveAsMenu, "saveAsMenu");
             this.saveAsMenu.Click += new System.EventHandler(this.saveAsMenu_Click);
             // 
             // toolStripSeparator2
             // 
-            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             // 
             // exitMenu
             // 
-            resources.ApplyResources(this.exitMenu, "exitMenu");
             this.exitMenu.Name = "exitMenu";
+            resources.ApplyResources(this.exitMenu, "exitMenu");
             // 
             // editMenu
             // 
-            resources.ApplyResources(this.editMenu, "editMenu");
             this.editMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.undoItem,
             this.redoItem});
             this.editMenu.Name = "editMenu";
+            resources.ApplyResources(this.editMenu, "editMenu");
             // 
             // undoItem
             // 
@@ -152,12 +154,14 @@
             // 
             // redoItem
             // 
-            resources.ApplyResources(this.redoItem, "redoItem");
             this.redoItem.Name = "redoItem";
+            resources.ApplyResources(this.redoItem, "redoItem");
             // 
             // toolGroup
             // 
             resources.ApplyResources(this.toolGroup, "toolGroup");
+            this.toolGroup.Controls.Add(this.button4);
+            this.toolGroup.Controls.Add(this.button3);
             this.toolGroup.Controls.Add(this.buttonInvert);
             this.toolGroup.Controls.Add(this.label1);
             this.toolGroup.Controls.Add(this.progressBar);
@@ -267,6 +271,20 @@
             this.openFileDialog1.SupportMultiDottedExtensions = true;
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
+            // button3
+            // 
+            resources.ApplyResources(this.button3, "button3");
+            this.button3.Name = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            resources.ApplyResources(this.button4, "button4");
+            this.button4.Name = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -317,6 +335,8 @@
         private System.Windows.Forms.ProgressBar progressBar;
         internal System.Windows.Forms.PictureBox previewBox;
         private System.Windows.Forms.Button buttonInvert;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }
 

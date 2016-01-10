@@ -29,17 +29,18 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.buttonLS = new System.Windows.Forms.Button();
             this.buttonRS = new System.Windows.Forms.Button();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.buttonOk = new System.Windows.Forms.Button();
-            this.buttonClose = new System.Windows.Forms.Button();
+            this.buttonLS = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonOk = new System.Windows.Forms.Button();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.buttonClose = new System.Windows.Forms.Button();
+            this.buttonOkRGB = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,17 +56,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Shift";
             // 
-            // groupBox2
+            // buttonRS
             // 
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.buttonOk);
-            this.groupBox2.Controls.Add(this.trackBar1);
-            this.groupBox2.Location = new System.Drawing.Point(13, 76);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(322, 123);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Black and White";
+            this.buttonRS.Location = new System.Drawing.Point(215, 20);
+            this.buttonRS.Name = "buttonRS";
+            this.buttonRS.Size = new System.Drawing.Size(75, 23);
+            this.buttonRS.TabIndex = 2;
+            this.buttonRS.Text = "Right Shift";
+            this.buttonRS.UseVisualStyleBackColor = true;
+            this.buttonRS.Click += new System.EventHandler(this.buttonRS_Click);
+            // 
+            // buttonLS
+            // 
+            this.buttonLS.Location = new System.Drawing.Point(134, 21);
+            this.buttonLS.Name = "buttonLS";
+            this.buttonLS.Size = new System.Drawing.Size(75, 23);
+            this.buttonLS.TabIndex = 1;
+            this.buttonLS.Text = "Left Shift";
+            this.buttonLS.UseVisualStyleBackColor = true;
+            this.buttonLS.Click += new System.EventHandler(this.buttonLS_Click);
             // 
             // numericUpDown1
             // 
@@ -79,25 +88,37 @@
             this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
             this.numericUpDown1.TabIndex = 0;
             // 
-            // buttonLS
+            // groupBox2
             // 
-            this.buttonLS.Location = new System.Drawing.Point(134, 21);
-            this.buttonLS.Name = "buttonLS";
-            this.buttonLS.Size = new System.Drawing.Size(75, 23);
-            this.buttonLS.TabIndex = 1;
-            this.buttonLS.Text = "Left Shift";
-            this.buttonLS.UseVisualStyleBackColor = true;
-            this.buttonLS.Click += new System.EventHandler(this.buttonLS_Click);
+            this.groupBox2.Controls.Add(this.buttonOkRGB);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.buttonOk);
+            this.groupBox2.Controls.Add(this.trackBar1);
+            this.groupBox2.Location = new System.Drawing.Point(13, 76);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(322, 123);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Threshold";
             // 
-            // buttonRS
+            // label1
             // 
-            this.buttonRS.Location = new System.Drawing.Point(215, 20);
-            this.buttonRS.Name = "buttonRS";
-            this.buttonRS.Size = new System.Drawing.Size(75, 23);
-            this.buttonRS.TabIndex = 2;
-            this.buttonRS.Text = "Right Shift";
-            this.buttonRS.UseVisualStyleBackColor = true;
-            this.buttonRS.Click += new System.EventHandler(this.buttonRS_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 73);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 12);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Value: 127";
+            // 
+            // buttonOk
+            // 
+            this.buttonOk.Location = new System.Drawing.Point(240, 94);
+            this.buttonOk.Name = "buttonOk";
+            this.buttonOk.Size = new System.Drawing.Size(75, 23);
+            this.buttonOk.TabIndex = 1;
+            this.buttonOk.Text = "Grey";
+            this.buttonOk.UseVisualStyleBackColor = true;
+            this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
             // trackBar1
             // 
@@ -112,16 +133,6 @@
             this.trackBar1.Value = 127;
             this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
             // 
-            // buttonOk
-            // 
-            this.buttonOk.Location = new System.Drawing.Point(215, 94);
-            this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(75, 23);
-            this.buttonOk.TabIndex = 1;
-            this.buttonOk.Text = "Confirm";
-            this.buttonOk.UseVisualStyleBackColor = true;
-            this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
-            // 
             // buttonClose
             // 
             this.buttonClose.Location = new System.Drawing.Point(342, 170);
@@ -132,14 +143,15 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // label1
+            // buttonOkRGB
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 73);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 12);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Value: 127";
+            this.buttonOkRGB.Location = new System.Drawing.Point(159, 94);
+            this.buttonOkRGB.Name = "buttonOkRGB";
+            this.buttonOkRGB.Size = new System.Drawing.Size(75, 23);
+            this.buttonOkRGB.TabIndex = 3;
+            this.buttonOkRGB.Text = "RGB";
+            this.buttonOkRGB.UseVisualStyleBackColor = true;
+            this.buttonOkRGB.Click += new System.EventHandler(this.buttonOkRGB_Click);
             // 
             // Form2
             // 
@@ -152,9 +164,9 @@
             this.Name = "Form2";
             this.Text = "Form2";
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
 
@@ -171,5 +183,6 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonOkRGB;
     }
 }

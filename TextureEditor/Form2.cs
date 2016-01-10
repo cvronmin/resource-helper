@@ -73,5 +73,20 @@ namespace TextureEditor
         {
             label1.Text = "Value: " + trackBar1.Value;
         }
+
+        private void buttonOkRGB_Click(object sender, EventArgs e)
+        {
+            for (int x = 0; x < parent.map.Width; x++)
+            {
+                for (int y = 0; y < parent.map.Height; y++)
+                {
+                    parent.map.SetPixel(x, y, Color.FromArgb(parent.map.GetPixel(x, y).A, parent.groupColor(parent.map.GetPixel(x, y).R), parent.groupColor(parent.map.GetPixel(x, y).G), parent.groupColor(parent.map.GetPixel(x, y).B)));
+                }
+            }
+            parent.graphic = Graphics.FromImage(parent.map);
+            parent.previewBox.Image = parent.map;
+            //            parent.BlackWhiteAny(trackBar1.Value);
+            Close();
+        }
     }
 }

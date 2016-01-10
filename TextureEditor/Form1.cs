@@ -324,5 +324,54 @@ namespace TextureEditor
             previewBox.Image = map;
             buttonInvert.Enabled = true;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            button3.Enabled = false;
+            for (int x = 0; x < map.Width; x++)
+            {
+                for (int y = 0; y < map.Height; y++)
+                {
+                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, groupColor(map.GetPixel(x, y).R), groupColor(map.GetPixel(x, y).G), groupColor(map.GetPixel(x, y).B)));
+                }
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            button3.Enabled = true;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            button4.Enabled = false;
+            for (int x = 0; x < map.Width; x++)
+            {
+                for (int y = 0; y < map.Height; y++)
+                {
+                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, fourfive(map.GetPixel(x, y).R), fourfive(map.GetPixel(x, y).G), fourfive(map.GetPixel(x, y).B)));
+                }
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            button4.Enabled = true;
+        }
+        public int fourfive(int target) {
+            if (((target % 16) - 7) < 0)
+            {
+                target = (int)((float)target / 255 * 10f) * 16 - 1; 
+            }
+            else
+            {
+                target = (int)((float)target / 255 * 10f) * 16 - 1 + 16;
+            }
+            if (target < 0)
+            {
+                target = 0;
+            }
+            if (target > 255)
+            {
+                target = 255;
+            }
+            return target;
+        }
     }
 }
