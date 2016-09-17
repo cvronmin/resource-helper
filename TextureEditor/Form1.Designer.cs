@@ -44,9 +44,9 @@
             this.undoItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolGroup = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.buttonInvert = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.buttonOther = new System.Windows.Forms.Button();
             this.buttonRS2 = new System.Windows.Forms.Button();
             this.buttonLS2 = new System.Windows.Forms.Button();
@@ -58,8 +58,6 @@
             this.buttonGray = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.previewGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -163,8 +161,6 @@
             this.toolGroup.Controls.Add(this.button4);
             this.toolGroup.Controls.Add(this.button3);
             this.toolGroup.Controls.Add(this.buttonInvert);
-            this.toolGroup.Controls.Add(this.label1);
-            this.toolGroup.Controls.Add(this.progressBar);
             this.toolGroup.Controls.Add(this.buttonOther);
             this.toolGroup.Controls.Add(this.buttonRS2);
             this.toolGroup.Controls.Add(this.buttonLS2);
@@ -177,22 +173,26 @@
             this.toolGroup.Name = "toolGroup";
             this.toolGroup.TabStop = false;
             // 
+            // button4
+            // 
+            resources.ApplyResources(this.button4, "button4");
+            this.button4.Name = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            resources.ApplyResources(this.button3, "button3");
+            this.button3.Name = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // buttonInvert
             // 
             resources.ApplyResources(this.buttonInvert, "buttonInvert");
             this.buttonInvert.Name = "buttonInvert";
             this.buttonInvert.UseVisualStyleBackColor = true;
             this.buttonInvert.Click += new System.EventHandler(this.buttonInvert_Click);
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // progressBar
-            // 
-            resources.ApplyResources(this.progressBar, "progressBar");
-            this.progressBar.Name = "progressBar";
             // 
             // buttonOther
             // 
@@ -271,20 +271,6 @@
             this.openFileDialog1.SupportMultiDottedExtensions = true;
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
-            // button3
-            // 
-            resources.ApplyResources(this.button3, "button3");
-            this.button3.Name = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            resources.ApplyResources(this.button4, "button4");
-            this.button4.Name = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -298,7 +284,6 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolGroup.ResumeLayout(false);
-            this.toolGroup.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -331,8 +316,6 @@
         private System.Windows.Forms.Button buttonRS2;
         private System.Windows.Forms.Button buttonLS2;
         private System.Windows.Forms.Button buttonOther;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ProgressBar progressBar;
         internal System.Windows.Forms.PictureBox previewBox;
         private System.Windows.Forms.Button buttonInvert;
         private System.Windows.Forms.Button button3;

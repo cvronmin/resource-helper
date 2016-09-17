@@ -61,27 +61,66 @@ namespace TextureEditor
 
         private void buttonGray_Click(object sender, EventArgs e)
         {
-                        buttonGray.Enabled = false;
-                        for (int x = 0; x < map.Width; x++)
-                        {
-                            for (int y = 0; y < map.Height; y++)
-                            {
-                                map.SetPixel(x,y,Color.FromArgb(map.GetPixel(x,y).A, averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B), averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B), averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B)));
-                            }
-                        }
-                        graphic = Graphics.FromImage(map);
-                        previewBox.Image = map;
-                        buttonGray.Enabled = true;
- /*           buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
-            var thread = new PixelModifyThread(map, 1);
-            thread.ModifyChangingEvent += OnModifyChange;
-            thread.ModifyFinishEvent += OnModifyFinish;
-            thread.Start();*/
+            buttonGray.Enabled = false;
+            unsafe
+            {
+                Rectangle rect = new Rectangle(0, 0, map.Width, map.Height);
+                Bitmap _map = new Bitmap(map.Width, map.Height);
+                System.Drawing.Imaging.BitmapData data = map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                System.Drawing.Imaging.BitmapData _data = _map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                IntPtr ptr = data.Scan0;
+                IntPtr _ptr = _data.Scan0;
+                int bytes = data.Stride * map.Height;
+                byte[] bgr = new byte[bytes];
+                byte[] _bgr = new byte[bytes];
+                System.Runtime.InteropServices.Marshal.Copy(ptr, bgr, 0, bytes);
+                System.Runtime.InteropServices.Marshal.Copy(_ptr, _bgr, 0, bytes);
+                int sw = 3;
+                if (map.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+                    sw = 4;
+                for (int y = 0; y < map.Height; y++)
+                {
+                    //get the data from the original image
+                    byte* oRow = (byte*)data.Scan0 + (y * data.Stride);
+
+                    //get the data from the new image
+                    byte* nRow = (byte*)_data.Scan0 + (y * _data.Stride);
+
+                    for (int x = 0; x < map.Width; x++)
+                    {
+                        //create the grayscale version
+                        byte grayScale =
+                           (byte)((oRow[x * sw] * .11) + //B
+                           (oRow[x * sw + 1] * .59) +  //G
+                           (oRow[x * sw + 2] * .3)); //R
+
+                        //set the new image's pixel to the grayscale version
+                        nRow[x * sw] = grayScale; //B
+                        nRow[x * sw + 1] = grayScale; //G
+                        nRow[x * sw + 2] = grayScale; //R
+                        if (sw > 3) nRow[x * sw + 3] = oRow[x * sw + 3]; //A
+                    }
+                }
+
+                map.UnlockBits(data);
+                _map.UnlockBits(_data);
+                map = _map;
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            buttonGray.Enabled = true;
+            /*           buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+                       var thread = new PixelModifyThread(map, 1);
+                       thread.ModifyChangingEvent += OnModifyChange;
+                       thread.ModifyFinishEvent += OnModifyFinish;
+                       thread.Start();*/
         }
-        public int averageColor(int R, int G, int B) {
+        public int averageColor(int R, int G, int B)
+        {
             return (R + G + B) / 3;
         }
-        public int groupColor(int average) {
+        public int groupColor(int average)
+        {
             return average < 127 ? 0 : 255;
         }
         public int groupColor(int average, int split)
@@ -91,56 +130,132 @@ namespace TextureEditor
         private void buttonBW_Click(object sender, EventArgs e)
         {
             buttonBW.Enabled = false;
-            for (int x = 0; x < map.Width; x++)
+            unsafe
             {
+                Rectangle rect = new Rectangle(0, 0, map.Width, map.Height);
+                Bitmap _map = new Bitmap(map.Width, map.Height);
+                System.Drawing.Imaging.BitmapData data = map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                System.Drawing.Imaging.BitmapData _data = _map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                IntPtr ptr = data.Scan0;
+                IntPtr _ptr = _data.Scan0;
+                int bytes = data.Stride * map.Height;
+                byte[] bgr = new byte[bytes];
+                byte[] _bgr = new byte[bytes];
+                System.Runtime.InteropServices.Marshal.Copy(ptr, bgr, 0, bytes);
+                System.Runtime.InteropServices.Marshal.Copy(_ptr, _bgr, 0, bytes);
+                int sw = 3;
+                if (map.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+                    sw = 4;
                 for (int y = 0; y < map.Height; y++)
                 {
-                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, groupColor(averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B)), groupColor(averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B)), groupColor(averageColor(map.GetPixel(x, y).R, map.GetPixel(x, y).G, map.GetPixel(x, y).B))));
+                    //get the data from the original image
+                    byte* oRow = (byte*)data.Scan0 + (y * data.Stride);
+
+                    //get the data from the new image
+                    byte* nRow = (byte*)_data.Scan0 + (y * _data.Stride);
+
+                    for (int x = 0; x < map.Width; x++)
+                    {
+                        //create the grayscale version
+                        byte grayScale =
+                           (byte)((oRow[x * sw] * .11) + //B
+                           (oRow[x * sw + 1] * .59) +  //G
+                           (oRow[x * sw + 2] * .3)); //R
+
+                        const int nThreshold = 105;
+                        byte bw = (255 - grayScale < nThreshold) ? (byte)255 : (byte)0;
+
+                        //set the new image's pixel to the grayscale version
+                        nRow[x * sw] = bw; //B
+                        nRow[x * sw + 1] = bw; //G
+                        nRow[x * sw + 2] = bw; //R
+                        if (sw > 3) nRow[x * sw + 3] = oRow[x * sw + 3]; //A
+                    }
                 }
+
+                map.UnlockBits(data);
+                _map.UnlockBits(_data);
+                map = _map;
             }
             graphic = Graphics.FromImage(map);
             previewBox.Image = map;
             buttonBW.Enabled = true;
-/*            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
-            var thread = new PixelModifyThread(map, 2);
-            thread.ModifyChangingEvent += OnModifyChange;
-            thread.ModifyFinishEvent += OnModifyFinish;
-            thread.Start();*/
+            /*            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+                        var thread = new PixelModifyThread(map, 2);
+                        thread.ModifyChangingEvent += OnModifyChange;
+                        thread.ModifyFinishEvent += OnModifyFinish;
+                        thread.Start();*/
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-                        button1.Enabled = false;
-                        for (int x = 0; x < map.Width; x++)
-                        {
-                            for (int y = 0; y < map.Height; y++)
-                            {
-                                map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 16) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 8) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1)) & 255));
-                            }
-                        }
-                        graphic = Graphics.FromImage(map);
-                        previewBox.Image = map;
-                        button1.Enabled = true;
- /*           buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
-            var thread = new PixelModifyThread(map, 3, 1);
-            thread.ModifyChangingEvent += OnModifyChange;
-            thread.ModifyFinishEvent += OnModifyFinish;
-            thread.Start();*/
+            button1.Enabled = false;
+            unsafe
+            {
+                Rectangle rect = new Rectangle(0, 0, map.Width, map.Height);
+                Bitmap _map = new Bitmap(map.Width, map.Height);
+                System.Drawing.Imaging.BitmapData data = map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                System.Drawing.Imaging.BitmapData _data = _map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                IntPtr ptr = data.Scan0;
+                IntPtr _ptr = _data.Scan0;
+                int bytes = data.Stride * map.Height;
+                byte[] bgr = new byte[bytes];
+                byte[] _bgr = new byte[bytes];
+                System.Runtime.InteropServices.Marshal.Copy(ptr, bgr, 0, bytes);
+                System.Runtime.InteropServices.Marshal.Copy(_ptr, _bgr, 0, bytes);
+                int sw = 3;
+                if (map.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+                    sw = 4;
+                for (int y = 0; y < map.Height; y++)
+                {
+                    //get the data from the original image
+                    byte* oRow = (byte*)data.Scan0 + (y * data.Stride);
+
+                    //get the data from the new image
+                    byte* nRow = (byte*)_data.Scan0 + (y * _data.Stride);
+
+                    for (int x = 0; x < map.Width; x++)
+                    {
+                        //create the shifted version
+                        int shift = (oRow[x * sw + 2] << 16) + (oRow[x * sw + 1] << 8) + oRow[x * sw];
+                        shift = leftShift(shift, 1);
+
+                        //set the new image's pixel to the grayscale version
+                        nRow[x * sw + 2] = (byte)((shift >> 16) & 255); //B
+                        nRow[x * sw + 1] = (byte)((shift >> 8) & 255); //G
+                        nRow[x * sw] = (byte)(shift & 255); //R
+                        if (sw > 3) nRow[x * sw + 3] = oRow[x * sw + 3]; //A
+                    }
+                }
+                map.UnlockBits(data);
+                _map.UnlockBits(_data);
+                map = _map;
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            button1.Enabled = true;
+            /*           buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+                       var thread = new PixelModifyThread(map, 3, 1);
+                       thread.ModifyChangingEvent += OnModifyChange;
+                       thread.ModifyFinishEvent += OnModifyFinish;
+                       thread.Start();*/
         }
-        public int leftShift(int par, int dight) {
+        public int leftShift(int par, int dight)
+        {
             int temp = par << dight;
-            temp = (temp | (par >> (Convert.ToString(0xFFFFFF, 2).Length - dight)));
+            temp = (temp | (par >> (24 - dight)));
             return temp & 0xFFFFFF;
         }
         public int rightShift(int par, int dight)
         {
             int temp = par >> dight;
-            temp = (temp | ((par << Convert.ToString(0xFFFFFF, 2).Length - dight) & (twoDight(dight) << Convert.ToString(0xFFFFFF, 2).Length - dight)));
+            temp = (temp | ((par << (24 - dight)) & 0xFFFFFF));
             return temp & 0xFFFFFF;
         }
         [Obsolete]
-        private int leftMove(int par) {
-            return leftMove(par,1);
+        private int leftMove(int par)
+        {
+            return leftMove(par, 1);
         }
         [Obsolete]
         private int leftMove(int par, int dight)
@@ -152,7 +267,7 @@ namespace TextureEditor
         [Obsolete]
         private int rightMove(int par)
         {
-            return rightMove(par,1);
+            return rightMove(par, 1);
         }
         [Obsolete]
         private int rightMove(int par, int dight)
@@ -161,164 +276,328 @@ namespace TextureEditor
             temp = (temp | ((par & temp) << Convert.ToString(par, 2).Length - dight));
             return temp & 0xFFFFFF;
         }
-        private int twoDight(int dight) {
+        private int twoDight(int dight)
+        {
             int temp = 0;
             for (int i = 0; i < dight; i++)
             {
-                temp += (int) Math.Pow(2,i);
+                temp += (int)Math.Pow(2, i);
             }
             return temp;
         }
         private void button2_Click(object sender, EventArgs e)
         {
-                        button2.Enabled = false;
-                        for (int x = 0; x < map.Width; x++)
-                        {
-                            for (int y = 0; y < map.Height; y++)
-                            {
-                                map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 16) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1) >> 8) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 1)) & 255));
-                            }
-                        }
-                        graphic = Graphics.FromImage(map);
-                        previewBox.Image = map;
-                        button2.Enabled = true;
- /*           buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
-            var thread = new PixelModifyThread(map, 4, 1);
-            thread.ModifyChangingEvent += OnModifyChange;
-            thread.ModifyFinishEvent += OnModifyFinish;
-            thread.Start();*/
+            button2.Enabled = false;
+            unsafe
+            {
+                Rectangle rect = new Rectangle(0, 0, map.Width, map.Height);
+                Bitmap _map = new Bitmap(map.Width, map.Height);
+                System.Drawing.Imaging.BitmapData data = map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                System.Drawing.Imaging.BitmapData _data = _map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                IntPtr ptr = data.Scan0;
+                IntPtr _ptr = _data.Scan0;
+                int bytes = data.Stride * map.Height;
+                byte[] bgr = new byte[bytes];
+                byte[] _bgr = new byte[bytes];
+                System.Runtime.InteropServices.Marshal.Copy(ptr, bgr, 0, bytes);
+                System.Runtime.InteropServices.Marshal.Copy(_ptr, _bgr, 0, bytes);
+                int sw = 3;
+                if (map.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+                    sw = 4;
+                for (int y = 0; y < map.Height; y++)
+                {
+                    //get the data from the original image
+                    byte* oRow = (byte*)data.Scan0 + (y * data.Stride);
+
+                    //get the data from the new image
+                    byte* nRow = (byte*)_data.Scan0 + (y * _data.Stride);
+
+                    for (int x = 0; x < map.Width; x++)
+                    {
+                        //create the shifted version
+                        int shift = (oRow[x * sw + 2] << 16) + (oRow[x * sw + 1] << 8) + oRow[x * sw];
+                        shift = rightShift(shift, 1);
+
+                        //set the new image's pixel to the grayscale version
+                        nRow[x * sw + 2] = (byte)((shift >> 16) & 255); //B
+                        nRow[x * sw + 1] = (byte)((shift >> 8) & 255); //G
+                        nRow[x * sw] = (byte)(shift & 255); //R
+                        if (sw > 3) nRow[x * sw + 3] = oRow[x * sw + 3]; //A
+                    }
+                }
+                map.UnlockBits(data);
+                _map.UnlockBits(_data);
+                map = _map;
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            button2.Enabled = true;
+            /*           buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+                       var thread = new PixelModifyThread(map, 4, 1);
+                       thread.ModifyChangingEvent += OnModifyChange;
+                       thread.ModifyFinishEvent += OnModifyFinish;
+                       thread.Start();*/
         }
 
         private void buttonLH_Click(object sender, EventArgs e)
         {
-                       buttonLH.Enabled = false;
-                        for (int x = 0; x < map.Width; x++)
-                        {
-                            for (int y = 0; y < map.Height; y++)
-                            {
-                                map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 16) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 8) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4)) & 255));
-                            }
-                        }
-                        graphic = Graphics.FromImage(map);
-                        previewBox.Image = map;
-                        buttonLH.Enabled = true;
- /*           buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
-            var thread = new PixelModifyThread(map, 3, 4);
-            thread.ModifyChangingEvent += OnModifyChange;
-            thread.ModifyFinishEvent += OnModifyFinish;
-            thread.Start();*/
+            buttonLH.Enabled = false;
+            unsafe
+            {
+                Rectangle rect = new Rectangle(0, 0, map.Width, map.Height);
+                Bitmap _map = new Bitmap(map.Width, map.Height);
+                System.Drawing.Imaging.BitmapData data = map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                System.Drawing.Imaging.BitmapData _data = _map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                IntPtr ptr = data.Scan0;
+                IntPtr _ptr = _data.Scan0;
+                int bytes = data.Stride * map.Height;
+                byte[] bgr = new byte[bytes];
+                byte[] _bgr = new byte[bytes];
+                System.Runtime.InteropServices.Marshal.Copy(ptr, bgr, 0, bytes);
+                System.Runtime.InteropServices.Marshal.Copy(_ptr, _bgr, 0, bytes);
+                int sw = 3;
+                if (map.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+                    sw = 4;
+                for (int y = 0; y < map.Height; y++)
+                {
+                    //get the data from the original image
+                    byte* oRow = (byte*)data.Scan0 + (y * data.Stride);
+
+                    //get the data from the new image
+                    byte* nRow = (byte*)_data.Scan0 + (y * _data.Stride);
+
+                    for (int x = 0; x < map.Width; x++)
+                    {
+                        //create the shifted version
+                        int shift = (oRow[x * sw + 2] << 16) + (oRow[x * sw + 1] << 8) + oRow[x * sw];
+                        shift = leftShift(shift, 4);
+
+                        //set the new image's pixel to the grayscale version
+                        nRow[x * sw + 2] = (byte)((shift >> 16) & 255); //B
+                        nRow[x * sw + 1] = (byte)((shift >> 8) & 255); //G
+                        nRow[x * sw] = (byte)(shift & 255); //R
+                        if (sw > 3) nRow[x * sw + 3] = oRow[x * sw + 3]; //A
+                    }
+                }
+                map.UnlockBits(data);
+                _map.UnlockBits(_data);
+                map = _map;
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            buttonLH.Enabled = true;
+            /*           buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+                       var thread = new PixelModifyThread(map, 3, 4);
+                       thread.ModifyChangingEvent += OnModifyChange;
+                       thread.ModifyFinishEvent += OnModifyFinish;
+                       thread.Start();*/
         }
 
         private void buttonRH_Click(object sender, EventArgs e)
         {
-                        buttonRH.Enabled = false;
-                        for (int x = 0; x < map.Width; x++)
-                        {
-                            for (int y = 0; y < map.Height; y++)
-                            {
-                                map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 16) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4) >> 8) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 4)) & 255));
-                            }
-                        }
-                        graphic = Graphics.FromImage(map);
-                        previewBox.Image = map;
-                        buttonRH.Enabled = true;
- /*           buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
-            var thread = new PixelModifyThread(map, 4, 4);
-            thread.ModifyChangingEvent += OnModifyChange;
-            thread.ModifyFinishEvent += OnModifyFinish;
-            thread.Start();*/
+            buttonRH.Enabled = false;
+            unsafe
+            {
+                Rectangle rect = new Rectangle(0, 0, map.Width, map.Height);
+                Bitmap _map = new Bitmap(map.Width, map.Height);
+                System.Drawing.Imaging.BitmapData data = map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                System.Drawing.Imaging.BitmapData _data = _map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                IntPtr ptr = data.Scan0;
+                IntPtr _ptr = _data.Scan0;
+                int bytes = data.Stride * map.Height;
+                byte[] bgr = new byte[bytes];
+                byte[] _bgr = new byte[bytes];
+                System.Runtime.InteropServices.Marshal.Copy(ptr, bgr, 0, bytes);
+                System.Runtime.InteropServices.Marshal.Copy(_ptr, _bgr, 0, bytes);
+                int sw = 3;
+                if (map.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+                    sw = 4;
+                for (int y = 0; y < map.Height; y++)
+                {
+                    //get the data from the original image
+                    byte* oRow = (byte*)data.Scan0 + (y * data.Stride);
+
+                    //get the data from the new image
+                    byte* nRow = (byte*)_data.Scan0 + (y * _data.Stride);
+
+                    for (int x = 0; x < map.Width; x++)
+                    {
+                        //create the shifted version
+                        int shift = (oRow[x * sw + 2] << 16) + (oRow[x * sw + 1] << 8) + oRow[x * sw];
+                        shift = rightShift(shift, 4);
+
+                        //set the new image's pixel to the grayscale version
+                        nRow[x * sw + 2] = (byte)((shift >> 16) & 255); //B
+                        nRow[x * sw + 1] = (byte)((shift >> 8) & 255); //G
+                        nRow[x * sw] = (byte)(shift & 255); //R
+                        if (sw > 3) nRow[x * sw + 3] = oRow[x * sw + 3]; //A
+                    }
+                }
+                map.UnlockBits(data);
+                _map.UnlockBits(_data);
+                map = _map;
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            buttonRH.Enabled = true;
+            /*           buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+                       var thread = new PixelModifyThread(map, 4, 4);
+                       thread.ModifyChangingEvent += OnModifyChange;
+                       thread.ModifyFinishEvent += OnModifyFinish;
+                       thread.Start();*/
         }
 
         private void buttonLS2_Click(object sender, EventArgs e)
         {
-                        buttonLS2.Enabled = false;
-                        for (int x = 0; x < map.Width; x++)
-                        {
-                            for (int y = 0; y < map.Height; y++)
-                            {
-                                map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 16) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 8) & 255, (leftShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8)) & 255));
-                            }
-                        }
-                        graphic = Graphics.FromImage(map);
-                        previewBox.Image = map;
-                        buttonLS2.Enabled = true;
-/*            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
-            var thread = new PixelModifyThread(map, 3, 8);
-            thread.ModifyChangingEvent += OnModifyChange;
-            thread.ModifyFinishEvent += OnModifyFinish;
-            thread.Start();*/
+            buttonLS2.Enabled = false;
+            unsafe
+            {
+                Rectangle rect = new Rectangle(0, 0, map.Width, map.Height);
+                Bitmap _map = new Bitmap(map.Width, map.Height);
+                System.Drawing.Imaging.BitmapData data = map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                System.Drawing.Imaging.BitmapData _data = _map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                IntPtr ptr = data.Scan0;
+                IntPtr _ptr = _data.Scan0;
+                int bytes = data.Stride * map.Height;
+                byte[] bgr = new byte[bytes];
+                byte[] _bgr = new byte[bytes];
+                System.Runtime.InteropServices.Marshal.Copy(ptr, bgr, 0, bytes);
+                System.Runtime.InteropServices.Marshal.Copy(_ptr, _bgr, 0, bytes);
+                int sw = 3;
+                if (map.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+                    sw = 4;
+                for (int y = 0; y < map.Height; y++)
+                {
+                    //get the data from the original image
+                    byte* oRow = (byte*)data.Scan0 + (y * data.Stride);
+
+                    //get the data from the new image
+                    byte* nRow = (byte*)_data.Scan0 + (y * _data.Stride);
+
+                    for (int x = 0; x < map.Width; x++)
+                    {
+                        //create the shifted version
+                        int shift = (oRow[x * sw + 2] << 16) + (oRow[x * sw + 1] << 8) + oRow[x * sw];
+                        shift = leftShift(shift, 8);
+
+                        //set the new image's pixel to the grayscale version
+                        nRow[x * sw + 2] = (byte)((shift >> 16) & 255); //B
+                        nRow[x * sw + 1] = (byte)((shift >> 8) & 255); //G
+                        nRow[x * sw] = (byte)(shift & 255); //R
+                        if (sw > 3) nRow[x * sw + 3] = oRow[x * sw + 3]; //A
+                    }
+                }
+                map.UnlockBits(data);
+                _map.UnlockBits(_data);
+                map = _map;
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            buttonLS2.Enabled = true;
+            /*            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+                        var thread = new PixelModifyThread(map, 3, 8);
+                        thread.ModifyChangingEvent += OnModifyChange;
+                        thread.ModifyFinishEvent += OnModifyFinish;
+                        thread.Start();*/
         }
 
         private void buttonRS2_Click(object sender, EventArgs e)
         {
-                        buttonRS2.Enabled = false;
-                        for (int x = 0; x < map.Width; x++)
-                        {
-                            for (int y = 0; y < map.Height; y++)
-                            {
-                                map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 16) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8) >> 8) & 255, (rightShift(map.GetPixel(x, y).ToArgb() & 0xFFFFFF, 8)) & 255));
-                            }
-                        }
-                        graphic = Graphics.FromImage(map);
-                        previewBox.Image = map;
-                        buttonRS2.Enabled = true;
-/*            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
-            var thread = new PixelModifyThread(map, 4, 8);
-            thread.ModifyChangingEvent += OnModifyChange;
-            thread.ModifyFinishEvent += OnModifyFinish;
-            thread.Start();*/
+            buttonRS2.Enabled = false;
+            unsafe
+            {
+                Rectangle rect = new Rectangle(0, 0, map.Width, map.Height);
+                Bitmap _map = new Bitmap(map.Width, map.Height);
+                System.Drawing.Imaging.BitmapData data = map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                System.Drawing.Imaging.BitmapData _data = _map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                IntPtr ptr = data.Scan0;
+                IntPtr _ptr = _data.Scan0;
+                int bytes = data.Stride * map.Height;
+                byte[] bgr = new byte[bytes];
+                byte[] _bgr = new byte[bytes];
+                System.Runtime.InteropServices.Marshal.Copy(ptr, bgr, 0, bytes);
+                System.Runtime.InteropServices.Marshal.Copy(_ptr, _bgr, 0, bytes);
+                int sw = 3;
+                if (map.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+                    sw = 4;
+                for (int y = 0; y < map.Height; y++)
+                {
+                    //get the data from the original image
+                    byte* oRow = (byte*)data.Scan0 + (y * data.Stride);
+
+                    //get the data from the new image
+                    byte* nRow = (byte*)_data.Scan0 + (y * _data.Stride);
+
+                    for (int x = 0; x < map.Width; x++)
+                    {
+                        //create the shifted version
+                        int shift = (oRow[x * sw + 2] << 16) + (oRow[x * sw + 1] << 8) + oRow[x * sw];
+                        shift = rightShift(shift, 8);
+
+                        //set the new image's pixel to the grayscale version
+                        nRow[x * sw + 2] = (byte)((shift >> 16) & 255); //B
+                        nRow[x * sw + 1] = (byte)((shift >> 8) & 255); //G
+                        nRow[x * sw] = (byte)(shift & 255); //R
+                        if (sw > 3) nRow[x * sw + 3] = oRow[x * sw + 3]; //A
+                    }
+                }
+                map.UnlockBits(data);
+                _map.UnlockBits(_data);
+                map = _map;
+            }
+            graphic = Graphics.FromImage(map);
+            previewBox.Image = map;
+            buttonRS2.Enabled = true;
+            /*            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
+                        var thread = new PixelModifyThread(map, 4, 8);
+                        thread.ModifyChangingEvent += OnModifyChange;
+                        thread.ModifyFinishEvent += OnModifyFinish;
+                        thread.Start();*/
         }
 
         private void buttonOther_Click(object sender, EventArgs e)
         {
             new Form2(this).ShowDialog();
         }
-        private void OnModifyChange(int process, int max) {
-            ProgressBarValueChange(process, max);
-        }
-        private void OnModifyFinish(Bitmap map) {
-            graphic = Graphics.FromImage(map);
-            previewBox.Image = map;
-            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = true;
-        }
-        public void ProgressBarValueChange(int process, int max) {
-            progressBar.Maximum = max;
-            progressBar.Value = process;
-            label1.Text = "Process: " + process + "/" + max;
-        }
-        public void BlackWhiteAny(int seperater)
-        {
-            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
-            var thread = new PixelModifyThread(map, 2, seperater);
-            thread.ModifyChangingEvent += OnModifyChange;
-            thread.ModifyFinishEvent += OnModifyFinish;
-            thread.Start();
-        }
-        public void leftShiftAny(int shift) {
-            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
-            var thread = new PixelModifyThread(map, 3, shift);
-            thread.ModifyChangingEvent += OnModifyChange;
-            thread.ModifyFinishEvent += OnModifyFinish;
-            thread.Start();
-        }
-        public void rightShiftAny(int shift)
-        {
-            buttonOther.Enabled = buttonLH.Enabled = buttonRH.Enabled = buttonLS2.Enabled = buttonRS2.Enabled = button1.Enabled = button2.Enabled = buttonBW.Enabled = buttonGray.Enabled = false;
-            var thread = new PixelModifyThread(map, 4, shift);
-            thread.ModifyChangingEvent += OnModifyChange;
-            thread.ModifyFinishEvent += OnModifyFinish;
-            thread.Start();
-        }
 
         private void buttonInvert_Click(object sender, EventArgs e)
         {
             buttonInvert.Enabled = false;
-            for (int x = 0; x < map.Width; x++)
+            unsafe
             {
+                Rectangle rect = new Rectangle(0, 0, map.Width, map.Height);
+                Bitmap _map = new Bitmap(map.Width, map.Height);
+                System.Drawing.Imaging.BitmapData data = map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                System.Drawing.Imaging.BitmapData _data = _map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                IntPtr ptr = data.Scan0;
+                IntPtr _ptr = _data.Scan0;
+                int bytes = data.Stride * map.Height;
+                byte[] bgr = new byte[bytes];
+                byte[] _bgr = new byte[bytes];
+                System.Runtime.InteropServices.Marshal.Copy(ptr, bgr, 0, bytes);
+                System.Runtime.InteropServices.Marshal.Copy(_ptr, _bgr, 0, bytes);
+                int sw = 3;
+                if (map.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+                    sw = 4;
                 for (int y = 0; y < map.Height; y++)
                 {
-                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, ~(map.GetPixel(x, y).R) & 255, ~(map.GetPixel(x, y).G) & 255, ~(map.GetPixel(x, y).B) & 255));
+                    //get the data from the original image
+                    byte* oRow = (byte*)data.Scan0 + (y * data.Stride);
+
+                    //get the data from the new image
+                    byte* nRow = (byte*)_data.Scan0 + (y * _data.Stride);
+
+                    for (int x = 0; x < map.Width; x++)
+                    {
+                        nRow[x * sw + 2] = (byte)~oRow[x * sw + 2]; //B
+                        nRow[x * sw + 1] = (byte)~oRow[x * sw + 1]; //G
+                        nRow[x * sw] = (byte)~oRow[x * sw]; //R
+                        if (sw > 3) nRow[x * sw + 3] = oRow[x * sw + 3]; //A
+                    }
                 }
+                map.UnlockBits(data);
+                _map.UnlockBits(_data);
+                map = _map;
             }
             graphic = Graphics.FromImage(map);
             previewBox.Image = map;
@@ -328,12 +607,43 @@ namespace TextureEditor
         private void button3_Click(object sender, EventArgs e)
         {
             button3.Enabled = false;
-            for (int x = 0; x < map.Width; x++)
+            unsafe
             {
+                Rectangle rect = new Rectangle(0, 0, map.Width, map.Height);
+                Bitmap _map = new Bitmap(map.Width, map.Height);
+                System.Drawing.Imaging.BitmapData data = map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                System.Drawing.Imaging.BitmapData _data = _map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                IntPtr ptr = data.Scan0;
+                IntPtr _ptr = _data.Scan0;
+                int bytes = data.Stride * map.Height;
+                byte[] bgr = new byte[bytes];
+                byte[] _bgr = new byte[bytes];
+                System.Runtime.InteropServices.Marshal.Copy(ptr, bgr, 0, bytes);
+                System.Runtime.InteropServices.Marshal.Copy(_ptr, _bgr, 0, bytes);
+                int sw = 3;
+                if (map.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+                    sw = 4;
                 for (int y = 0; y < map.Height; y++)
                 {
-                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, groupColor(map.GetPixel(x, y).R), groupColor(map.GetPixel(x, y).G), groupColor(map.GetPixel(x, y).B)));
+                    //get the data from the original image
+                    byte* oRow = (byte*)data.Scan0 + (y * data.Stride);
+
+                    //get the data from the new image
+                    byte* nRow = (byte*)_data.Scan0 + (y * _data.Stride);
+
+                    for (int x = 0; x < map.Width; x++)
+                    {
+                        const int nThreshold = 105;
+                        nRow[x * sw] = (255 - oRow[x * sw] < nThreshold) ? (byte)255 : (byte)0; //B
+                        nRow[x * sw + 1] = (255 - oRow[x * sw + 1] < nThreshold) ? (byte)255 : (byte)0; //G
+                        nRow[x * sw + 2] = (255 - oRow[x * sw + 2] < nThreshold) ? (byte)255 : (byte)0; //R
+                        if (sw > 3) nRow[x * sw + 3] = oRow[x * sw + 3]; //A
+                    }
                 }
+
+                map.UnlockBits(data);
+                _map.UnlockBits(_data);
+                map = _map;
             }
             graphic = Graphics.FromImage(map);
             previewBox.Image = map;
@@ -343,25 +653,56 @@ namespace TextureEditor
         private void button4_Click(object sender, EventArgs e)
         {
             button4.Enabled = false;
-            for (int x = 0; x < map.Width; x++)
+            unsafe
             {
+                Rectangle rect = new Rectangle(0, 0, map.Width, map.Height);
+                Bitmap _map = new Bitmap(map.Width, map.Height);
+                System.Drawing.Imaging.BitmapData data = map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                System.Drawing.Imaging.BitmapData _data = _map.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, map.PixelFormat);
+                IntPtr ptr = data.Scan0;
+                IntPtr _ptr = _data.Scan0;
+                int bytes = data.Stride * map.Height;
+                byte[] bgr = new byte[bytes];
+                byte[] _bgr = new byte[bytes];
+                System.Runtime.InteropServices.Marshal.Copy(ptr, bgr, 0, bytes);
+                System.Runtime.InteropServices.Marshal.Copy(_ptr, _bgr, 0, bytes);
+                int sw = 3;
+                if (map.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+                    sw = 4;
                 for (int y = 0; y < map.Height; y++)
                 {
-                    map.SetPixel(x, y, Color.FromArgb(map.GetPixel(x, y).A, fourfive(map.GetPixel(x, y).R), fourfive(map.GetPixel(x, y).G), fourfive(map.GetPixel(x, y).B)));
+                    //get the data from the original image
+                    byte* oRow = (byte*)data.Scan0 + (y * data.Stride);
+
+                    //get the data from the new image
+                    byte* nRow = (byte*)_data.Scan0 + (y * _data.Stride);
+
+                    for (int x = 0; x < map.Width; x++)
+                    {
+                        nRow[x * sw] = (byte)fourfive(oRow[x * sw]); //B
+                        nRow[x * sw + 1] = (byte)fourfive(oRow[x * sw + 1]); //G
+                        nRow[x * sw + 2] = (byte)fourfive(oRow[x * sw + 2]); //R
+                        if (sw > 3) nRow[x * sw + 3] = oRow[x * sw + 3]; //A
+                    }
                 }
+
+                map.UnlockBits(data);
+                _map.UnlockBits(_data);
+                map = _map;
             }
             graphic = Graphics.FromImage(map);
             previewBox.Image = map;
             button4.Enabled = true;
         }
-        public int fourfive(int target) {
-            if (((target % 16) - 7) < 0)
+        public int fourfive(int target)
+        {
+            if ((target % 16) < 7)
             {
-                target = (int)((float)target / 255 * 10f) * 16 - 1; 
+                target = (int)((float)target / 255 * 16f) * 16 - 1;
             }
             else
             {
-                target = (int)((float)target / 255 * 10f) * 16 - 1 + 16;
+                target = (int)((float)target / 255 * 16f) * 16 - 1 + 16;
             }
             if (target < 0)
             {
