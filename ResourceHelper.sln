@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextureCreator", "TextureCreator\TextureCreator.csproj", "{175609F9-AE14-42CB-B294-99DD32313B2F}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextureComparer", "TextureComparer\TextureComparer.csproj", "{29BE6595-632F-4E79-9EA0-C5C14B67C131}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextureEditor", "TextureEditor\TextureEditor.csproj", "{C9FB4B41-5247-4053-AA46-F007B985525F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageEditorAPK", "ImageEditorAPK\ImageEditorAPK.csproj", "{41EAD8F3-1957-4C74-85E2-CAFC4199A882}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,12 @@ Global
 		{C9FB4B41-5247-4053-AA46-F007B985525F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9FB4B41-5247-4053-AA46-F007B985525F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9FB4B41-5247-4053-AA46-F007B985525F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41EAD8F3-1957-4C74-85E2-CAFC4199A882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41EAD8F3-1957-4C74-85E2-CAFC4199A882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41EAD8F3-1957-4C74-85E2-CAFC4199A882}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{41EAD8F3-1957-4C74-85E2-CAFC4199A882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41EAD8F3-1957-4C74-85E2-CAFC4199A882}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41EAD8F3-1957-4C74-85E2-CAFC4199A882}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

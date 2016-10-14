@@ -26,7 +26,6 @@ namespace Main
             if (System.IO.File.Exists(Environment.CurrentDirectory + @"\TextureCreator.dll"))
             {
                 button1.Enabled = true;
-                button4.Enabled = true;
             }
             if (System.IO.File.Exists(Environment.CurrentDirectory + @"\EntityTextureCreator.dll"))
             {
@@ -50,11 +49,6 @@ namespace Main
         private void button3_Click(object sender, EventArgs e)
         {
             new EntityTextureCreator.NewTC().Show();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            new TextureCreator.NewTC().Show();
         }
 
         private void button5_Click(object sender, EventArgs e)

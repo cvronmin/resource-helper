@@ -571,21 +571,21 @@ namespace EntityTextureCreator
             filename = openFileDialog1.FileName;
             this.Text = filename != null ? "Texture Creator - " + filename : "Texture Creator - Untitled";
             Image file = Image.FromFile(filename);
-            if (file.Width >= 256 && file.Height >= 256)
+            if (file.Width >= 512 && file.Height >= 256)
             {
-                map = new Bitmap(file, new Size(256, 256));
+                map = new Bitmap(file, new Size(512, 256));
             }
-            else if (file.Width >= 64 && file.Height >= 64 && file.Height < 256 && file.Width < 256)
+            else if (file.Width >= 256 && file.Height >= 128 && file.Width < 512 && file.Height < 256)
             {
-                map = new Bitmap(file, new Size(64, 64));
+                map = new Bitmap(file, new Size(256, 128));
             }
-            else if (file.Height >= 32 && file.Width >= 32 && file.Height < 64 && file.Width < 64)
+            else if (file.Width >= 128 && file.Height >= 64 && file.Width < 256 && file.Height < 128)
             {
-                map = new Bitmap(file, new Size(32, 32));
+                map = new Bitmap(file, new Size(128, 64));
             }
             else
             {
-                map = new Bitmap(file, new Size(16, 16));
+                map = new Bitmap(file, new Size(64, 32));
             }
             graphic = Graphics.FromImage(map);
             zoommap = zoom(map);

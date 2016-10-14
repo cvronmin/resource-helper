@@ -77,15 +77,14 @@
             // 
             // menuStrip1
             // 
-            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.檔案FToolStripMenuItem,
             this.editMenu});
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
             // 檔案FToolStripMenuItem
             // 
-            resources.ApplyResources(this.檔案FToolStripMenuItem, "檔案FToolStripMenuItem");
             this.檔案FToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newFileItem,
             this.openItem,
@@ -93,39 +92,39 @@
             this.saveItem,
             this.saveAsItem});
             this.檔案FToolStripMenuItem.Name = "檔案FToolStripMenuItem";
+            resources.ApplyResources(this.檔案FToolStripMenuItem, "檔案FToolStripMenuItem");
             // 
             // newFileItem
             // 
-            resources.ApplyResources(this.newFileItem, "newFileItem");
             this.newFileItem.Name = "newFileItem";
+            resources.ApplyResources(this.newFileItem, "newFileItem");
             this.newFileItem.Click += new System.EventHandler(this.newFileItem_Click);
             // 
             // openItem
             // 
-            resources.ApplyResources(this.openItem, "openItem");
             this.openItem.Name = "openItem";
+            resources.ApplyResources(this.openItem, "openItem");
             this.openItem.Click += new System.EventHandler(this.openItem_Click);
             // 
             // toolStripSeparator1
             // 
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
             // saveItem
             // 
-            resources.ApplyResources(this.saveItem, "saveItem");
             this.saveItem.Name = "saveItem";
+            resources.ApplyResources(this.saveItem, "saveItem");
             this.saveItem.Click += new System.EventHandler(this.saveItem_Click);
             // 
             // saveAsItem
             // 
-            resources.ApplyResources(this.saveAsItem, "saveAsItem");
             this.saveAsItem.Name = "saveAsItem";
+            resources.ApplyResources(this.saveAsItem, "saveAsItem");
             this.saveAsItem.Click += new System.EventHandler(this.saveAsItem_Click);
             // 
             // editMenu
             // 
-            resources.ApplyResources(this.editMenu, "editMenu");
             this.editMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.undoItem,
             this.redoItem,
@@ -133,6 +132,7 @@
             this.ChangeSizeMenuItem,
             this.RotateMenuItem});
             this.editMenu.Name = "editMenu";
+            resources.ApplyResources(this.editMenu, "editMenu");
             // 
             // undoItem
             // 
@@ -141,51 +141,50 @@
             // 
             // redoItem
             // 
-            resources.ApplyResources(this.redoItem, "redoItem");
             this.redoItem.Name = "redoItem";
+            resources.ApplyResources(this.redoItem, "redoItem");
             // 
             // toolStripSeparator3
             // 
-            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
             this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
             // 
             // ChangeSizeMenuItem
             // 
-            resources.ApplyResources(this.ChangeSizeMenuItem, "ChangeSizeMenuItem");
             this.ChangeSizeMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.x21Item,
             this.x42Item,
             this.x84Item,
             this.x168Item});
             this.ChangeSizeMenuItem.Name = "ChangeSizeMenuItem";
+            resources.ApplyResources(this.ChangeSizeMenuItem, "ChangeSizeMenuItem");
             // 
             // x21Item
             // 
-            resources.ApplyResources(this.x21Item, "x21Item");
             this.x21Item.Name = "x21Item";
+            resources.ApplyResources(this.x21Item, "x21Item");
             this.x21Item.Click += new System.EventHandler(this.x16Item_Click);
             // 
             // x42Item
             // 
-            resources.ApplyResources(this.x42Item, "x42Item");
             this.x42Item.Name = "x42Item";
+            resources.ApplyResources(this.x42Item, "x42Item");
             this.x42Item.Click += new System.EventHandler(this.x32Item_Click);
             // 
             // x84Item
             // 
-            resources.ApplyResources(this.x84Item, "x84Item");
             this.x84Item.Name = "x84Item";
+            resources.ApplyResources(this.x84Item, "x84Item");
             this.x84Item.Click += new System.EventHandler(this.x64Item_Click);
             // 
             // x168Item
             // 
-            resources.ApplyResources(this.x168Item, "x168Item");
             this.x168Item.Name = "x168Item";
+            resources.ApplyResources(this.x168Item, "x168Item");
             this.x168Item.Click += new System.EventHandler(this.x128Item_Click);
             // 
             // RotateMenuItem
             // 
-            resources.ApplyResources(this.RotateMenuItem, "RotateMenuItem");
             this.RotateMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.C90Item,
             this.AC90Item,
@@ -194,40 +193,41 @@
             this.HMItem,
             this.VMItem});
             this.RotateMenuItem.Name = "RotateMenuItem";
+            resources.ApplyResources(this.RotateMenuItem, "RotateMenuItem");
             // 
             // C90Item
             // 
-            resources.ApplyResources(this.C90Item, "C90Item");
             this.C90Item.Name = "C90Item";
+            resources.ApplyResources(this.C90Item, "C90Item");
             this.C90Item.Click += new System.EventHandler(this.C90Item_Click);
             // 
             // AC90Item
             // 
-            resources.ApplyResources(this.AC90Item, "AC90Item");
             this.AC90Item.Name = "AC90Item";
+            resources.ApplyResources(this.AC90Item, "AC90Item");
             this.AC90Item.Click += new System.EventHandler(this.AC90Item_Click);
             // 
             // R180Item
             // 
-            resources.ApplyResources(this.R180Item, "R180Item");
             this.R180Item.Name = "R180Item";
+            resources.ApplyResources(this.R180Item, "R180Item");
             this.R180Item.Click += new System.EventHandler(this.R180Item_Click);
             // 
             // toolStripSeparator4
             // 
-            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
             this.toolStripSeparator4.Name = "toolStripSeparator4";
+            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
             // 
             // HMItem
             // 
-            resources.ApplyResources(this.HMItem, "HMItem");
             this.HMItem.Name = "HMItem";
+            resources.ApplyResources(this.HMItem, "HMItem");
             this.HMItem.Click += new System.EventHandler(this.HMItem_Click);
             // 
             // VMItem
             // 
-            resources.ApplyResources(this.VMItem, "VMItem");
             this.VMItem.Name = "VMItem";
+            resources.ApplyResources(this.VMItem, "VMItem");
             this.VMItem.Click += new System.EventHandler(this.VMItem_Click);
             // 
             // toolBar
@@ -246,93 +246,93 @@
             // 
             // cursorItem
             // 
-            resources.ApplyResources(this.cursorItem, "cursorItem");
             this.cursorItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.cursorItem.Image = global::EntityTextureCreator.Properties.Resources.Cursor;
+            resources.ApplyResources(this.cursorItem, "cursorItem");
             this.cursorItem.Name = "cursorItem";
             this.cursorItem.Click += new System.EventHandler(this.cursorItem_Click);
             // 
             // pencilItem
             // 
-            resources.ApplyResources(this.pencilItem, "pencilItem");
             this.pencilItem.BackColor = System.Drawing.SystemColors.Control;
             this.pencilItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.pencilItem.Image = global::EntityTextureCreator.Properties.Resources.Pencil;
+            resources.ApplyResources(this.pencilItem, "pencilItem");
             this.pencilItem.Name = "pencilItem";
             this.pencilItem.Click += new System.EventHandler(this.pencilItem_Click);
             // 
             // ereasorItem
             // 
-            resources.ApplyResources(this.ereasorItem, "ereasorItem");
             this.ereasorItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ereasorItem.Image = global::EntityTextureCreator.Properties.Resources.Ereasor;
+            resources.ApplyResources(this.ereasorItem, "ereasorItem");
             this.ereasorItem.Name = "ereasorItem";
             this.ereasorItem.Click += new System.EventHandler(this.ereasorItem_Click);
             // 
             // toolStripSeparator2
             // 
-            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             // 
             // dRectItem
             // 
-            resources.ApplyResources(this.dRectItem, "dRectItem");
             this.dRectItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.dRectItem.Image = global::EntityTextureCreator.Properties.Resources.dRect;
+            resources.ApplyResources(this.dRectItem, "dRectItem");
             this.dRectItem.Name = "dRectItem";
             this.dRectItem.Click += new System.EventHandler(this.dRectItem_Click);
             // 
             // dOvalItem
             // 
-            resources.ApplyResources(this.dOvalItem, "dOvalItem");
             this.dOvalItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.dOvalItem.Image = global::EntityTextureCreator.Properties.Resources.dOval;
+            resources.ApplyResources(this.dOvalItem, "dOvalItem");
             this.dOvalItem.Name = "dOvalItem";
             this.dOvalItem.Click += new System.EventHandler(this.dOvalItem_Click);
             // 
             // fRectItem
             // 
-            resources.ApplyResources(this.fRectItem, "fRectItem");
             this.fRectItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.fRectItem.Image = global::EntityTextureCreator.Properties.Resources.fRect;
+            resources.ApplyResources(this.fRectItem, "fRectItem");
             this.fRectItem.Name = "fRectItem";
             this.fRectItem.Click += new System.EventHandler(this.fRectItem_Click);
             // 
             // fOvalItem
             // 
-            resources.ApplyResources(this.fOvalItem, "fOvalItem");
             this.fOvalItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.fOvalItem.Image = global::EntityTextureCreator.Properties.Resources.fOval;
+            resources.ApplyResources(this.fOvalItem, "fOvalItem");
             this.fOvalItem.Name = "fOvalItem";
             this.fOvalItem.Click += new System.EventHandler(this.fOvalItem_Click);
             // 
             // toolStrip1
             // 
-            resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
             this.foreColorItem,
             this.backColorItem});
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Name = "toolStrip1";
             // 
             // toolStripLabel1
             // 
-            resources.ApplyResources(this.toolStripLabel1, "toolStripLabel1");
             this.toolStripLabel1.Name = "toolStripLabel1";
+            resources.ApplyResources(this.toolStripLabel1, "toolStripLabel1");
             // 
             // foreColorItem
             // 
-            resources.ApplyResources(this.foreColorItem, "foreColorItem");
             this.foreColorItem.BackColor = System.Drawing.Color.Black;
             this.foreColorItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            resources.ApplyResources(this.foreColorItem, "foreColorItem");
             this.foreColorItem.Name = "foreColorItem";
             this.foreColorItem.Click += new System.EventHandler(this.foreColorItem_Click);
             // 
             // backColorItem
             // 
-            resources.ApplyResources(this.backColorItem, "backColorItem");
             this.backColorItem.BackColor = System.Drawing.Color.White;
             this.backColorItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            resources.ApplyResources(this.backColorItem, "backColorItem");
             this.backColorItem.Name = "backColorItem";
             this.backColorItem.Click += new System.EventHandler(this.backColorItem_Click);
             // 
@@ -343,8 +343,8 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
+            this.openFileDialog1.ShowHelp = true;
             this.openFileDialog1.SupportMultiDottedExtensions = true;
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
@@ -357,10 +357,10 @@
             // 
             // designBox
             // 
-            resources.ApplyResources(this.designBox, "designBox");
             this.designBox.BackColor = System.Drawing.Color.White;
             this.designBox.BackgroundImage = global::EntityTextureCreator.Properties.Resources.TranBack;
             this.designBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.designBox, "designBox");
             this.designBox.Name = "designBox";
             this.designBox.TabStop = false;
             this.designBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.designBox_MouseDown);
