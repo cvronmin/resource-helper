@@ -3,4 +3,13 @@
     <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">ImageEditor</string>
   <string name="PickImage">Pick Image</string>
+  <string name="DialogPickNoForShift">Pick a number to shift</string>
+  <string name="DialogPickNoForThreshold">Pick a threshold number</string>
+  <string name="DialogDescShiftBin">Seek a number to shift</string>
+  <string name="DialogThreshold">Threshold is {0}</string>
+  <string name="DialogShiftDoNothing">Nothing change</string>
+  <string name="DialogShiftBinLeft">Shift {0} binary number to the left</string>
+  <string name="DialogShiftBinRight">Shift {0} binary number to the right</string>
+  <string name="DialogShiftHexLeft">Shift {0} hexadecimal number to the left</string>
+  <string name="DialogShiftHexRight">Shift {0} hexadecimal number to the right</string>
 </resources>

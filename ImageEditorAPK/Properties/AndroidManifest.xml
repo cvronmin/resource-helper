@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="ImageEditor.ImageEditor" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="16" />
-	<application android:label="ImageEditor" android:icon="@drawable/Icon"></application>
+	<application android:label="ImageEditor" android:icon="@drawable/Icon" android:hardwareAccelerated="false" android:largeHeap="true" android:theme="@style/MyTheme"></application>
 </manifest>

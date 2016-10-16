@@ -3,10 +3,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-  <include android:id="@+id/toolbar" layout="@layout/toolbar"/>
-    <Button
-        android:id="@+id/MyButton"
+    <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select a image" />
+        android:id="@+id/seekBar1" />
+    <TextView
+        android:text="@string/DialogShiftBinLeft"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2" />
 </LinearLayout>

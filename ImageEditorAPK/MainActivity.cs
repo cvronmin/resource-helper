@@ -5,11 +5,14 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Support.V7.App;
+
+using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace ImageEditorAPK
 {
     [Activity(Label = "Image Editor", MainLauncher = true, Icon = "@drawable/icon")]
-    public class MainActivity : Activity
+    public class MainActivity : AppCompatActivity
     {
         int count = 1;
 
@@ -19,7 +22,10 @@ namespace ImageEditorAPK
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
 
+            //Toolbar will now take on default actionbar characteristics
+            SetSupportActionBar(toolbar);
             // Get our button from the layout resource,
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.MyButton);
@@ -32,7 +38,7 @@ namespace ImageEditorAPK
                 //pickIntent.SetType("image/*");
 
                 Intent chooserIntent = Intent.CreateChooser(getIntent,GetText(Resource.String.PickImage));
-                chooserIntent.PutExtra(Intent.ExtraInitialIntents, new Intent[] { getIntent });
+                //chooserIntent.PutExtra(Intent.ExtraInitialIntents, new Intent[] { getIntent });
 
                 StartActivityForResult(chooserIntent, 0);
             };
