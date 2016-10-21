@@ -32,32 +32,99 @@
                 android:minHeight="25px"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/layoutHandle">
-                <Button
+                android:id="@+id/layoutHandle"
+                android:padding="10dp">
+                <ImageButton
                     android:text="Greyscale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/butGrey" />
-                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/butGrey"
+                    android:src="@drawable/ic_grayscale"
+                    android:adjustViewBounds="true"
+                    android:padding="0dp"
+                    android:scaleType="fitCenter"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" />
+                <ImageButton
                     android:text="B&amp;W"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/butbw" />
-                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/butbw"
+                    android:src="@drawable/ic_monochrome"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:padding="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" />
+                <ImageButton
                     android:text="Shift binary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/butShiftBin" />
-                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/butShiftBin"
+                    android:src="@drawable/ic_shiftbin"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitCenter"
+                    android:padding="0dp"
+                    android:adjustViewBounds="true" />
+                <ImageButton
                     android:text="Shift Hexadecimal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/butShiftHex" />
-              <Button
-    android:text="Invert"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/butInvert" />
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/butShiftHex"
+                    android:src="@drawable/ic_shifthex"
+                    android:padding="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true" />
+                <ImageButton
+                    android:text="Invert"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/butInvert"
+                    android:src="@drawable/ic_invert"
+                    android:scaleType="fitCenter"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:padding="0dp"
+                    android:adjustViewBounds="true" />
+                <ImageButton
+                    android:text="Invert"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/butRGBmono"
+                    android:src="@drawable/ic_rgbmono"
+                    android:padding="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true" />
+                <ImageButton
+                    android:text="Invert"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/but8bit"
+                    android:src="@drawable/ic_8bit"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:padding="0dp" />
             </LinearLayout>
         </HorizontalScrollView>
         <ProgressBar

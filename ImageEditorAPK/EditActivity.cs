@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V7.App;
+using Android.Util;
 using System.Drawing;
 using Android.Graphics;
 using Java.Nio;
@@ -38,9 +39,11 @@ namespace ImageEditorAPK
             SetContentView(Resource.Layout.Edit);
 
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-
+            
             //Toolbar will now take on default actionbar characteristics
             SetSupportActionBar(toolbar);
+            var a = SupportActionBar;
+            a.SetDisplayHomeAsUpEnabled(true);
 
             imageView = FindViewById<ImageView>(Resource.Id.imageView);
             layoutHandle = FindViewById<LinearLayout>(Resource.Id.layoutHandle);
@@ -49,7 +52,7 @@ namespace ImageEditorAPK
             imageView.SetImageURI(uri);
             map = Android.Provider.MediaStore.Images.Media.GetBitmap(this.ContentResolver, uri);
             //CreateAgain();
-            var butGrey = FindViewById<Button>(Resource.Id.butGrey);
+            var butGrey = FindViewById<ImageButton>(Resource.Id.butGrey);
             butGrey.Click += delegate
             {
                 ModifyImage((byt, ctr) =>
@@ -68,27 +71,30 @@ namespace ImageEditorAPK
                     //if (sw > 3) nRow[x * sw + 3] = oRow[x * sw + 3]; //A
                 });
             };
-            var butbw = FindViewById<Button>(Resource.Id.butbw);
+            var butbw = FindViewById<ImageButton>(Resource.Id.butbw);
             butbw.Click += delegate
             {
-                ModifyImage((byt,ctr)=> {
-                    //create the grayscale version
-                    byte grayScale =
-                       (byte)((byt[ctr + 2] * .11) + //B
-                       (byt[ctr + 1] * .59) +  //G
-                       (byt[ctr] * .3)); //R
+                SeekBarDialogFragment dialog = new SeekBarDialogFragment(this, 0, 255, 105, Resource.String.DialogPickNoForThreshold, Resource.String.DialogThreshold, Resource.String.DialogThreshold, Resource.String.DialogThreshold);
+                dialog.Ok += delegate {
+                    ModifyImage((byt, ctr) =>
+                    {
+                        //create the grayscale version
+                        byte grayScale =
+                           (byte) ((byt[ctr + 2] * .11) + //B
+                           (byt[ctr + 1] * .59) +  //G
+                           (byt[ctr] * .3)); //R
 
-                    const int nThreshold = 105;
-                    byte bw = (255 - grayScale < nThreshold) ? (byte)255 : (byte)0;
+                        byte bw = (255 - grayScale < dialog.finProgress) ? (byte) 255 : (byte) 0;
 
-                    //set the new image's pixel to the grayscale version
-                    byt[ctr + 2] = bw; //B
-                    byt[ctr + 1] = bw; //G
-                    byt[ctr] = bw; //R
-                    //if (sw > 3) nRow[x * sw + 3] = oRow[x * sw + 3]; //A
-                });
+                        //set the new image's pixel to the grayscale version
+                        byt[ctr + 2] = bw; //B
+                        byt[ctr + 1] = bw; //G
+                        byt[ctr] = bw; //R
+                                       //if (sw > 3) nRow[x * sw + 3] = oRow[x * sw + 3]; //A
+                    }); };
+                dialog.Show(FragmentManager, "seekThreshold");
             };
-            var butShiftBin = FindViewById<Button>(Resource.Id.butShiftBin);
+            var butShiftBin = FindViewById<ImageButton>(Resource.Id.butShiftBin);
             butShiftBin.Click += delegate {
                 var dialog = new SeekBarDialogFragment(this, -23, 23, 0,Resource.String.DialogPickNoForShift,Resource.String.DialogShiftBinLeft, Resource.String.DialogShiftDoNothing,Resource.String.DialogShiftBinRight);
                 dialog.Ok += delegate {
@@ -100,12 +106,12 @@ namespace ImageEditorAPK
                         //set the new image's pixel to the grayscale version
                         byt[ctr] = (byte)((shift >> 16) & 255); //R
                         byt[ctr + 1] = (byte)((shift >> 8) & 255); //G
-                        byt[ctr] = (byte)(shift & 255); //B
+                        byt[ctr + 2] = (byte)(shift & 255); //B
                     });
                 };
                 dialog.Show(FragmentManager,"seekShiftBin");
             };
-            var butShiftHex = FindViewById<Button>(Resource.Id.butShiftHex);
+            var butShiftHex = FindViewById<ImageButton>(Resource.Id.butShiftHex);
             butShiftHex.Click += delegate {
                 var dialog = new SeekBarDialogFragment(this, -5, 5, 0, Resource.String.DialogPickNoForShift, Resource.String.DialogShiftHexLeft, Resource.String.DialogShiftDoNothing, Resource.String.DialogShiftHexRight);
                 dialog.Ok += delegate {
@@ -122,12 +128,31 @@ namespace ImageEditorAPK
                 };
                 dialog.Show(FragmentManager, "seekShiftHex");
             };
-            var butInvert = FindViewById<Button>(Resource.Id.butInvert);
+            var butInvert = FindViewById<ImageButton>(Resource.Id.butInvert);
             butInvert.Click += delegate {
                 ModifyImage((byt, ctr) => {
                     byt[ctr + 2] = (byte)~byt[ctr + 2]; //B
                     byt[ctr + 1] = (byte)~byt[ctr + 1]; //G
                     byt[ctr] = (byte)~byt[ctr]; //R
+                });
+            };
+            var butRGBMono = FindViewById<ImageButton>(Resource.Id.butRGBmono);
+            butRGBMono.Click +=delegate{
+                SeekBarDialogFragment dialog = new SeekBarDialogFragment(this, 0, 255, 105, Resource.String.DialogPickNoForThreshold, Resource.String.DialogThreshold, Resource.String.DialogThreshold, Resource.String.DialogThreshold);
+                dialog.Ok += delegate {
+                    ModifyImage((byt, ctr) => {
+                        byt[ctr] = (255 - byt[ctr] < dialog.finProgress) ? (byte) 255 : (byte) 0; //R
+                        byt[ctr + 1] = (255 - byt[ctr + 1] < dialog.finProgress) ? (byte) 255 : (byte) 0; //G
+                        byt[ctr + 2] = (255 - byt[ctr + 2] < dialog.finProgress) ? (byte) 255 : (byte) 0; //B
+                    }); };
+                dialog.Show(FragmentManager, "seekRGBThreshold");
+            };
+            var but8bit = FindViewById<ImageButton>(Resource.Id.but8bit);
+            but8bit.Click += delegate {
+                ModifyImage((byt, ctr) => {
+                    byt[ctr + 2] = (byte) fourfive(byt[ctr + 2]); //B
+                    byt[ctr + 1] = (byte) fourfive(byt[ctr + 1]); //G
+                    byt[ctr] = (byte) fourfive(byt[ctr]); //R
                 });
             };
         }
@@ -141,57 +166,13 @@ namespace ImageEditorAPK
         {
             switch (item.ItemId)
             {
+                case Resource.Id.home:
+                    Finish();
+                    return true;
                 case Resource.Id.save:
-                    {
-                        var folder = new File(Environment.GetExternalStoragePublicDirectory(Environment.DirectoryPictures), "image_editor");
-                        if (!folder.Exists()) folder.Mkdir();
-                        var filename = this.GetRealPathFromUri(uri);
-                        filename = filename.Substring(filename.LastIndexOf(File.SeparatorChar));
-                        var file = new File(folder, filename);
-                        var fullname = file.AbsolutePath;
-                        try
-                        {
-                            using (var stream = new System.IO.FileStream(fullname, System.IO.FileMode.Create))
-                            {
-                                var format = System.Text.RegularExpressions.Regex.IsMatch(filename, "\\w+(.jpg|.jpeg|.jpe|.jfif)", System.Text.RegularExpressions.RegexOptions.IgnoreCase) ? Bitmap.CompressFormat.Jpeg : filename.EndsWith(".png") ? Bitmap.CompressFormat.Png : Bitmap.CompressFormat.Webp;
-                                map.Compress(format, 100, stream);
-                            }
-                            Toast.MakeText(this, "Saved as " + fullname.Substring(fullname.IndexOf(Environment.DirectoryPictures)), ToastLength.Short).Show();
-                        }
-                        catch (Exception)
-                        {
-                            Toast.MakeText(this, "Unable to save image", ToastLength.Short).Show();
-                        }
-                    }
-                    return true;
+                    return SaveImage();
                 case Resource.Id.saveAsCopy:
-                    {
-                        var folder = new File(Environment.GetExternalStoragePublicDirectory(Environment.DirectoryPictures), "image_editor");
-                        if (!folder.Exists()) folder.Mkdir();
-                        var filename = this.GetRealPathFromUri(uri);
-                        filename = filename.Substring(filename.LastIndexOf(File.SeparatorChar));
-                        var file = new File(folder, filename);
-                        int count = 0;
-                        while (file.Exists())
-                        {
-                            count++;
-                            file = new File(folder, filename.Insert(filename.LastIndexOf('.'), string.Format("({0})", count)));
-                        }
-                        var fullname = file.AbsolutePath;
-                        try
-                        {
-                            using (var stream = new System.IO.FileStream(fullname, System.IO.FileMode.Create))
-                            {
-                                var format = System.Text.RegularExpressions.Regex.IsMatch(filename, "\\w+(.jpg|.jpeg|.jpe|.jfif)", System.Text.RegularExpressions.RegexOptions.IgnoreCase) ? Bitmap.CompressFormat.Jpeg : filename.EndsWith(".png") ? Bitmap.CompressFormat.Png : Bitmap.CompressFormat.Webp;
-                                map.Compress(format, 100, stream);
-                            }
-                            Toast.MakeText(this, "Saved as " + fullname.Substring(fullname.IndexOf(Environment.DirectoryPictures)), ToastLength.Short).Show();
-                        }
-                        catch (Exception) {
-                            Toast.MakeText(this, "Unable to save image", ToastLength.Short).Show();
-                        }
-                    }
-                    return true;
+                    return SaveImage(true);
                 default:
                     return base.OnOptionsItemSelected(item);
             }
@@ -205,11 +186,49 @@ namespace ImageEditorAPK
             imageView.SetImageBitmap(map);
             
         }
+
         protected override void OnDestroy()
         {
             base.OnDestroy();
             map.Recycle();
         }
+
+        private bool SaveImage (bool preventOverride = false) {
+            var folder = new File(Environment.GetExternalStoragePublicDirectory(Environment.DirectoryPictures), "image_editor");
+            if (!folder.Exists()) folder.Mkdir();
+            var filename = this.GetRealPathFromUri(uri);
+            filename = filename.Substring(filename.LastIndexOf(File.SeparatorChar));
+            var file = new File(folder, filename);
+            int count = 0;
+            if(preventOverride)
+            while (file.Exists())
+            {
+                count++;
+                file = new File(folder, filename.Insert(filename.LastIndexOf('.'), string.Format("({0})", count)));
+            }
+            if (!file.Exists()) file.CreateNewFile();
+            var fullname = file.AbsolutePath;
+            try
+            {
+                using (var stream = new System.IO.FileStream(fullname, System.IO.FileMode.Create))
+                {
+                    var format = System.Text.RegularExpressions.Regex.IsMatch(filename, "\\w+(.jpg|.jpeg|.jpe|.jfif)", System.Text.RegularExpressions.RegexOptions.IgnoreCase) ? Bitmap.CompressFormat.Jpeg : filename.EndsWith(".png") ? Bitmap.CompressFormat.Png : Bitmap.CompressFormat.Webp;
+                    map.Compress(format, 100, stream);
+                }
+                var mediaScanIntent = new Intent(Intent.ActionMediaScannerScanFile);
+                mediaScanIntent.SetData(Uri.FromFile(file));
+                SendBroadcast(mediaScanIntent);
+                Toast.MakeText(this, "Saved as " + fullname.Substring(fullname.IndexOf(Environment.DirectoryPictures)), ToastLength.Short).Show();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Log.Warn("ImageEditor", Java.Lang.Throwable.FromException(e));
+                Toast.MakeText(this, "Unable to save image", ToastLength.Short).Show();
+                return false;
+            }
+        }
+
         private async void ModifyImage(Action<byte[], int> procedue){
             if (procedue == null) return;
             if (map == null)
@@ -224,15 +243,16 @@ namespace ImageEditorAPK
                 buf.Rewind();
                 byte[] byt = new byte[size];
                 buf.Get(byt);
-                //RunOnUiThread(() => progressBar.Max = size);
 
                 for (int ctr = 0; ctr < size; ctr += 4)
                 {
                     procedue.Invoke(byt, ctr);
-                    //RunOnUiThread(() => progressBar.Progress = ctr);
                 }
                 ByteBuffer retBuf = ByteBuffer.Wrap(byt);
                 map.CopyPixelsFromBuffer(retBuf);
+                buf.Dispose();
+                retBuf.Dispose();
+                byt = null;
 
             }).ContinueWith(task => {
                 RunOnUiThread(() => {
@@ -272,7 +292,26 @@ namespace ImageEditorAPK
             temp = (temp | ((par << (24 - dight)) & 0xFFFFFF));
             return temp & 0xFFFFFF;
         }
+        public int fourfive (int target)
+        {
+            if ((target % 16) < 7)
+            {
+                target = (int) ((float) target / 255 * 16f) * 16 - 1;
+            }
+            else
+            {
+                target = (int) ((float) target / 255 * 16f) * 16 - 1 + 16;
+            }
+            if (target < 0)
+            {
+                target = 0;
+            }
+            if (target > 255)
+            {
+                target = 255;
+            }
+            return target;
+        }
 
-        
     }
 }
