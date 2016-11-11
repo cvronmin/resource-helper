@@ -50,7 +50,7 @@ namespace ImageEditorAPK
             progressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
             uri = Intent.GetParcelableExtra("Image").JavaCast<Uri>();
             imageView.SetImageURI(uri);
-            map = Android.Provider.MediaStore.Images.Media.GetBitmap(this.ContentResolver, uri);
+            map = Android.Provider.MediaStore.Images.Media.GetBitmap(ContentResolver, uri);
             //CreateAgain();
             var butGrey = FindViewById<ImageButton>(Resource.Id.butGrey);
             butGrey.Click += delegate
@@ -84,7 +84,7 @@ namespace ImageEditorAPK
                            (byt[ctr + 1] * .59) +  //G
                            (byt[ctr] * .3)); //R
 
-                        byte bw = (255 - grayScale < dialog.finProgress) ? (byte) 255 : (byte) 0;
+                        byte bw = (255 - grayScale > dialog.finProgress) ? (byte) 255 : (byte) 0;
 
                         //set the new image's pixel to the grayscale version
                         byt[ctr + 2] = bw; //B
@@ -141,9 +141,9 @@ namespace ImageEditorAPK
                 SeekBarDialogFragment dialog = new SeekBarDialogFragment(this, 0, 255, 105, Resource.String.DialogPickNoForThreshold, Resource.String.DialogThreshold, Resource.String.DialogThreshold, Resource.String.DialogThreshold);
                 dialog.Ok += delegate {
                     ModifyImage((byt, ctr) => {
-                        byt[ctr] = (255 - byt[ctr] < dialog.finProgress) ? (byte) 255 : (byte) 0; //R
-                        byt[ctr + 1] = (255 - byt[ctr + 1] < dialog.finProgress) ? (byte) 255 : (byte) 0; //G
-                        byt[ctr + 2] = (255 - byt[ctr + 2] < dialog.finProgress) ? (byte) 255 : (byte) 0; //B
+                        byt[ctr] = (255 - byt[ctr] > dialog.finProgress) ? (byte) 255 : (byte) 0; //R
+                        byt[ctr + 1] = (255 - byt[ctr + 1] > dialog.finProgress) ? (byte) 255 : (byte) 0; //G
+                        byt[ctr + 2] = (255 - byt[ctr + 2] > dialog.finProgress) ? (byte) 255 : (byte) 0; //B
                     }); };
                 dialog.Show(FragmentManager, "seekRGBThreshold");
             };
@@ -168,6 +168,10 @@ namespace ImageEditorAPK
             {
                 case Resource.Id.home:
                     Finish();
+                    return true;
+                case Resource.Id.reset:
+                    map = Android.Provider.MediaStore.Images.Media.GetBitmap(ContentResolver, uri);
+                    imageView.SetImageBitmap(map);
                     return true;
                 case Resource.Id.save:
                     return SaveImage();
@@ -237,22 +241,35 @@ namespace ImageEditorAPK
             }
             layoutHandle.Visibility = ViewStates.Gone;
             await System.Threading.Tasks.Task.Run(() => {
-                int size = map.RowBytes * map.Height * 4;
-                ByteBuffer buf = ByteBuffer.Allocate(size);
-                map.CopyPixelsToBuffer(buf);
-                buf.Rewind();
-                byte[] byt = new byte[size];
-                buf.Get(byt);
-
-                for (int ctr = 0; ctr < size; ctr += 4)
+                try
                 {
-                    procedue.Invoke(byt, ctr);
+                    int size = map.RowBytes * map.Height * 4;
+                    ByteBuffer buf = ByteBuffer.Allocate(size);
+                    map.CopyPixelsToBuffer(buf);
+                    buf.Rewind();
+                    byte[] byt = new byte[size];
+                    buf.Get(byt);
+
+                    for (int ctr = 0; ctr < size; ctr += 4)
+                    {
+                        procedue.Invoke(byt, ctr);
+                    }
+                    ByteBuffer retBuf = ByteBuffer.Wrap(byt);
+                    map.CopyPixelsFromBuffer(retBuf);
+                    buf.Dispose();
+                    retBuf.Dispose();
+                    byt = null;
                 }
-                ByteBuffer retBuf = ByteBuffer.Wrap(byt);
-                map.CopyPixelsFromBuffer(retBuf);
-                buf.Dispose();
-                retBuf.Dispose();
-                byt = null;
+                catch (OutOfMemoryException)
+                {
+                    RunOnUiThread(() => {
+                        Toast.MakeText(this, "Out of memory! Try cleaning up", ToastLength.Short).Show();
+                        GC.Collect();
+                        Java.Lang.JavaSystem.Gc();
+                    });
+                }
+                catch (Exception) { throw; }
+
 
             }).ContinueWith(task => {
                 RunOnUiThread(() => {
