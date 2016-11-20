@@ -93,7 +93,10 @@ namespace ImageEditorAPK
                 drawerLayout.CloseDrawers();
                 if (e.MenuItem.ItemId == Resource.Id.nav_imgedit)
                 {
-                    StartActivity(new Intent(this, typeof(MainActivity)));
+                    var intent = new Intent(this, typeof(MainActivity));
+                    intent.AddFlags(ActivityFlags.ClearTask);
+                    intent.AddFlags(ActivityFlags.NewTask);
+                    StartActivity(intent);
                 }
             };
         }

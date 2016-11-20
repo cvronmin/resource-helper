@@ -2293,14 +2293,14 @@ namespace ImageEditorAPK
 			// aapt resource value: 0x7f060016
 			public const int multiply = 2131099670;
 			
-			// aapt resource value: 0x7f0600a1
-			public const int nav_encrypt = 2131099809;
-			
 			// aapt resource value: 0x7f0600a2
-			public const int nav_imgedit = 2131099810;
+			public const int nav_encrypt = 2131099810;
 			
 			// aapt resource value: 0x7f0600a3
-			public const int nav_namegen = 2131099811;
+			public const int nav_imgedit = 2131099811;
+			
+			// aapt resource value: 0x7f0600a4
+			public const int nav_namegen = 2131099812;
 			
 			// aapt resource value: 0x7f06008d
 			public const int nav_view = 2131099789;
@@ -2341,20 +2341,20 @@ namespace ImageEditorAPK
 			// aapt resource value: 0x7f060078
 			public const int relativeLayout1 = 2131099768;
 			
-			// aapt resource value: 0x7f06009d
-			public const int reset = 2131099805;
+			// aapt resource value: 0x7f06009e
+			public const int reset = 2131099806;
 			
 			// aapt resource value: 0x7f060031
 			public const int right = 2131099697;
 			
-			// aapt resource value: 0x7f06009f
-			public const int save = 2131099807;
-			
 			// aapt resource value: 0x7f0600a0
-			public const int saveAsCopy = 2131099808;
+			public const int save = 2131099808;
 			
-			// aapt resource value: 0x7f06009e
-			public const int saveMain = 2131099806;
+			// aapt resource value: 0x7f0600a1
+			public const int saveAsCopy = 2131099809;
+			
+			// aapt resource value: 0x7f06009f
+			public const int saveMain = 2131099807;
 			
 			// aapt resource value: 0x7f060017
 			public const int screen = 2131099671;
@@ -2406,6 +2406,9 @@ namespace ImageEditorAPK
 			
 			// aapt resource value: 0x7f06009c
 			public const int seekBar1 = 2131099804;
+			
+			// aapt resource value: 0x7f06009d
+			public const int select = 2131099805;
 			
 			// aapt resource value: 0x7f06006c
 			public const int select_dialog_listview = 2131099756;
