@@ -16,8 +16,9 @@ namespace ImageEditorAPK
     [Activity(Label = "Encoder", Icon = "@drawable/icon")]
     public class EncryptActivity : AppCompatActivity
     {
-        private readonly string[] EncodeType = new string[]{ "base64" , "crmkjk" };
+        private readonly string[] EncodeType = new string[]{ "base64" , "crmkjk", "unicode" };
         DrawerLayout drawerLayout;
+        Switch switchForceUnicode, switchEncodeTextEncode;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -28,12 +29,28 @@ namespace ImageEditorAPK
             SetContentView(Resource.Layout.Encrypt);
             var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
-
-            //Enable support action bar to display hamburger
             SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_action_nav_menu_holo_dark);
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+
+            switchForceUnicode = FindViewById<Switch>(Resource.Id.switchForceUnicode);
+            switchForceUnicode.Visibility = ViewStates.Gone;
+            switchEncodeTextEncode = FindViewById<Switch>(Resource.Id.switchEncodeTextEncode);
+            switchEncodeTextEncode.Visibility = ViewStates.Gone;
+
             Spinner spinnerEncodeType = FindViewById<Spinner>(Resource.Id.spinnerEncodeType);
             spinnerEncodeType.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, EncodeType);
+            spinnerEncodeType.ItemSelected += (sender, e) => {
+                if (e.Position == 1) {
+                    switchForceUnicode.Visibility = ViewStates.Visible;
+                    switchEncodeTextEncode.Visibility = ViewStates.Visible;
+                }
+                else
+                {
+                    switchForceUnicode.Visibility = ViewStates.Gone;
+                    switchEncodeTextEncode.Visibility = ViewStates.Gone;
+                }
+            };
+
 
             EditText editTextOrigin = FindViewById<EditText>(Resource.Id.editTextO);
             EditText editTextEncode = FindViewById<EditText>(Resource.Id.editTextE);
@@ -45,11 +62,14 @@ namespace ImageEditorAPK
                 switch (EncodeType[spinnerEncodeType.SelectedItemPosition])
                 {
                     case "crmkjk":
-                        editTextEncode.Text = CRMKJK.CRMKJK.Encode(editTextOrigin.Text);
+                        editTextEncode.Text = CRMKJK.CRMKJK.EncodeEasy(editTextOrigin.Text, (switchForceUnicode.Checked ? CRMKJKState.Unicode : 0) & (switchEncodeTextEncode.Checked ? CRMKJKState.EncodeTextB64Encode : 0));
                         break;
                     case "base64":
                         if (string.IsNullOrWhiteSpace(editTextOrigin.Text)) return;
                         editTextEncode.Text = Convert.ToBase64String(Encoding.Default.GetBytes(editTextOrigin.Text));
+                        break;
+                    case "unicode":
+                        editTextEncode.Text = editTextOrigin.Text.EscapeToUnicode();
                         break;
                     default:
                         break;
@@ -78,6 +98,17 @@ namespace ImageEditorAPK
                         catch (FormatException)
                         {
                             Toast.MakeText(this, "ERROR: unexpected base64 encode", ToastLength.Short).Show();
+                        }
+                        break;
+                    case "unicode":
+                        if (string.IsNullOrWhiteSpace(editTextEncode.Text)) return;
+                        try
+                        {
+                            editTextOrigin.Text = editTextEncode.Text.TrapToUnicode();
+                        }
+                        catch (FormatException)
+                        {
+                            Toast.MakeText(this, "ERROR: unexpected unicode", ToastLength.Short).Show();
                         }
                         break;
                     default:
