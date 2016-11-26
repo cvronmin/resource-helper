@@ -33,21 +33,18 @@ namespace ImageEditorAPK
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
             switchForceUnicode = FindViewById<Switch>(Resource.Id.switchForceUnicode);
-            switchForceUnicode.Visibility = ViewStates.Gone;
             switchEncodeTextEncode = FindViewById<Switch>(Resource.Id.switchEncodeTextEncode);
-            switchEncodeTextEncode.Visibility = ViewStates.Gone;
-
+            var listView1 = FindViewById<ScrollView>(Resource.Id.listView1);
+            listView1.Visibility = ViewStates.Gone;
             Spinner spinnerEncodeType = FindViewById<Spinner>(Resource.Id.spinnerEncodeType);
             spinnerEncodeType.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, EncodeType);
             spinnerEncodeType.ItemSelected += (sender, e) => {
                 if (e.Position == 1) {
-                    switchForceUnicode.Visibility = ViewStates.Visible;
-                    switchEncodeTextEncode.Visibility = ViewStates.Visible;
+                    listView1.Visibility = ViewStates.Visible;
                 }
                 else
                 {
-                    switchForceUnicode.Visibility = ViewStates.Gone;
-                    switchEncodeTextEncode.Visibility = ViewStates.Gone;
+                    listView1.Visibility = ViewStates.Gone;
                 }
             };
 
@@ -62,7 +59,7 @@ namespace ImageEditorAPK
                 switch (EncodeType[spinnerEncodeType.SelectedItemPosition])
                 {
                     case "crmkjk":
-                        editTextEncode.Text = CRMKJK.CRMKJK.EncodeEasy(editTextOrigin.Text, (switchForceUnicode.Checked ? CRMKJKState.Unicode : 0) & (switchEncodeTextEncode.Checked ? CRMKJKState.EncodeTextB64Encode : 0));
+                        editTextEncode.Text = CRMKJK.CRMKJK.EncodeEasy(editTextOrigin.Text, (switchForceUnicode.Checked ? CRMKJKState.Unicode : 0) | (switchEncodeTextEncode.Checked ? CRMKJKState.EncodeTextB64Encode : 0));
                         break;
                     case "base64":
                         if (string.IsNullOrWhiteSpace(editTextOrigin.Text)) return;
@@ -124,7 +121,10 @@ namespace ImageEditorAPK
                 drawerLayout.CloseDrawers();
                 if (e.MenuItem.ItemId == Resource.Id.nav_imgedit)
                 {
-                    StartActivity(new Intent(this, typeof(MainActivity)));
+                    var intent = new Intent(this, typeof(MainActivity));
+                    intent.AddFlags(ActivityFlags.ClearTask);
+                    intent.AddFlags(ActivityFlags.NewTask);
+                    StartActivity(intent);
                 }
             };
         }

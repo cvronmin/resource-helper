@@ -42,15 +42,13 @@ namespace ImageEditorAPK
             
             //Toolbar will now take on default actionbar characteristics
             SetSupportActionBar(toolbar);
-            var a = SupportActionBar;
-            a.SetDisplayHomeAsUpEnabled(true);
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
             imageView = FindViewById<ImageView>(Resource.Id.imageView);
             layoutHandle = FindViewById<LinearLayout>(Resource.Id.layoutHandle);
             progressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
-            uri = Intent.GetParcelableExtra("Image").JavaCast<Uri>();
-            imageView.SetImageURI(uri);
-            map = Android.Provider.MediaStore.Images.Media.GetBitmap(ContentResolver, uri);
+            if (Intent.HasExtra("Image")) 
+            setImage(Intent.GetParcelableExtra("Image").JavaCast<Uri>());
             //CreateAgain();
             var butGrey = FindViewById<ImageButton>(Resource.Id.butGrey);
             butGrey.Click += delegate
@@ -84,7 +82,7 @@ namespace ImageEditorAPK
                            (byt[ctr + 1] * .59) +  //G
                            (byt[ctr] * .3)); //R
 
-                        byte bw = (255 - grayScale > dialog.finProgress) ? (byte) 255 : (byte) 0;
+                        byte bw = (grayScale > dialog.finProgress) ? (byte) 255 : (byte) 0;
 
                         //set the new image's pixel to the grayscale version
                         byt[ctr + 2] = bw; //B
@@ -141,9 +139,9 @@ namespace ImageEditorAPK
                 SeekBarDialogFragment dialog = new SeekBarDialogFragment(this, 0, 255, 105, Resource.String.DialogPickNoForThreshold, Resource.String.DialogThreshold, Resource.String.DialogThreshold, Resource.String.DialogThreshold);
                 dialog.Ok += delegate {
                     ModifyImage((byt, ctr) => {
-                        byt[ctr] = (255 - byt[ctr] > dialog.finProgress) ? (byte) 255 : (byte) 0; //R
-                        byt[ctr + 1] = (255 - byt[ctr + 1] > dialog.finProgress) ? (byte) 255 : (byte) 0; //G
-                        byt[ctr + 2] = (255 - byt[ctr + 2] > dialog.finProgress) ? (byte) 255 : (byte) 0; //B
+                        byt[ctr] = (byt[ctr] > dialog.finProgress) ? (byte) 255 : (byte) 0; //R
+                        byt[ctr + 1] = (byt[ctr + 1] > dialog.finProgress) ? (byte) 255 : (byte) 0; //G
+                        byt[ctr + 2] = (byt[ctr + 2] > dialog.finProgress) ? (byte) 255 : (byte) 0; //B
                     }); };
                 dialog.Show(FragmentManager, "seekRGBThreshold");
             };
@@ -156,11 +154,26 @@ namespace ImageEditorAPK
                 });
             };
         }
+        private void setImage(Uri url) {
+            uri = url;
+            imageView.SetImageURI(uri);
+            map = Android.Provider.MediaStore.Images.Media.GetBitmap(ContentResolver, uri);
+            layoutHandle.Visibility = ViewStates.Visible;
 
+        }
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.MenuEdit, menu);
             return true;
+        }
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            if(requestCode == 2071)
+            if (resultCode == Result.Ok)
+            {
+                    setImage(data.Data);
+            }
         }
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
@@ -169,26 +182,28 @@ namespace ImageEditorAPK
                 case Resource.Id.home:
                     Finish();
                     return true;
+                case Resource.Id.select:
+                    Intent getIntent = new Intent(Intent.ActionGetContent);
+                    getIntent.SetType("image/*");
+
+                    Intent chooserIntent = Intent.CreateChooser(getIntent, GetText(Resource.String.PickImage));
+
+                    StartActivityForResult(chooserIntent, 2071);
+                    return true;
                 case Resource.Id.reset:
+                    if (uri == null) return false;
                     map = Android.Provider.MediaStore.Images.Media.GetBitmap(ContentResolver, uri);
                     imageView.SetImageBitmap(map);
                     return true;
                 case Resource.Id.save:
+                    if (map == null) return false;
                     return SaveImage();
                 case Resource.Id.saveAsCopy:
+                    if (map == null) return false;
                     return SaveImage(true);
                 default:
                     return base.OnOptionsItemSelected(item);
             }
-        }
-
-        protected override void OnPostCreate(Bundle savedInstanceState)
-        {
-            base.OnPostCreate(savedInstanceState);
-            if(map == null)
-                 CreateAgain();
-            imageView.SetImageBitmap(map);
-            
         }
 
         protected override void OnDestroy()
@@ -232,7 +247,7 @@ namespace ImageEditorAPK
                 return false;
             }
         }
-
+        private byte[] cache;
         private async void ModifyImage(Action<byte[], int> procedue){
             if (procedue == null) return;
             if (map == null)
@@ -244,19 +259,27 @@ namespace ImageEditorAPK
                 try
                 {
                     int size = map.RowBytes * map.Height * 4;
-                    ByteBuffer buf = ByteBuffer.Allocate(size);
-                    map.CopyPixelsToBuffer(buf);
-                    buf.Rewind();
-                    byte[] byt = new byte[size];
-                    buf.Get(byt);
-
+                    byte[] byt;
+                    ByteBuffer buf = null;
+                    if (cache != null) {
+                        byt = (byte[])cache.Clone();
+                    }
+                    else
+                    {
+                        buf = ByteBuffer.Allocate(size);
+                        map.CopyPixelsToBuffer(buf);
+                        buf.Rewind();
+                        byt = new byte[size];
+                        buf.Get(byt);
+                    }
                     for (int ctr = 0; ctr < size; ctr += 4)
                     {
                         procedue.Invoke(byt, ctr);
                     }
                     ByteBuffer retBuf = ByteBuffer.Wrap(byt);
                     map.CopyPixelsFromBuffer(retBuf);
-                    buf.Dispose();
+                    if(buf != null)
+                        buf.Dispose();
                     retBuf.Dispose();
                     byt = null;
                 }

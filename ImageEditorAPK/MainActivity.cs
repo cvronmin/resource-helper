@@ -15,7 +15,6 @@ namespace ImageEditorAPK
     [Activity(Label = "Image Editor", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : AppCompatActivity
     {
-        int count = 1;
         DrawerLayout drawerLayout;
         //NavigationView a;
 
@@ -39,11 +38,7 @@ namespace ImageEditorAPK
                 Intent getIntent = new Intent(Intent.ActionGetContent);
                 getIntent.SetType("image/*");
 
-                //Intent pickIntent = new Intent(Intent.ActionPick, Android.Provider.MediaStore.Images.Media.ExternalContentUri);
-                //pickIntent.SetType("image/*");
-
                 Intent chooserIntent = Intent.CreateChooser(getIntent,GetText(Resource.String.PickImage));
-                //chooserIntent.PutExtra(Intent.ExtraInitialIntents, new Intent[] { getIntent });
 
                 StartActivityForResult(chooserIntent, 0);
             };
@@ -55,7 +50,10 @@ namespace ImageEditorAPK
                 drawerLayout.CloseDrawers();
                 if (e.MenuItem.ItemId == Resource.Id.nav_encrypt)
                 {
-                    StartActivity(new Intent(this, typeof(EncryptActivity)));
+                    var intent = new Intent(this, typeof(EncryptActivity));
+                    intent.AddFlags(ActivityFlags.ClearTask);
+                    intent.AddFlags(ActivityFlags.NewTask);
+                    StartActivity(intent);
                 }
             };
         }

@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextureEditor", "TextureEdi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageEditorAPK", "ImageEditorAPK\ImageEditorAPK.csproj", "{41EAD8F3-1957-4C74-85E2-CAFC4199A882}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMKJK", "..\Encoder\CRMKJK\CRMKJK\CRMKJK.csproj", "{17B9EC55-6E4F-42DE-8F12-3A965C25B4B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMKJK", "CRMKJK\CRMKJK.csproj", "{17B9EC55-6E4F-42DE-8F12-3A965C25B4B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

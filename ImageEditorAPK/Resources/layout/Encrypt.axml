@@ -49,18 +49,26 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/butEncode"
             android:id="@+id/listView1">
-          <Switch
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/switchForceUnicode"
-              android:text="Force Unicode Mode"
-              android:switchPadding="10dp" />
-          <Switch
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/switchEncodeTextEncode"
-    android:text="Encode the key"
-    android:switchPadding="10dp" />
+          <LinearLayout
+                android:orientation="vertical"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switchForceUnicode"
+                android:text="Force Unicode Mode"
+                android:switchPadding="10dp" />
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switchEncodeTextEncode"
+                android:text="Encode the key"
+                android:switchPadding="10dp" />
+          </LinearLayout>
         </ScrollView>
         <Button
             android:text="Decode"
