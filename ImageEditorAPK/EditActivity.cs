@@ -247,7 +247,6 @@ namespace ImageEditorAPK
                 return false;
             }
         }
-        private byte[] cache;
         private async void ModifyImage(Action<byte[], int> procedue){
             if (procedue == null) return;
             if (map == null)
@@ -261,17 +260,11 @@ namespace ImageEditorAPK
                     int size = map.RowBytes * map.Height * 4;
                     byte[] byt;
                     ByteBuffer buf = null;
-                    if (cache != null) {
-                        byt = (byte[])cache.Clone();
-                    }
-                    else
-                    {
                         buf = ByteBuffer.Allocate(size);
                         map.CopyPixelsToBuffer(buf);
                         buf.Rewind();
                         byt = new byte[size];
                         buf.Get(byt);
-                    }
                     for (int ctr = 0; ctr < size; ctr += 4)
                     {
                         procedue.Invoke(byt, ctr);
