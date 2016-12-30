@@ -49,26 +49,25 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/butEncode"
             android:id="@+id/listView1">
-          <LinearLayout
+            <LinearLayout
                 android:orientation="vertical"
                 android:minWidth="25px"
                 android:minHeight="25px"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/switchForceUnicode"
-                android:text="Force Unicode Mode"
-                android:switchPadding="10dp" />
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/switchEncodeTextEncode"
-                android:text="Encode the key"
-                android:switchPadding="10dp" />
-          </LinearLayout>
+                android:layout_height="match_parent">
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/switchForceUnicode"
+                    android:text="Force Unicode Mode"
+                    android:switchPadding="10dp" />
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/switchEncodeTextEncode"
+                    android:text="Encode the key"
+                    android:switchPadding="10dp" />
+            </LinearLayout>
         </ScrollView>
         <Button
             android:text="Decode"
@@ -90,6 +89,12 @@
             android:layout_height="100.0dp"
             android:id="@+id/editTextE"
             android:layout_below="@id/textView2" />
+        <Button
+            android:text="Encode/Decode images"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/butEDImgs" />
     </RelativeLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

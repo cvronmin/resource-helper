@@ -26,24 +26,53 @@ namespace ImageEditorAPK
             return result;
         }
 
-        public static string GetRealPathFromUri(this Activity activity, Android.Net.Uri uri) {
+        public static string GetRealPathFromUri (this Activity activity, Android.Net.Uri uri)
+        {
             string[] filePathColumn = { MediaStore.Images.ImageColumns.Data };
             using (ICursor cursor = activity.ContentResolver.Query(uri, filePathColumn, null, null, null))
             {
-                if(cursor != null)
+                if (cursor != null)
+                    if (cursor.MoveToFirst())
+                    {
+                        int columnIndex = cursor.GetColumnIndex(filePathColumn[0]);
+                        string yourRealPath = cursor.GetString(columnIndex);
+                        return yourRealPath;
+                    }
+                    else
+                    {
+                        return "";
+                        //boooo, cursor doesn't have rows ...
+                    }
+            }
+            return "";
+        }
+        public static string GetRealPathFromUri (this Activity activity, string uri)
+        {
+            string[] column = { MediaStore.Images.ImageColumns.Data };
+            string id = uri.Split(':')[1];
+
+            // where id is equal to             
+            string sel = MediaStore.Images.ImageColumns.Id + "=?";
+            using (ICursor cursor = activity.ContentResolver.
+                                      Query(MediaStore.Images.Media.ExternalContentUri,
+                                      column, sel, new string[] { id }, null))
+            {
+                int columnIndex = cursor.GetColumnIndex(column[0]);
+
                 if (cursor.MoveToFirst())
                 {
-                    int columnIndex = cursor.GetColumnIndex(filePathColumn[0]);
-                    string yourRealPath = cursor.GetString(columnIndex);
-                        return yourRealPath;
+                    return cursor.GetString(columnIndex);
                 }
                 else
                 {
-                        return "";
-                    //boooo, cursor doesn't have rows ...
+                    return id;
                 }
             }
-            return "";
+        }
+
+        public static bool IsExternalStorageDocument (Android.Net.Uri uri)
+        {
+            return "com.android.externalstorage.documents".Equals(uri.Authority);
         }
     }
 }

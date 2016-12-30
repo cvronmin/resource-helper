@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -11,6 +12,7 @@ namespace TextureEditor
 {
     public partial class Form1 : Form
     {
+        internal Image file;
         internal Bitmap map;
         internal Graphics graphic;
         string filename;
@@ -26,9 +28,13 @@ namespace TextureEditor
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            filename = openFileDialog1.FileName;
+            if (sender is FileDialog)
+            {
+                filename = openFileDialog1.FileName;
+            }
+            if (sender is string) filename = sender as string;
             this.Text = filename != null ? "Texture Creator - " + filename : "Texture Creator - Untitled";
-            Image file = Image.FromFile(filename);
+            file = Image.FromFile(filename);
             map = new Bitmap(file);
             graphic = Graphics.FromImage(map);
             previewBox.Image = map;
@@ -713,6 +719,200 @@ namespace TextureEditor
                 target = 255;
             }
             return target;
+        }
+
+        private void button5_Click (object sender, EventArgs e)
+        {
+            string b = "";
+            using (var f = System.IO.File.OpenRead(filename))
+            {
+                using (var a = new System.IO.StreamReader(f, Encoding.GetEncoding(1252)))
+                {
+                    b = a.ReadToEnd();
+                    a.Close();
+                }
+                f.Close();
+            }
+            //Bitmap m = map.Clone(new Rectangle(0, 0, map.Width, map.Height), map.PixelFormat);
+            file.Dispose();
+            map.Dispose();
+            graphic.Dispose();
+            b = CRMKJK.CRMKJK.EncodeEasy(b, Encoding.UTF8, CRMKJK.CRMKJKState.EncodeTextB64Encode);
+            using (var f= System.IO.File.OpenWrite(filename))
+            {
+                using (var a = new System.IO.StreamWriter(f,Encoding.UTF8))
+                {
+                    a.Write(b);
+                }
+
+            }
+            //map = m.Clone(new Rectangle(0, 0, m.Width, m.Height), m.PixelFormat);
+            //m.Dispose();
+        }
+
+        private void button6_Click (object sender, EventArgs e)
+        {
+            var o = new OpenFileDialog() { SupportMultiDottedExtensions = true};
+            o.FileOk += (arg, arg1)=>{
+                var aa = "";
+                using (var f = System.IO.File.OpenRead(o.FileName))
+                {
+                    using (var f1 = new System.IO.StreamReader(f,Encoding.UTF8))
+                    {
+                        var a = f1.ReadToEnd();
+                        try
+                        {
+                            aa = CRMKJK.CRMKJK.Decode(a, Encoding.UTF8);
+                        }
+                        catch (CRMKJK.UnexpectedCRMKJKEncodeException)
+                        {
+                            openFileDialog1_FileOk(arg, arg1);
+                            return;
+                        }
+                        catch (FormatException ex) {
+                            throw ex;
+                        }
+                    }
+                }
+                using (var f1 = new System.IO.StreamWriter(o.FileName, false, Encoding.GetEncoding(1252)))
+                {
+                    f1.Write(aa);
+                }
+                GC.Collect();
+            };
+            o.ShowDialog();
+
+        }
+
+        private void button7_Click (object sender, EventArgs e)
+        {
+            var o = new OpenFileDialog() { SupportMultiDottedExtensions = true };
+            o.FileOk += (arg, arg1) => {
+                var b = "";
+                using (var f = System.IO.File.OpenRead(o.FileName))
+                {
+                    using (var a = new System.IO.StreamReader(f, Encoding.GetEncoding(1252)))
+                    {
+                        b = a.ReadToEnd();
+                        a.Close();
+                    }
+                    f.Close();
+                }
+                b = CRMKJK.CRMKJK.EncodeEasy(b, Encoding.UTF8, CRMKJK.CRMKJKState.EncodeTextB64Encode);
+                using (var f = System.IO.File.OpenWrite(o.FileName))
+                {
+                    using (var a = new System.IO.StreamWriter(f, Encoding.UTF8))
+                    {
+                        a.Write(b);
+                    }
+
+                }
+                GC.Collect();
+            };
+            o.ShowDialog();
+        }
+
+        private void button8_Click (object sender, EventArgs e)
+        {
+            var o = new FolderBrowserDialog();
+            if (o.ShowDialog() == DialogResult.OK)
+            {
+
+                    var dir = new DirectoryInfo(o.SelectedPath);
+                    var files = from f in dir.EnumerateFiles() where isFileImage(f) select f;
+                    var i = 0;
+                    foreach (var file in files)
+                    {
+                        i++;
+                        lblEncryptProgress.Text = "Encrypting... (" + i + "/" + files.Count() + ")";
+                        //var t = new System.Threading.Thread(() => {
+                            var b = "";
+                            using (var f = File.OpenRead(file.FullName))
+                            {
+                                using (var a = new StreamReader(f, Encoding.GetEncoding(1252)))
+                                {
+                                    b = a.ReadToEnd();
+                                    a.Close();
+                                }
+                                f.Close();
+                            }
+                            b = CRMKJK.CRMKJK.EncodeEasy(b, Encoding.UTF8, CRMKJK.CRMKJKState.EncodeTextB64Encode);
+                            using (var f = File.OpenWrite(file.FullName))
+                            {
+                                using (var a = new StreamWriter(f, Encoding.UTF8))
+                                {
+                                    a.Write(b);
+                                }
+
+                            }
+                            GC.Collect();
+                        //});
+
+                    //t.SetApartmentState(System.Threading.ApartmentState.STA);
+                    //t.Start();
+                    }
+                    MessageBox.Show("Done!");
+            }
+        }
+
+        private void button9_Click (object sender, EventArgs e)
+        {
+            var o = new FolderBrowserDialog();
+            if (o.ShowDialog() == DialogResult.OK) {
+                    var dir = new System.IO.DirectoryInfo(o.SelectedPath);
+                    var files = from f in dir.EnumerateFiles() where isFileImage(f) select f;
+                    var i = 0;
+                    foreach (var file in files)
+                    {
+                        i++;
+                        lblEncryptProgress.Text = "Decrypting... (" + i + "/" + files.Count() + ")";
+                        var aa = "";
+                        //var t = new System.Threading.Thread(() => {
+                            using (var f = System.IO.File.OpenRead(file.FullName))
+                            {
+                                using (var f1 = new System.IO.StreamReader(f, Encoding.UTF8))
+                                {
+                                    var a = f1.ReadToEnd();
+                                    try
+                                    {
+                                        aa = CRMKJK.CRMKJK.Decode(a, Encoding.UTF8);
+                                    }
+                                    catch (CRMKJK.UnexpectedCRMKJKEncodeException)
+                                    {
+                                        return;
+                                    }
+                                    catch (FormatException ex)
+                                    {
+                                        throw ex;
+                                    }
+                                }
+                            }
+                            using (var f1 = new System.IO.StreamWriter(file.FullName, false, Encoding.GetEncoding(1252)))
+                            {
+                                f1.Write(aa);
+                            }
+                            GC.Collect();
+                        //});
+
+                    //t.SetApartmentState(System.Threading.ApartmentState.STA);
+                    //t.Start();
+                }
+                    MessageBox.Show("Done!");
+                
+            }
+        }
+
+        private bool isFileImage (FileInfo f) {
+            return f.Extension.Equals(".png", StringComparison.InvariantCultureIgnoreCase) |
+                f.Extension.Equals(".jpg", StringComparison.InvariantCultureIgnoreCase) |
+                f.Extension.Equals(".jpeg", StringComparison.InvariantCultureIgnoreCase) |
+                f.Extension.Equals(".jpe", StringComparison.InvariantCultureIgnoreCase) |
+                f.Extension.Equals(".jfif", StringComparison.InvariantCultureIgnoreCase) |
+                f.Extension.Equals(".tif", StringComparison.InvariantCultureIgnoreCase) |
+                f.Extension.Equals(".tiff", StringComparison.InvariantCultureIgnoreCase) |
+                f.Extension.Equals(".bmp", StringComparison.InvariantCultureIgnoreCase) |
+                f.Extension.Equals(".dib", StringComparison.InvariantCultureIgnoreCase) |
+                f.Extension.Equals(".gif", StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

@@ -48,13 +48,24 @@ namespace ImageEditorAPK
                 e.MenuItem.SetChecked(true);
                 //react to click here and swap fragments or navigate
                 drawerLayout.CloseDrawers();
-                if (e.MenuItem.ItemId == Resource.Id.nav_encrypt)
+                Intent intent;
+                switch (e.MenuItem.ItemId)
                 {
-                    var intent = new Intent(this, typeof(EncryptActivity));
-                    intent.AddFlags(ActivityFlags.ClearTask);
-                    intent.AddFlags(ActivityFlags.NewTask);
-                    StartActivity(intent);
+                    case Resource.Id.nav_encrypt:
+                        intent = new Intent(this, typeof(EncryptActivity));
+                        break;
+                    case Resource.Id.nav_namegen:
+                        intent = new Intent(this, typeof(MonitorActivity));
+                        break;
+                    case Resource.Id.nav_phyqbank:
+                        intent = new Intent(this, typeof(PhyQBankActivity));
+                        break;
+                    default:
+                        return;
                 }
+                intent.AddFlags(ActivityFlags.ClearTask);
+                intent.AddFlags(ActivityFlags.NewTask);
+                StartActivity(intent);
             };
         }
 

@@ -11,6 +11,9 @@ using Android.Support.V7.App;
 using Android.Support.V4.Widget;
 using Android.Support.Design.Widget;
 
+using AlertDialog = Android.App.AlertDialog;
+using Android.Provider;
+
 namespace ImageEditorAPK
 {
     [Activity(Label = "Encoder", Icon = "@drawable/icon")]
@@ -127,6 +130,33 @@ namespace ImageEditorAPK
                     StartActivity(intent);
                 }
             };
+
+
+
+            var butEDImgs = FindViewById<Button>(Resource.Id.butEDImgs);
+            butEDImgs.Click += (sender, e) => {
+                AlertDialog.Builder db = new AlertDialog.Builder(this);
+                db.SetPositiveButton("Encrypt", (sender1, e1) => {
+                    Intent getIntent = new Intent(Intent.ActionGetContent);
+                    getIntent.SetType("image/*");
+                    getIntent.AddCategory(Intent.CategoryOpenable);
+
+                    Intent chooserIntent = Intent.CreateChooser(getIntent, GetText(Resource.String.PickImage));
+
+                    StartActivityForResult(chooserIntent, 2333);
+                });
+                db.SetNegativeButton("Decrypt", (sender1, e1) => {
+                    Intent getIntent = new Intent(Intent.ActionGetContent);
+                    getIntent.SetType("*/*");
+                    getIntent.AddCategory(Intent.CategoryOpenable);
+
+                    Intent chooserIntent = Intent.CreateChooser(getIntent, GetText(Resource.String.PickImage));
+
+                    StartActivityForResult(chooserIntent,6666);
+                });
+                Dialog dialog = db.Create();
+                dialog.Show();
+            };
         }
 
         public override bool OnOptionsItemSelected (IMenuItem item)
@@ -138,6 +168,45 @@ namespace ImageEditorAPK
                     return true;
             }
             return base.OnOptionsItemSelected(item);
+        }
+        protected override void OnActivityResult (int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            if (resultCode == Result.Ok)
+            {
+                string path = "";
+                
+                if (requestCode == 6666)
+                {
+                    var id = DocumentsContract.GetDocumentId(data.Data);
+                    path = Util.GetRealPathFromUri(this, id);
+                    if (!path.StartsWith("/storage/")) {
+                        path = System.IO.Path.Combine("/storage/emulated/0", path);
+                    }
+                    // ExternalStorageProvider
+                    if (Util.IsExternalStorageDocument(data.Data))
+                    {
+                         string docId = DocumentsContract.GetDocumentId(data.Data);
+                         string[] split = docId.Split(':');
+                         string type = split[0];
+
+                        if ("primary".Equals(type,StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            path = Android.OS.Environment.ExternalStorageDirectory + "/" + split[1];
+                        }
+
+                        // TODO handle non-primary volumes
+                    }
+                }
+                else if(requestCode == 2333) {
+                    path = Util.GetRealPathFromUri(this, data.Data);
+                }
+                Java.IO.File dir = new Java.IO.File(path).ParentFile;
+                Intent intent = new Intent(this, typeof(CryptImagesService));
+                intent.PutExtra("dir", dir.AbsolutePath);
+                intent.PutExtra("decrypt", requestCode == 6666);
+                StartService(intent);
+            }
         }
     }
 }

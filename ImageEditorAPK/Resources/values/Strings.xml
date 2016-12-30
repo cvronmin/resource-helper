@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="Hello">Hello World, Click Me!</string>
-    <string name="ApplicationName">ImageEditor</string>
+    <string name="ApplicationName">ToolBox</string>
   <string name="PickImage">Pick Image</string>
   <string name="DialogPickNoForShift">Pick a number to shift</string>
   <string name="DialogPickNoForThreshold">Pick a threshold number</string>

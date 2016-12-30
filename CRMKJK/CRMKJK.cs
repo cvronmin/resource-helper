@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 
@@ -10,17 +13,27 @@ namespace CRMKJK
         static Random rand = new Random();
         public static string EncodeEasy (string src, int state = 0)
         {
-            return Encode(src, rand, state);
+            return Encode(src, rand, Encoding.Unicode, state);
+        }
+        public static string EncodeEasy (string src, Encoding encoding, int state = 0)
+        {
+            return Encode(src, rand, encoding, state);
         }
         public static string Encode (string src, int seed, int state = 0)
         {
-            return Encode(src, new Random(seed), state);
+            return Encode(src, new Random(seed), Encoding.Unicode, state);
         }
-        public static string Encode (string src, Random rand, int state = 0)
+        public static string Encode (string src, int seed, Encoding encoding, int state = 0)
+        {
+            return Encode(src, new Random(seed), encoding, state);
+        }
+        public static string Encode (string src, Random rand, int state = 0) {
+            return Encode(src, rand, Encoding.Unicode, state);
+        }
+        public static string Encode (string src, Random rand, Encoding encoding, int state = 0)
         {
             if (string.IsNullOrWhiteSpace(src)) return "";
             bool unicode = false, etb64e = false;
-            HashSet<char> set = new HashSet<char>();
             if (!src.IsASCII() || (state & CRMKJKState.Unicode) != 0)
             {
                 src = src.EscapeToUnicode();
@@ -28,10 +41,7 @@ namespace CRMKJK
             }
             if ((state & CRMKJKState.EncodeTextB64Encode) != 0) etb64e = true;
             char[] chars = src.ToCharArray();
-            foreach (var item in chars)
-            {
-                set.Add(item);
-            }
+            HashSet<char> set = new HashSet<char>(chars.Distinct());
             int encodeRequired = set.Count;
             HashSet<byte> kjk = new HashSet<byte>();
             while (kjk.Count < encodeRequired)
@@ -42,47 +52,66 @@ namespace CRMKJK
             char[] origin = set.ToArray();
             Helper.Shuffle(ref encoded, ref origin);
             char[] enchant = new char[src.Length];
+            
             for (int i = 0; i < encoded.Length; i++)
             {
-                int j = -1;
-                while ((j = src.IndexOf(origin[i], j == -1 ? 0 : j)) != -1)
+                var enuma = src.IndexesOf(origin[i]);
+                foreach (var indices in enuma)
                 {
-                    enchant[j] = encoded[i];
-                    j++;
+                    enchant[indices] = encoded[i];
                 }
             }
-            byte[] benchant = Encoding.Unicode.GetBytes(enchant);
-            byte[] bencoded = Encoding.Unicode.GetBytes(encoded);
-            byte[] borigin = Encoding.Unicode.GetBytes(origin);
-            string fullencoded = Encoding.Unicode.GetString(borigin, 0, borigin.Length) + Encoding.Unicode.GetString(bencoded, 0, bencoded.Length);
+            byte[] benchant = encoding.GetBytes(enchant);
+            byte[] bencoded = encoding.GetBytes(encoded);
+            byte[] borigin = encoding.GetBytes(origin);
+            StringBuilder sb = new StringBuilder();
+            sb.Append(encoding.GetString(borigin, 0, borigin.Length)).Append(encoding.GetString(bencoded, 0, bencoded.Length));
             int fullencodedre = 0;
             if (etb64e)
             {
-                fullencoded = Convert.ToBase64String(Encoding.Unicode.GetBytes(string.Format("{0:000}", encodeRequired) + "=" + fullencoded));
-                fullencodedre = fullencoded.Length;
+                string tmp = Convert.ToBase64String(encoding.GetBytes(string.Format("{0:000}", encodeRequired) + "=" + sb.ToString()));
+                sb.Clear().Append(tmp);
+                fullencodedre = sb.Length;
             }
-            string full = fullencoded + Encoding.Unicode.GetString(benchant, 0, benchant.Length);
-            return (etb64e ? "b" : "") + (unicode ? "u" : "") + string.Format(etb64e ? "{0:0000000000}" : "{0:000}", etb64e ? fullencodedre : encodeRequired) + "=" + full;
+            sb.Append(encoding.GetString(benchant, 0, benchant.Length));
+            bool zip = false;
+            if (sb.Length > 0x80000) { //Too large for data storage
+                zip = true;
+                string zipped = Helper.ZipString(sb.ToString());
+                sb.Clear().Append(zipped);
+            }
+            sb.Insert(0, '=').Insert(0, string.Format(etb64e ? "{0:00000}" : "{0:000}", etb64e ? fullencodedre : encodeRequired));
+            sb.Insert(0, (zip ? "z" : "")).Insert(0, (unicode ? "u" : "")).Insert(0, (etb64e ? "b" : ""));
+            set.Clear(); kjk.Clear();
+            set = null;kjk = null;
+            enchant = encoded = origin = null;
+            benchant = bencoded = borigin = null;
+            return sb.ToString();
         }
-
-        public static string Decode (string src)
+        public static string Decode (string src) {
+            return Decode(src, Encoding.Unicode);
+        }
+        public static string Decode (string src, Encoding encoding)
         {
             if (string.IsNullOrWhiteSpace(src)) return "";
-            var match = System.Text.RegularExpressions.Regex.Match(src, "(b)?(u)?(\\d{3,10}?(?==))");
+            var match = System.Text.RegularExpressions.Regex.Match(src, "(b)?(u)?(z)?(\\d{3,10}?(?==))");
             if (!match.Success)
             {
                 throw new UnexpectedCRMKJKEncodeException();
             }
-            bool encodeTextB64Encoded = match.Groups[1].Success, unicode = match.Groups[2].Success;
-            int encodeRequired = Convert.ToInt32(match.Groups[3].Value);
-            src = System.Text.RegularExpressions.Regex.Replace(src, "(b)?(u)?(\\d{3,10}=)", "");
+            bool encodeTextB64Encoded = match.Groups[1].Success,
+                unicode = match.Groups[2].Success,
+                zip = match.Groups[3].Success;
+            int encodeRequired = Convert.ToInt32(match.Groups[4].Value);
+            src = System.Text.RegularExpressions.Regex.Replace(src, "(b)?(u)?(z)?(\\d{3,10}=)", "");
+            if (zip) src = Helper.UnzipString(src);
             if (encodeTextB64Encoded)
             {
                 string tmp1 = src.Substring(0, encodeRequired);
                 var a = Convert.FromBase64String(tmp1);
                 try
                 {
-                    tmp1 = Encoding.Unicode.GetString(a, 0, a.Length);
+                    tmp1 = encoding.GetString(a, 0, a.Length);
                     var regex = System.Text.RegularExpressions.Regex.Match(tmp1, "(\\d{3}?(?==))");
                     if (regex.Success)
                     {
@@ -107,16 +136,17 @@ namespace CRMKJK
             char[] enchant = new char[yummystring.Length];
             for (int i = 0; i < origin.Length; i++)
             {
-                int j = -1;
-                while ((j = yummystring.IndexOf(encode[i], j == -1 ? 0 : j)) != -1)
+                var enuma = yummystring.IndexesOf(encode[i]);
+                foreach (var indices in enuma)
                 {
-                    enchant[j] = origin[i];
-                    j++;
+                    enchant[indices] = origin[i];
                 }
             }
-            byte[] benchant = Encoding.Unicode.GetBytes(enchant);
-            string result = Encoding.Unicode.GetString(benchant, 0, benchant.Length);
+            byte[] benchant = encoding.GetBytes(enchant);
+            string result = encoding.GetString(benchant, 0, benchant.Length);
             if (unicode) result = result.TrapToUnicode();
+            oe = origin = enchant = encode = null;
+            benchant = null;
             return result;
         }
     }
@@ -138,34 +168,65 @@ namespace CRMKJK
 
         public static string EscapeToUnicode (this string value)
         {
-            string dst = "";
-            char[] src = value.ToCharArray();
-            for (int i = 0; i < src.Length; i++)
+            StringBuilder sb = new StringBuilder();
+            byte[] bytes = Encoding.Unicode.GetBytes(value);
+            for (int i = 0; i < bytes.Length; i+=2)
             {
-                byte[] bytes = Encoding.Unicode.GetBytes(src[i].ToString());
-                string str = @"\u" + bytes[1].ToString("X2") + bytes[0].ToString("X2");
-                dst += str;
+                sb.AppendFormat("\\u{0:X2}{1:X2}", bytes[i + 1], bytes[i]);
             }
-            return dst;
+            return sb.ToString();
         }
 
         public static string TrapToUnicode (this string value)
         {
-            string dst = "";
-            string src = value;
-            int len = value.Length / 6;
-
-            for (int i = 0; i <= len - 1; i++)
+            string[] a = value.Split(new char[] { '\\','u' },StringSplitOptions.RemoveEmptyEntries);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < a.Length; i++)
             {
-                string str = "";
-                str = src.Substring(0, 6).Substring(2);
-                src = src.Substring(6);
                 byte[] bytes = new byte[2];
-                bytes[1] = byte.Parse(int.Parse(str.Substring(0, 2), System.Globalization.NumberStyles.HexNumber).ToString());
-                bytes[0] = byte.Parse(int.Parse(str.Substring(2, 2), System.Globalization.NumberStyles.HexNumber).ToString());
-                dst += Encoding.Unicode.GetString(bytes, 0, 2);
+                a[i] = a[i].PadLeft(4, '0');
+                bytes[1] = byte.Parse(int.Parse(a[i].Substring(0, 2), System.Globalization.NumberStyles.HexNumber).ToString());
+                bytes[0] = byte.Parse(int.Parse(a[i].Substring(2, 2), System.Globalization.NumberStyles.HexNumber).ToString());
+                sb.Append(Encoding.Unicode.GetString(bytes, 0, 2));
             }
-            return dst;
+            return sb.ToString();
+        }
+
+        /**
+         * src: http://stackoverflow.com/questions/7343465/compression-decompression-string-with-c-sharp
+         **/
+        public static string ZipString (string str)
+        {
+            var bytes = Encoding.UTF8.GetBytes(str);
+
+            using (var msi = new MemoryStream(bytes))
+            using (var mso = new MemoryStream())
+            {
+                using (var gs = new GZipStream(mso, CompressionMode.Compress))
+                {
+                    msi.CopyTo(gs);
+                }
+
+                return Convert.ToBase64String(mso.ToArray());
+            }
+        }
+
+        /**
+         * src: http://stackoverflow.com/questions/7343465/compression-decompression-string-with-c-sharp
+         **/
+        public static string UnzipString (string str)
+        {
+            byte[] bytes = Convert.FromBase64String(str);
+            using (var msi = new MemoryStream(bytes))
+            using (var mso = new MemoryStream())
+            {
+                using (var gs = new GZipStream(msi, CompressionMode.Decompress))
+                {
+                    gs.CopyTo(mso);
+                }
+
+                return Encoding.UTF8.GetString(mso.ToArray(), 0, (int) mso.Length);
+            }
         }
 
         public static void Shuffle<T> (ref T[] a, ref T[] b)
@@ -177,9 +238,18 @@ namespace CRMKJK
                 T k = a[j];
                 T k1 = b[j];
                 a[j] = a[i - 1];
-                a[i - 1] = k;
                 b[j] = b[i - 1];
+                a[i - 1] = k;
                 b[i - 1] = k1;
+            }
+        }
+        public static IEnumerable<int> IndexesOf (this string src, char c) {
+            if (string.IsNullOrEmpty(src)) throw new ArgumentNullException("src");
+            for (int index = 0;; index++)
+            {
+                index = src.IndexOf(c,index);
+                if (index == -1) break;
+                yield return index;
             }
         }
     }
