@@ -825,27 +825,30 @@ namespace TextureEditor
                     {
                         i++;
                         lblEncryptProgress.Text = "Encrypting... (" + i + "/" + files.Count() + ")";
-                        //var t = new System.Threading.Thread(() => {
-                            var b = "";
-                            using (var f = File.OpenRead(file.FullName))
+                    //var t = new System.Threading.Thread(() => {
+                    var t = System.Threading.Tasks.Task.Factory.StartNew(() => {
+                        var b = "";
+                        using (var f = File.OpenRead(file.FullName))
+                        {
+                            using (var a = new StreamReader(f, Encoding.GetEncoding(1252)))
                             {
-                                using (var a = new StreamReader(f, Encoding.GetEncoding(1252)))
-                                {
-                                    b = a.ReadToEnd();
-                                    a.Close();
-                                }
-                                f.Close();
+                                b = a.ReadToEnd();
+                                a.Close();
                             }
-                            b = CRMKJK.CRMKJK.EncodeEasy(b, Encoding.UTF8, CRMKJK.CRMKJKState.EncodeTextB64Encode);
-                            using (var f = File.OpenWrite(file.FullName))
+                            f.Close();
+                        }
+                        b = CRMKJK.CRMKJK.EncodeEasy(b, Encoding.UTF8, CRMKJK.CRMKJKState.EncodeTextB64Encode);
+                        using (var f = File.OpenWrite(file.FullName))
+                        {
+                            using (var a = new StreamWriter(f, Encoding.UTF8))
                             {
-                                using (var a = new StreamWriter(f, Encoding.UTF8))
-                                {
-                                    a.Write(b);
-                                }
+                                a.Write(b);
+                            }
 
-                            }
-                            GC.Collect();
+                        }
+                        GC.Collect();
+                    });
+                    t.Wait();
                         //});
 
                     //t.SetApartmentState(System.Threading.ApartmentState.STA);
@@ -867,8 +870,9 @@ namespace TextureEditor
                         i++;
                         lblEncryptProgress.Text = "Decrypting... (" + i + "/" + files.Count() + ")";
                         var aa = "";
-                        //var t = new System.Threading.Thread(() => {
-                            using (var f = System.IO.File.OpenRead(file.FullName))
+                    //var t = new System.Threading.Thread(() => {
+                    var t = System.Threading.Tasks.Task.Factory.StartNew(() => {
+                        using (var f = System.IO.File.OpenRead(file.FullName))
                             {
                                 using (var f1 = new System.IO.StreamReader(f, Encoding.UTF8))
                                 {
@@ -892,8 +896,8 @@ namespace TextureEditor
                                 f1.Write(aa);
                             }
                             GC.Collect();
-                        //});
-
+                        });
+                    t.Wait();
                     //t.SetApartmentState(System.Threading.ApartmentState.STA);
                     //t.Start();
                 }

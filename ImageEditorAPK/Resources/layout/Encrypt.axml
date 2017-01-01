@@ -5,97 +5,105 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar" />
-        <TextView
-            android:text="Original Text"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView1"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="60dp" />
-        <EditText
-            android:inputType="textMultiLine"
-            android:layout_width="wrap_content"
-            android:layout_height="100.0dp"
-            android:id="@+id/editTextO"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/textView1" />
-        <Button
-            android:text="Encode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/editTextO"
-            android:id="@+id/butEncode"
-            android:layout_alignParentLeft="true" />
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinnerEncodeType"
-            android:spinnerMode="dropdown"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/editTextO" />
         <ScrollView
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/butEncode"
-            android:id="@+id/listView1">
-            <LinearLayout
-                android:orientation="vertical"
-                android:minWidth="25px"
-                android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <Switch
+              <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+                <TextView
+                    android:text="Original Text"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/switchForceUnicode"
-                    android:text="Force Unicode Mode"
-                    android:switchPadding="10dp" />
-                <Switch
+                    android:id="@+id/textView1"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="60dp" />
+                <EditText
+                    android:inputType="textMultiLine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100.0dp"
+                    android:id="@+id/editTextO"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/textView1" />
+                <Button
+                    android:text="Encode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/switchEncodeTextEncode"
-                    android:text="Encode the key"
-                    android:switchPadding="10dp" />
-            </LinearLayout>
+                    android:layout_below="@id/editTextO"
+                    android:id="@+id/butEncode"
+                    android:layout_alignParentLeft="true" />
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinnerEncodeType"
+                    android:spinnerMode="dropdown"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/editTextO" />
+                <ScrollView
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/butEncode"
+                    android:id="@+id/listView1">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:minWidth="25px"
+                        android:minHeight="25px"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/switchForceUnicode"
+                            android:text="Force Unicode Mode"
+                            android:switchPadding="10dp" />
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/switchEncodeTextEncode"
+                            android:text="Encode the key"
+                            android:switchPadding="10dp" />
+                    </LinearLayout>
+                </ScrollView>
+                <Button
+                    android:text="Decode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/butDecode"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/listView1" />
+                <TextView
+                    android:text="Encoded Text"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView2"
+                    android:layout_below="@id/butDecode" />
+                <EditText
+                    android:inputType="textMultiLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="100.0dp"
+                    android:id="@+id/editTextE"
+                    android:layout_below="@id/textView2" />
+                <Button
+                    android:text="Encode/Decode images"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editTextE"
+                    android:id="@+id/butEDImgs" />
+            </RelativeLayout>
         </ScrollView>
-        <Button
-            android:text="Decode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/butDecode"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/listView1" />
-        <TextView
-            android:text="Encoded Text"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2"
-            android:layout_below="@id/butDecode" />
-        <EditText
-            android:inputType="textMultiLine"
-            android:layout_width="match_parent"
-            android:layout_height="100.0dp"
-            android:id="@+id/editTextE"
-            android:layout_below="@id/textView2" />
-        <Button
-            android:text="Encode/Decode images"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/butEDImgs" />
-    </RelativeLayout>
+    </LinearLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

@@ -75,7 +75,7 @@ namespace CRMKJK
             }
             sb.Append(encoding.GetString(benchant, 0, benchant.Length));
             bool zip = false;
-            if (sb.Length > 0x80000) { //Too large for data storage
+            if (sb.Length > 0x80000 & false) { //Too large for data storage
                 zip = true;
                 string zipped = Helper.ZipString(sb.ToString());
                 sb.Clear().Append(zipped);
@@ -102,7 +102,17 @@ namespace CRMKJK
             bool encodeTextB64Encoded = match.Groups[1].Success,
                 unicode = match.Groups[2].Success,
                 zip = match.Groups[3].Success;
-            int encodeRequired = Convert.ToInt32(match.Groups[4].Value);
+            int encodeRequired;
+            try
+            {
+
+                encodeRequired = Convert.ToInt32(match.Groups[4].Value);
+            }
+            catch (FormatException e)
+            {
+                throw new UnexpectedCRMKJKEncodeException("Unexpected exception in converting", e);
+            }
+            match = null;
             src = System.Text.RegularExpressions.Regex.Replace(src, "(b)?(u)?(z)?(\\d{3,10}=)", "");
             if (zip) src = Helper.UnzipString(src);
             if (encodeTextB64Encoded)
@@ -119,6 +129,7 @@ namespace CRMKJK
                         src = System.Text.RegularExpressions.Regex.Replace(src, "(\\d{3}=)", "");
                         encodeRequired = Convert.ToInt32(regex.Value);
                     }
+                    regex = null;
                 }
                 catch (Exception e)
                 {
@@ -169,11 +180,17 @@ namespace CRMKJK
         public static string EscapeToUnicode (this string value)
         {
             StringBuilder sb = new StringBuilder();
-            byte[] bytes = Encoding.Unicode.GetBytes(value);
-            for (int i = 0; i < bytes.Length; i+=2)
+            char[] chars = value.ToCharArray();
+            //byte[] bytes = Encoding.Unicode.GetBytes(value);
+            for (int i = 0; i < chars.Length; i++)
+            {
+                byte[] cb = Encoding.Unicode.GetBytes(chars[i].ToString());
+                sb.AppendFormat("\\u{0:X2}{1:X2}", cb[1], cb[0]);
+            }
+            /*for (int i = 0; i < bytes.Length; i+=2)
             {
                 sb.AppendFormat("\\u{0:X2}{1:X2}", bytes[i + 1], bytes[i]);
-            }
+            }*/
             return sb.ToString();
         }
 
@@ -188,7 +205,9 @@ namespace CRMKJK
                 bytes[1] = byte.Parse(int.Parse(a[i].Substring(0, 2), System.Globalization.NumberStyles.HexNumber).ToString());
                 bytes[0] = byte.Parse(int.Parse(a[i].Substring(2, 2), System.Globalization.NumberStyles.HexNumber).ToString());
                 sb.Append(Encoding.Unicode.GetString(bytes, 0, 2));
+                bytes = null;
             }
+            GC.Collect();
             return sb.ToString();
         }
 
