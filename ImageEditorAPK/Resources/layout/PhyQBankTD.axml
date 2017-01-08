@@ -3,19 +3,20 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-  <Button
-    android:text="Answer"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/butAns"
-    android:layout_alignParentBottom="true" />
+    <Button
+        android:text="Answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/butAns"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true" />
     <ImageView
         android:src="@android:drawable/ic_menu_gallery"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/imgView"
-        android:scaleType="centerInside"
+        android:scaleType="fitCenter"
         android:layout_alignParentTop="true"
-        android:layout_above="@id/butAns"/>
-
+        android:layout_above="@id/butAns"
+        android:layout_margin="5.0dp" />
 </RelativeLayout>

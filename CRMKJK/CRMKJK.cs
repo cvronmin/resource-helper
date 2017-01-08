@@ -61,11 +61,8 @@ namespace CRMKJK
                     enchant[indices] = encoded[i];
                 }
             }
-            byte[] benchant = encoding.GetBytes(enchant);
-            byte[] bencoded = encoding.GetBytes(encoded);
-            byte[] borigin = encoding.GetBytes(origin);
             StringBuilder sb = new StringBuilder();
-            sb.Append(encoding.GetString(borigin, 0, borigin.Length)).Append(encoding.GetString(bencoded, 0, bencoded.Length));
+            sb.Append(new string(origin)).Append(new string(encoded));
             int fullencodedre = 0;
             if (etb64e)
             {
@@ -73,7 +70,7 @@ namespace CRMKJK
                 sb.Clear().Append(tmp);
                 fullencodedre = sb.Length;
             }
-            sb.Append(encoding.GetString(benchant, 0, benchant.Length));
+            sb.Append(new string(enchant));
             bool zip = false;
             if (sb.Length > 0x80000 & false) { //Too large for data storage
                 zip = true;
@@ -85,7 +82,6 @@ namespace CRMKJK
             set.Clear(); kjk.Clear();
             set = null;kjk = null;
             enchant = encoded = origin = null;
-            benchant = bencoded = borigin = null;
             return sb.ToString();
         }
         public static string Decode (string src) {
@@ -113,7 +109,8 @@ namespace CRMKJK
                 throw new UnexpectedCRMKJKEncodeException("Unexpected exception in converting", e);
             }
             match = null;
-            src = System.Text.RegularExpressions.Regex.Replace(src, "(b)?(u)?(z)?(\\d{3,10}=)", "");
+            var r = new System.Text.RegularExpressions.Regex("(b)?(u)?(z)?(\\d{3,10}=)");
+            src = r.Replace(src, "", 1);
             if (zip) src = Helper.UnzipString(src);
             if (encodeTextB64Encoded)
             {
@@ -126,7 +123,8 @@ namespace CRMKJK
                     if (regex.Success)
                     {
                         src =  tmp1 + src.Substring(encodeRequired);
-                        src = System.Text.RegularExpressions.Regex.Replace(src, "(\\d{3}=)", "");
+                        var re = new System.Text.RegularExpressions.Regex("(\\d{3}=)");
+                        src = re.Replace(src , "", 1);
                         encodeRequired = Convert.ToInt32(regex.Value);
                     }
                     regex = null;
@@ -153,11 +151,9 @@ namespace CRMKJK
                     enchant[indices] = origin[i];
                 }
             }
-            byte[] benchant = encoding.GetBytes(enchant);
-            string result = encoding.GetString(benchant, 0, benchant.Length);
+            string result = new string(enchant);
             if (unicode) result = result.TrapToUnicode();
             oe = origin = enchant = encode = null;
-            benchant = null;
             return result;
         }
     }

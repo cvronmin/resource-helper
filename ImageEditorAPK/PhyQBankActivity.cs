@@ -81,7 +81,7 @@ namespace ImageEditorAPK
 
         private void initPager (string uri)
         {
-            WebRequest request = WebRequest.Create(uri ?? "http://ccleungsir.asuscomm.com/qbank/l.php?a=160.1.Q.a88dbccc3d57335b95584b47d5cdacb2.Y");
+            WebRequest request = WebRequest.Create(uri ?? "http://ccleungsir.asuscomm.com/qbank/l.php?a=210.1.Q.ff88341cc2a53ba2e2958685fb6771a7.Y");
             WebResponse response = request.GetResponse();
             var html = new HtmlDocument();
             html.Load(response.GetResponseStream());
@@ -180,20 +180,35 @@ namespace ImageEditorAPK
         {
             base.OnViewCreated(view, savedInstanceState);
             ImageView img =  view.FindViewById<ImageView>(Resource.Id.imgView);
-            img.SetImageBitmap(GetImageBitmapFromUrl(ImgUri));
+            var bitmap = GetImageBitmapFromUrl(ImgUri);
+            if(bitmap != null) img.SetImageBitmap(bitmap);
+            var butAns = view.FindViewById<Button>(Resource.Id.butAns);
+            butAns.Click += (s, e) => {
+                Intent inte = new Intent(view.Context, typeof(PhyQBankAQActivity));
+                inte.PutExtra("uri", ansUri);
+                StartActivity(inte);
+            };
         }
 
 
         private Bitmap GetImageBitmapFromUrl (string url)
         {
             Bitmap imageBitmap = null;
+            string shCache = url.Substring(url.LastIndexOf('/') + 1);
 
             using (var webClient = new WebClient())
             {
-                var imageBytes = webClient.DownloadData(url);
-                if (imageBytes != null && imageBytes.Length > 0)
+                try
                 {
-                    imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+                    var imageBytes = webClient.DownloadData(url);
+                    if (imageBytes != null && imageBytes.Length > 0)
+                    {
+                        imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+                    }
+                }
+                catch (System.Net.WebException)
+                {
+                    return null;
                 }
             }
 

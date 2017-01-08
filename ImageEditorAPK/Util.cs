@@ -77,7 +77,10 @@ namespace ImageEditorAPK
         {
             return "com.android.externalstorage.documents".Equals(uri.Authority);
         }
-
+        public static HtmlAgilityPack.HtmlAttribute GetAttribute(this HtmlAgilityPack.HtmlNode node, string name)
+        {
+            return node.Attributes.Single(arr => arr.Name.Equals(name));
+        }
     }
     public class ExternalStorage
     {
@@ -232,5 +235,7 @@ namespace ImageEditorAPK
             }
             return map;
         }
+
+
     }
 }

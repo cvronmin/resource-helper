@@ -59,17 +59,55 @@ namespace ImageEditorAPK
                 {
                     using (var f = ContentResolver.OpenInputStream(files[i].Uri))
                     {
-                        using (var a = new System.IO.StreamReader(f, decrypt ? Encoding.UTF8 : Encoding.GetEncoding(1252)))
+                        if (decrypt)
                         {
-                            b = a.ReadToEnd();
+                            using (var a = new System.IO.BinaryReader(f, Encoding.GetEncoding(1252)))
+                            {
+                                byte[] by = a.ReadBytes((int)f.Length);
+                                var sb = new StringBuilder();
+                                foreach (var item in by)
+                                {
+                                    sb.AppendFormat("{0:X2}", item);
+                                }
+                                b = sb.ToString();
+                            }
+                        }
+                        else {
+                            using (var a = new System.IO.StreamReader(f, Encoding.GetEncoding(1252)))
+                            {
+                                b = a.ReadToEnd();
+                            }
                         }
                     }
                     b = decrypt ? CRMKJK.CRMKJK.Decode(b, Encoding.UTF8) : CRMKJK.CRMKJK.EncodeEasy(b, Encoding.UTF8, CRMKJK.CRMKJKState.EncodeTextB64Encode);
                     using (var f = ContentResolver.OpenOutputStream(files[i].Uri))
                     {
-                        using (var a = new System.IO.StreamWriter(f, decrypt ? Encoding.GetEncoding(1252) : Encoding.UTF8))
+                        if (decrypt)
                         {
-                            a.Write(b);
+                            using (var a = new System.IO.BinaryWriter(f, Encoding.GetEncoding(1252)))
+                            {
+                                var by = new byte[b.Length / 2];
+                                for (int i1 = 0; i1 < b.Length / 2; i1++)
+                                {
+                                    try
+                                    {
+                                        by[i1] = byte.Parse(int.Parse(b.Substring(i1 * 2, 2), System.Globalization.NumberStyles.HexNumber).ToString());
+                                    }
+                                    catch (Exception)
+                                    {
+                                        continue;
+                                    }
+                                }
+                                a.Write(by);
+                                by = null;
+                            }
+                        }
+                        else
+                        {
+                            using (var a = new System.IO.StreamWriter(f, Encoding.UTF8))
+                            {
+                                a.Write(b);
+                            }
                         }
                     }
                     GC.Collect();

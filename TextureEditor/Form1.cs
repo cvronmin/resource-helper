@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -774,10 +775,19 @@ namespace TextureEditor
                         }
                     }
                 }
-                using (var f1 = new System.IO.StreamWriter(o.FileName, false, Encoding.GetEncoding(1252)))
+                var by = new byte[aa.Length / 2];
+                for (int i = 0; i < aa.Length / 2; i++)
                 {
-                    f1.Write(aa);
+                    by[i] = byte.Parse(int.Parse(aa.Substring(i * 2, 2), System.Globalization.NumberStyles.HexNumber).ToString());
                 }
+                using (var f = new FileStream(o.FileName, FileMode.Create, FileAccess.Write))
+                {
+                    using (var f1 = new System.IO.BinaryWriter(f, Encoding.GetEncoding(1252)))
+                    {
+                        f1.Write(by);
+                    }
+                }
+                by = null;
                 GC.Collect();
             };
             o.ShowDialog();
@@ -791,12 +801,16 @@ namespace TextureEditor
                 var b = "";
                 using (var f = System.IO.File.OpenRead(o.FileName))
                 {
-                    using (var a = new System.IO.StreamReader(f, Encoding.GetEncoding(1252)))
+                    using (var a = new BinaryReader(f, Encoding.GetEncoding(1252)))
                     {
-                        b = a.ReadToEnd();
-                        a.Close();
+                        byte[] by = a.ReadBytes((int)f.Length);
+                        var sb = new StringBuilder();
+                        foreach (var item in by)
+                        {
+                            sb.AppendFormat("{0:X2}", item);
+                        }
+                        b = sb.ToString();
                     }
-                    f.Close();
                 }
                 b = CRMKJK.CRMKJK.EncodeEasy(b, Encoding.UTF8, CRMKJK.CRMKJKState.EncodeTextB64Encode);
                 using (var f = System.IO.File.OpenWrite(o.FileName))
@@ -814,11 +828,11 @@ namespace TextureEditor
 
         private void button8_Click (object sender, EventArgs e)
         {
-            var o = new FolderBrowserDialog();
-            if (o.ShowDialog() == DialogResult.OK)
+            var o1 = new FolderBrowserDialog();
+            var o = new CommonOpenFileDialog() { IsFolderPicker = true};
+            if (o.ShowDialog() == CommonFileDialogResult.Ok)
             {
-
-                    var dir = new DirectoryInfo(o.SelectedPath);
+                    var dir = new DirectoryInfo(o.FileName);
                     var files = from f in dir.EnumerateFiles() where isFileImage(f) select f;
                     var i = 0;
                     foreach (var file in files)
@@ -828,19 +842,23 @@ namespace TextureEditor
                     //var t = new System.Threading.Thread(() => {
                     var t = System.Threading.Tasks.Task.Factory.StartNew(() => {
                         var b = "";
-                        using (var f = File.OpenRead(file.FullName))
+                        using (var f = System.IO.File.OpenRead(file.FullName))
                         {
-                            using (var a = new StreamReader(f, Encoding.GetEncoding(1252)))
+                            using (var a = new BinaryReader(f, Encoding.GetEncoding(1252)))
                             {
-                                b = a.ReadToEnd();
-                                a.Close();
+                                byte[] by = a.ReadBytes((int)f.Length);
+                                var sb = new StringBuilder();
+                                foreach (var item in by)
+                                {
+                                    sb.AppendFormat("{0:X2}", item);
+                                }
+                                b = sb.ToString();
                             }
-                            f.Close();
                         }
                         b = CRMKJK.CRMKJK.EncodeEasy(b, Encoding.UTF8, CRMKJK.CRMKJKState.EncodeTextB64Encode);
-                        using (var f = File.OpenWrite(file.FullName))
+                        using (var f = System.IO.File.OpenWrite(file.FullName))
                         {
-                            using (var a = new StreamWriter(f, Encoding.UTF8))
+                            using (var a = new System.IO.StreamWriter(f, Encoding.UTF8))
                             {
                                 a.Write(b);
                             }
@@ -860,43 +878,61 @@ namespace TextureEditor
 
         private void button9_Click (object sender, EventArgs e)
         {
-            var o = new FolderBrowserDialog();
-            if (o.ShowDialog() == DialogResult.OK) {
-                    var dir = new System.IO.DirectoryInfo(o.SelectedPath);
-                    var files = from f in dir.EnumerateFiles() where isFileImage(f) select f;
+            var o1 = new FolderBrowserDialog();
+            var o = new CommonOpenFileDialog() { IsFolderPicker = true };
+            if (o.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                var dir = new DirectoryInfo(o.FileName);
+                var files = from f in dir.EnumerateFiles() where isFileImage(f) select f;
                     var i = 0;
                     foreach (var file in files)
                     {
                         i++;
                         lblEncryptProgress.Text = "Decrypting... (" + i + "/" + files.Count() + ")";
-                        var aa = "";
                     //var t = new System.Threading.Thread(() => {
                     var t = System.Threading.Tasks.Task.Factory.StartNew(() => {
+                        var aa = "";
                         using (var f = System.IO.File.OpenRead(file.FullName))
+                        {
+                            using (var f1 = new System.IO.StreamReader(f, Encoding.UTF8))
                             {
-                                using (var f1 = new System.IO.StreamReader(f, Encoding.UTF8))
+                                var a = f1.ReadToEnd();
+                                try
                                 {
-                                    var a = f1.ReadToEnd();
-                                    try
-                                    {
-                                        aa = CRMKJK.CRMKJK.Decode(a, Encoding.UTF8);
-                                    }
-                                    catch (CRMKJK.UnexpectedCRMKJKEncodeException)
-                                    {
-                                        return;
-                                    }
-                                    catch (FormatException ex)
-                                    {
-                                        throw ex;
-                                    }
+                                    aa = CRMKJK.CRMKJK.Decode(a, Encoding.UTF8);
+                                }
+                                catch (CRMKJK.UnexpectedCRMKJKEncodeException)
+                                {
+                                    return;
+                                }
+                                catch (FormatException ex)
+                                {
+                                    throw ex;
                                 }
                             }
-                            using (var f1 = new System.IO.StreamWriter(file.FullName, false, Encoding.GetEncoding(1252)))
+                        }
+                        var by = new byte[aa.Length / 2];
+                        for (int i1 = 0; i1 < aa.Length / 2; i1++)
+                        {
+                            try
                             {
-                                f1.Write(aa);
+                                by[i1] = byte.Parse(int.Parse(aa.Substring(i1 * 2, 2), System.Globalization.NumberStyles.HexNumber).ToString());
                             }
-                            GC.Collect();
-                        });
+                            catch (Exception)
+                            {
+                                continue;
+                            }
+                        }
+                        using (var f = new FileStream(file.FullName, FileMode.Create, FileAccess.Write))
+                        {
+                            using (var f1 = new System.IO.BinaryWriter(f, Encoding.GetEncoding(1252)))
+                            {
+                                f1.Write(by);
+                            }
+                        }
+                        by = null;
+                        GC.Collect();
+                    });
                     t.Wait();
                     //t.SetApartmentState(System.Threading.ApartmentState.STA);
                     //t.Start();

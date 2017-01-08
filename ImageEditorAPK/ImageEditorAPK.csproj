@@ -110,6 +110,7 @@
     <Compile Include="MonitorActivity.cs" />
     <Compile Include="PhyQBankActivity.cs" />
     <Compile Include="CryptImagesService.cs" />
+    <Compile Include="PhyQBankAQActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeekBarDialogFragment.cs" />
@@ -136,6 +137,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\PhyQBankTD.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PhyQBankAQ.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
