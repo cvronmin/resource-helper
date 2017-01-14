@@ -18,9 +18,9 @@
             android:minHeight="25px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/tableLayout1">
+            android:id="@+id/tableLayout1"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true">
             <TableRow>
                 <TextView
                     android:layout_height="wrap_content"
@@ -69,9 +69,9 @@
             android:layout_height="match_parent"
             android:id="@+id/imgView"
             android:scaleType="fitCenter"
-            android:layout_alignParentTop="true"
-            android:layout_above="@id/tableLayout1"
-            android:layout_margin="5.0dp" />
+            android:layout_margin="5.0dp"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/tableLayout1" />
     </RelativeLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

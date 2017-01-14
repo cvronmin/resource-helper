@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relativeLayout1">
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView"
+            android:scaleType="fitCenter"
+            android:layout_toLeftOf="@id/hsv" />
+        <ScrollView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:id="@+id/hsv"
+            android:layout_alignParentRight="true">
+            <LinearLayout
+                android:orientation="vertical"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/layoutHandle"
+                android:padding="10dp">
+                <ImageButton
+                    android:text="Greyscale"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/butGrey"
+                    android:src="@drawable/ic_grayscale"
+                    android:adjustViewBounds="true"
+                    android:padding="0dp"
+                    android:scaleType="fitCenter"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="-5dp"
+                    android:layout_marginRight="0dp" />
+                <ImageButton
+                    android:text="B&amp;W"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/butbw"
+                    android:src="@drawable/ic_monochrome"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:padding="0dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="-5dp"
+                    android:layout_marginRight="0dp" />
+                <ImageButton
+                    android:text="Shift binary"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/butShiftBin"
+                    android:src="@drawable/ic_shiftbin"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="-5dp"
+                    android:layout_marginRight="0dp"
+                    android:scaleType="fitCenter"
+                    android:padding="0dp"
+                    android:adjustViewBounds="true" />
+                <ImageButton
+                    android:text="Shift Hexadecimal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/butShiftHex"
+                    android:src="@drawable/ic_shifthex"
+                    android:padding="0dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="-5dp"
+                    android:layout_marginRight="0dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true" />
+                <ImageButton
+                    android:text="Invert"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/butInvert"
+                    android:src="@drawable/ic_invert"
+                    android:scaleType="fitCenter"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="-5dp"
+                    android:layout_marginRight="0dp"
+                    android:padding="0dp"
+                    android:adjustViewBounds="true" />
+                <ImageButton
+                    android:text="Invert"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/butRGBmono"
+                    android:src="@drawable/ic_rgbmono"
+                    android:padding="0dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="-5dp"
+                    android:layout_marginRight="0dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true" />
+                <ImageButton
+                    android:text="Invert"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/but8bit"
+                    android:src="@drawable/ic_8bit"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="-5dp"
+                    android:layout_marginRight="0dp"
+                    android:padding="0dp" />
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</LinearLayout>

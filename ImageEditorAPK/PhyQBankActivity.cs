@@ -180,7 +180,7 @@ namespace ImageEditorAPK
         {
             base.OnViewCreated(view, savedInstanceState);
             ImageView img =  view.FindViewById<ImageView>(Resource.Id.imgView);
-            var bitmap = GetImageBitmapFromUrl(ImgUri);
+            var bitmap = GetImageBitmapFromUrl(view.Context, ImgUri);
             if(bitmap != null) img.SetImageBitmap(bitmap);
             var butAns = view.FindViewById<Button>(Resource.Id.butAns);
             butAns.Click += (s, e) => {
@@ -210,6 +210,39 @@ namespace ImageEditorAPK
                 {
                     return null;
                 }
+            }
+
+            return imageBitmap;
+        }
+        private Bitmap GetImageBitmapFromUrl (Context context, string url)
+        {
+            Bitmap imageBitmap = null;
+            string shCache = url.Substring(url.LastIndexOf('/') + 1);
+            Java.IO.File cache = new Java.IO.File(context.CacheDir, shCache);
+            if (!cache.Exists())
+            {
+                using (var webClient = new WebClient())
+                {
+                    try
+                    {
+                        var imageBytes = webClient.DownloadData(url);
+                        if (imageBytes != null && imageBytes.Length > 0)
+                        {
+                            imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+                            using (var s = new System.IO.FileStream(cache.AbsolutePath,System.IO.FileMode.Create)) {
+                                imageBitmap.Compress(Bitmap.CompressFormat.Png, 100, s);
+                            }
+                        }
+                    }
+                    catch (WebException)
+                    {
+                        return null;
+                    }
+                }
+            }
+            else
+            {
+                imageBitmap = BitmapFactory.DecodeFile(cache.AbsolutePath);
             }
 
             return imageBitmap;
