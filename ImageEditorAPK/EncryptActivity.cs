@@ -14,6 +14,8 @@ using Android.Support.Design.Widget;
 using AlertDialog = Android.App.AlertDialog;
 using Android.Provider;
 using Android.Support.V4.Provider;
+using Android.Text;
+using Android.Content.PM;
 
 namespace ImageEditorAPK
 {
@@ -138,22 +140,155 @@ namespace ImageEditorAPK
             butEDImgs.Click += (sender, e) => {
                 AlertDialog.Builder db = new AlertDialog.Builder(this);
                 db.SetPositiveButton("Encrypt", (sender1, e1) => {
-                    Intent getIntent = new Intent(Intent.ActionOpenDocumentTree);
-                    //getIntent.SetType("image/*");
-                    //getIntent.AddCategory(Intent.CategoryOpenable);
+                    Intent selectMultiFilesIntent = new Intent(Intent.ActionOpenDocument);
+                    selectMultiFilesIntent.PutExtra(Intent.ExtraAllowMultiple, true);
+                    selectMultiFilesIntent.SetType("*/*");
+                    selectMultiFilesIntent.AddCategory(Intent.CategoryOpenable);
+                    
+                        Intent selectFolderIntent = new Intent(Intent.ActionOpenDocumentTree);
+                    //selectFolderIntent.PutExtra(Intent.ExtraAllowMultiple, true);
+                    //selectFolderIntent.SetType("*/*");
+                    //selectFolderIntent.AddCategory(Intent.CategoryOpenable);
+                    var a  = PackageManager.QueryIntentActivities(selectMultiFilesIntent, 0);
+                    var a1 = PackageManager.QueryIntentActivities(selectFolderIntent    , 0);
+                    bool usefolderone = false;
+                    if (a.Count == 0) usefolderone = true;
+                    if (usefolderone && a1.Count == 0) {
+                        AlertDialog.Builder db1 = new Android.App.AlertDialog.Builder(this);
+                        db1.SetMessage("No selectors found");
+                        db1.Create().Show();
+                        return;
+                    }
 
-                    //Intent chooserIntent = Intent.CreateChooser(getIntent, GetText(Resource.String.PickImage));
-
-                    StartActivityForResult(getIntent, 2333);
+                    Intent chooserIntent = Intent.CreateChooser(usefolderone ? selectFolderIntent : selectMultiFilesIntent, GetText(Resource.String.PickImage));
+                    chooserIntent = new Intent(Intent.ActionChooser);
+                    chooserIntent.PutExtra(Intent.ExtraTitle, "Open as...");
+                    SpannableString forEditing = new SpannableString(" (selecting multiple files)");
+                    forEditing.SetSpan(new Android.Text.Style.ForegroundColorSpan(Android.Graphics.Color.Cyan), 0, forEditing.Length(), SpanTypes.ExclusiveExclusive);
+                    Intent[] extraIntents = new Intent[a.Count];
+                    for (int i = 0; i < extraIntents.Length; i++)
+                    {
+                        ResolveInfo ri = a[i];
+                        String packageName = ri.ActivityInfo.PackageName;
+                        Intent intent = new Intent();
+                        intent.SetComponent(new ComponentName(packageName, ri.ActivityInfo.Name));
+                        intent.SetAction(Intent.ActionOpenDocument);
+                        intent.PutExtra(Intent.ExtraAllowMultiple, true);
+                        intent.SetType("*/*");
+                        intent.AddCategory(Intent.CategoryOpenable);
+                        string label = TextUtils.Concat(ri.LoadLabel(PackageManager), forEditing.SubSequence(0, forEditing.Length()));
+                        extraIntents[i] = new LabeledIntent(intent, packageName, label, ri.Icon);
+                    }
+                    forEditing = new SpannableString(" (selecting folder)");
+                    forEditing.SetSpan(new Android.Text.Style.ForegroundColorSpan(Android.Graphics.Color.Cyan), 0, forEditing.Length(), SpanTypes.ExclusiveExclusive);
+                    Intent[] extraIntents1 = new Intent[a1.Count];
+                    for (int i = 0; i < extraIntents1.Length; i++)
+                    {
+                        ResolveInfo ri = a1[i];
+                        String packageName = ri.ActivityInfo.PackageName;
+                        Intent intent = new Intent();
+                        intent.SetComponent(new ComponentName(packageName, ri.ActivityInfo.Name));
+                        intent.SetAction(Intent.ActionOpenDocumentTree);
+                        string label = TextUtils.Concat(ri.LoadLabel(PackageManager), forEditing.SubSequence(0, forEditing.Length()));
+                        extraIntents1[i] = new LabeledIntent(intent, packageName, label, ri.Icon);
+                    }
+                    Intent[] final = null;
+                    if (!usefolderone)
+                    {
+                        final = new Intent[a.Count + a1.Count];
+                        Array.Copy(extraIntents, final, extraIntents.Length);
+                        Array.Copy(extraIntents1, 0, final, extraIntents.Length, extraIntents1.Length);
+                    }
+                    else {
+                        final = extraIntents1;
+                    }
+                    if (final.Length != 0) {
+                        chooserIntent.PutExtra(Intent.ExtraIntent, final[0]);
+                    }
+                    if (final.Length > 1)
+                    {
+                        var a2 = new Intent[final.Length - 1];
+                        Array.Copy(final, 1, a2, 0, a2.Length);
+                        chooserIntent.PutExtra(Intent.ExtraInitialIntents, a2);
+                    }
+                    StartActivityForResult(chooserIntent, 2333);
                 });
                 db.SetNegativeButton("Decrypt", (sender1, e1) => {
-                    Intent getIntent = new Intent(Intent.ActionOpenDocumentTree);
-                    //getIntent.SetType("image/*");
-                    //getIntent.AddCategory(Intent.CategoryOpenable);
+                    Intent selectMultiFilesIntent = new Intent(Intent.ActionOpenDocument);
+                    selectMultiFilesIntent.PutExtra(Intent.ExtraAllowMultiple, true);
+                    selectMultiFilesIntent.SetType("*/*");
+                    selectMultiFilesIntent.AddCategory(Intent.CategoryOpenable);
 
-                    //Intent chooserIntent = Intent.CreateChooser(getIntent, GetText(Resource.String.PickImage));
+                    Intent selectFolderIntent = new Intent(Intent.ActionOpenDocumentTree);
+                    //selectFolderIntent.PutExtra(Intent.ExtraAllowMultiple, true);
+                    //selectFolderIntent.SetType("*/*");
+                    //selectFolderIntent.AddCategory(Intent.CategoryOpenable);
+                    var a = PackageManager.QueryIntentActivities(selectMultiFilesIntent, 0);
+                    var a1 = PackageManager.QueryIntentActivities(selectFolderIntent, 0);
+                    bool usefolderone = false;
+                    if (a.Count == 0) usefolderone = true;
+                    if (usefolderone && a1.Count == 0)
+                    {
+                        AlertDialog.Builder db1 = new Android.App.AlertDialog.Builder(this);
+                        db1.SetMessage("No selectors found");
+                        db1.Create().Show();
+                        return;
+                    }
 
-                    StartActivityForResult(getIntent,6666);
+                    Intent chooserIntent = Intent.CreateChooser(usefolderone ? selectFolderIntent : selectMultiFilesIntent, GetText(Resource.String.PickImage));
+                    chooserIntent = new Intent(Intent.ActionChooser);
+                    chooserIntent.PutExtra(Intent.ExtraTitle, "Open as...");
+                    SpannableString forEditing = new SpannableString(" (selecting multiple files)");
+                    forEditing.SetSpan(new Android.Text.Style.ForegroundColorSpan(Android.Graphics.Color.Cyan), 0, forEditing.Length(), SpanTypes.ExclusiveExclusive);
+                    Intent[] extraIntents = new Intent[a.Count];
+                    for (int i = 0; i < extraIntents.Length; i++)
+                    {
+                        ResolveInfo ri = a[i];
+                        String packageName = ri.ActivityInfo.PackageName;
+                        Intent intent = new Intent();
+                        intent.SetComponent(new ComponentName(packageName, ri.ActivityInfo.Name));
+                        intent.SetAction(Intent.ActionOpenDocument);
+                        intent.PutExtra(Intent.ExtraAllowMultiple, true);
+                        intent.SetType("*/*");
+                        intent.AddCategory(Intent.CategoryOpenable);
+                        string label = TextUtils.Concat(ri.LoadLabel(PackageManager), forEditing.SubSequence(0, forEditing.Length()));
+                        extraIntents[i] = new LabeledIntent(intent, packageName, label, ri.Icon);
+                    }
+                    forEditing = new SpannableString(" (selecting folder)");
+                    forEditing.SetSpan(new Android.Text.Style.ForegroundColorSpan(Android.Graphics.Color.Cyan), 0, forEditing.Length(), SpanTypes.ExclusiveExclusive);
+                    Intent[] extraIntents1 = new Intent[a1.Count];
+                    for (int i = 0; i < extraIntents1.Length; i++)
+                    {
+                        ResolveInfo ri = a1[i];
+                        String packageName = ri.ActivityInfo.PackageName;
+                        Intent intent = new Intent();
+                        intent.SetComponent(new ComponentName(packageName, ri.ActivityInfo.Name));
+                        intent.SetAction(Intent.ActionOpenDocumentTree);
+                        string label = TextUtils.Concat(ri.LoadLabel(PackageManager), forEditing.SubSequence(0, forEditing.Length()));
+                        extraIntents1[i] = new LabeledIntent(intent, packageName, label, ri.Icon);
+                    }
+                    Intent[] final = null;
+                    if (!usefolderone)
+                    {
+                        final = new Intent[a.Count + a1.Count];
+                        Array.Copy(extraIntents, final, extraIntents.Length);
+                        Array.Copy(extraIntents1, 0, final, extraIntents.Length, extraIntents1.Length);
+                    }
+                    else
+                    {
+                        final = extraIntents1;
+                    }
+                    if (final.Length != 0)
+                    {
+                        chooserIntent.PutExtra(Intent.ExtraIntent, final[0]);
+                    }
+                    if (final.Length > 1)
+                    {
+                        var a2 = new Intent[final.Length - 1];
+                        Array.Copy(final, 1, a2, 0, a2.Length);
+                        chooserIntent.PutExtra(Intent.ExtraInitialIntents, a2);
+                    }
+                    StartActivityForResult(chooserIntent, 6666);
                 });
                 Dialog dialog = db.Create();
                 dialog.Show();
@@ -177,6 +312,7 @@ namespace ImageEditorAPK
             {
                 Intent intent = new Intent(this, typeof(CryptImagesService));
                 intent.PutExtra("dir", data.Data);
+                intent.PutExtra("files", data.ClipData);
                 intent.PutExtra("decrypt", requestCode == 6666);
                 StartService(intent);
             }
