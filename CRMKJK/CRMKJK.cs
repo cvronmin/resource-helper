@@ -72,7 +72,7 @@ namespace CRMKJK
             }
             sb.Append(new string(enchant));
             bool zip = false;
-            if (sb.Length > 0x80000 & false) { //Too large for data storage
+            if (sb.Length > 0x80000) { //Too large for data storage
                 zip = true;
                 string zipped = Helper.ZipString(sb.ToString());
                 sb.Clear().Append(zipped);

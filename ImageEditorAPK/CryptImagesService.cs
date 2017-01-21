@@ -35,6 +35,8 @@ namespace ImageEditorAPK
             nb.SetOngoing(true);
             //string dir = intent.GetStringExtra("dir");
             Android.Net.Uri dir = intent.GetParcelableExtra("dir") as Android.Net.Uri;
+            ClipData cd = intent.GetParcelableExtra("files") as ClipData;
+            ClipData.Item cdi = cd.GetItemAt(0);
             bool decrypt = intent.GetBooleanExtra("decrypt",false);
 
             intent1.PutExtra("noticeId", 0x731);
@@ -46,7 +48,18 @@ namespace ImageEditorAPK
             var action = new Notification.Action(Android.Resource.Drawable.IcDelete, "Cancel", pi);
             //nb.AddAction(action);
             noticeMgr.Notify(0x731, nb.Build());
-            var files = DocumentFile.FromTreeUri(this,dir).ListFiles();
+            DocumentFile[] files = null;
+            if (dir != null)
+            {
+                files = DocumentFile.FromTreeUri(this, dir).ListFiles();
+            }
+            else if (cd != null) {
+                files = new DocumentFile[cd.ItemCount];
+                for (int i = 0; i < files.Length; i++)
+                {
+                    files[i] = DocumentFile.FromSingleUri(this, cd.GetItemAt(i).Uri);
+                }
+            }
             noticeMgr.Notify(0x731, nb.SetContentText(string.Format("doing job... (0/{0})", files.Length)).SetProgress(files.Length, 0, false).Build());
             for (int i = 0; i < files.Length; i++)
             {
@@ -59,7 +72,7 @@ namespace ImageEditorAPK
                 {
                     using (var f = ContentResolver.OpenInputStream(files[i].Uri))
                     {
-                        if (decrypt)
+                        if (!decrypt)
                         {
                             using (var a = new System.IO.BinaryReader(f, Encoding.GetEncoding(1252)))
                             {
@@ -69,6 +82,7 @@ namespace ImageEditorAPK
                                 {
                                     sb.AppendFormat("{0:X2}", item);
                                 }
+                                by = null;
                                 b = sb.ToString();
                             }
                         }
