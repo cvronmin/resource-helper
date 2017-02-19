@@ -87,7 +87,7 @@ namespace ImageEditorAPK
                             }
                         }
                         else {
-                            using (var a = new System.IO.StreamReader(f, Encoding.GetEncoding(1252)))
+                            using (var a = new System.IO.StreamReader(f, Encoding.UTF8))
                             {
                                 b = a.ReadToEnd();
                             }
