@@ -17,7 +17,7 @@ using Android.Support.V4.Provider;
 using Android.Text;
 using Android.Content.PM;
 
-namespace ImageEditorAPK
+namespace ToolBoxAPK
 {
     [Activity(Label = "Encoder", Icon = "@drawable/icon")]
     public class EncryptActivity : AppCompatActivity
@@ -125,13 +125,28 @@ namespace ImageEditorAPK
                 e.MenuItem.SetChecked(true);
                 //react to click here and swap fragments or navigate
                 drawerLayout.CloseDrawers();
-                if (e.MenuItem.ItemId == Resource.Id.nav_imgedit)
+                Intent intent;
+                switch (e.MenuItem.ItemId)
                 {
-                    var intent = new Intent(this, typeof(MainActivity));
-                    intent.AddFlags(ActivityFlags.ClearTask);
-                    intent.AddFlags(ActivityFlags.NewTask);
-                    StartActivity(intent);
+                    case Resource.Id.nav_imgedit:
+                        intent = new Intent(this, typeof(MainActivity));
+                        break;
+                    case Resource.Id.nav_namegen:
+                        intent = new Intent(this, typeof(MonitorActivity));
+                        break;
+                    case Resource.Id.nav_launch:
+                        intent = new Intent(this, typeof(LaunchingActivity));
+                        break;
+                    case Resource.Id.nav_phyqbank:
+                        intent = new Intent(this, typeof(PhyQBankActivity));
+                        break;
+                    default:
+                        return;
                 }
+                intent.AddFlags(ActivityFlags.ClearTask);
+                intent.AddFlags(ActivityFlags.NewTask);
+                StartActivity(intent);
+                
             };
 
 

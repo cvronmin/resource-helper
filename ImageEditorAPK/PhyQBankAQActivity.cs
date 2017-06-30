@@ -20,9 +20,9 @@ using Java.Lang;
 using Android.Graphics;
 using Android.Support.V4.App;
 using Fragment = Android.Support.V4.App.Fragment;
-using ImageEditorAPK;
+using ToolBoxAPK;
 
-namespace ImageEditorAPK
+namespace ToolBoxAPK
 {
     [Activity(Label = "PhyQBankAQ")]
     public class PhyQBankAQActivity : AppCompatActivity

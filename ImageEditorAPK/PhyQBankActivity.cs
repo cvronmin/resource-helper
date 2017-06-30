@@ -21,7 +21,7 @@ using Android.Graphics;
 using Android.Support.V4.App;
 using Fragment = Android.Support.V4.App.Fragment;
 
-namespace ImageEditorAPK
+namespace ToolBoxAPK
 {
     [Activity(Label = "PhyQBank")]
     public class PhyQBankActivity : AppCompatActivity
@@ -43,20 +43,27 @@ namespace ImageEditorAPK
                 e.MenuItem.SetChecked(true);
                 //react to click here and swap fragments or navigate
                 drawerLayout.CloseDrawers();
-                if (e.MenuItem.ItemId == Resource.Id.nav_encrypt)
+                Intent intent;
+                switch (e.MenuItem.ItemId)
                 {
-                    var intent = new Intent(this, typeof(EncryptActivity));
-                    intent.AddFlags(ActivityFlags.ClearTask);
-                    intent.AddFlags(ActivityFlags.NewTask);
-                    StartActivity(intent);
+                    case Resource.Id.nav_encrypt:
+                        intent = new Intent(this, typeof(EncryptActivity));
+                        break;
+                    case Resource.Id.nav_imgedit:
+                        intent = new Intent(this, typeof(MainActivity));
+                        break;
+                    case Resource.Id.nav_namegen:
+                        intent = new Intent(this, typeof(MonitorActivity));
+                        break;
+                    case Resource.Id.nav_launch:
+                        intent = new Intent(this, typeof(LaunchingActivity));
+                        break;
+                    default:
+                        return;
                 }
-                if (e.MenuItem.ItemId == Resource.Id.nav_imgedit)
-                {
-                    var intent = new Intent(this, typeof(MainActivity));
-                    intent.AddFlags(ActivityFlags.ClearTask);
-                    intent.AddFlags(ActivityFlags.NewTask);
-                    StartActivity(intent);
-                }
+                intent.AddFlags(ActivityFlags.ClearTask);
+                intent.AddFlags(ActivityFlags.NewTask);
+                StartActivity(intent);
             };
             
             pager = FindViewById<ViewPager>(Resource.Id.viewPager1);

@@ -11,7 +11,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 
-namespace ImageEditorAPK
+namespace ToolBoxAPK
 {
     public class SeekBarDialogFragment : DialogFragment
     {

@@ -56,7 +56,8 @@ namespace CRMKJK
         {
             //Including this division at the end gives us significantly improved
             //random number distribution.
-            return (InternalSample() * (1.0 / MBIG));
+            int v = InternalSample();
+            return v * (1.0 / MBIG);
         }
 
         private int InternalSample()
@@ -70,8 +71,10 @@ namespace CRMKJK
 
             retVal = SeedArray[locINext] - SeedArray[locINextp];
 
-            if (retVal == MBIG) retVal--;
-            if (retVal < 0) retVal += MBIG;
+            if (retVal == MBIG)
+                retVal--;
+            if (retVal < 0)
+                retVal += MBIG;
 
             SeedArray[locINext] = retVal;
 
@@ -90,7 +93,7 @@ namespace CRMKJK
 
             int result = InternalSample();
             // Note we can't use addition here. The distribution will be bad if we do that.
-            bool negative = (InternalSample() % 2 == 0) ? true : false;  // decide the sign based on second sample
+            bool negative = (InternalSample() % 2 == 0);  // decide the sign based on second sample
             if (negative)
             {
                 result = -result;
@@ -204,8 +207,8 @@ namespace CRMKJK
             {
                 samples[i] = (results[i] - minValue) / range;
             }
-            int inext, locINext = 0;
-            int inextp, locINextp = 31;
+            int locINext = 0;
+            int locINextp = 31;
             int[] SeedArray = new int[56];
             for (int i = 0; i < samples.Length; i++)
             {
@@ -217,33 +220,30 @@ namespace CRMKJK
             }
             for (int i = samples.Length - 1; i >= 0; i--)
             {
-                var a = (int)(samples[i] / (1.0 / MBIG));
-                //locINext = (1 + i % 56) % 55 + 1;
-                //locINextp = (22 + i % 56) % 55 + 1;
-                
-                if (a - MBIG < 0) a -= MBIG;
-                if (a + 1 == MBIG) a++;
+                var retVal = SeedArray[locINext];
 
-                SeedArray[locINext] = SeedArray[locINextp] + a;
+                if ((retVal/* + 1*/) == MBIG)
+                    retVal/*++*/--;
+                if (retVal/* - MBIG*/ < 0) retVal /*-*/+= MBIG;
+
+                SeedArray[locINext] = SeedArray[locINextp] + retVal;
 
                 if (--locINext <= 0) locINext = 55;
                 if (--locINextp <= 0) locINextp = 55;
-                inext = locINext;
-                inextp = locINextp;
             }
             for (int k = 1; k < 5; k++)
             {
                 for (int i = 55; i > 0; i--)
                 {
-                    if (SeedArray[i] - MBIG < 0) SeedArray[i] -= MBIG;
                     SeedArray[i] += SeedArray[1 + (i + 30) % 55];
+                    if (SeedArray[i]/* - MBIG */< 0) SeedArray[i] /*-*/+= MBIG;
                 }
             }
             int Seed;
             int mj;
             mj = SeedArray[55];
             int subtraction = MSEED - mj;
-            Seed = subtraction == int.MaxValue ? int.MinValue : subtraction;
+            Seed = subtraction == int.MaxValue ? int.MinValue : (subtraction < 0 ? subtraction + MBIG : subtraction);
             return Seed;
         }
 

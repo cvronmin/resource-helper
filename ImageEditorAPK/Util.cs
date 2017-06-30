@@ -16,7 +16,7 @@ using Environment = Android.OS.Environment;
 using Java.IO;
 using Java.Util;
 
-namespace ImageEditorAPK
+namespace ToolBoxAPK
 {
     static class Util
     {

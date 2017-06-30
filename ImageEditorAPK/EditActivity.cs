@@ -20,7 +20,7 @@ using Environment = Android.OS.Environment;
 using Uri = Android.Net.Uri;
 using File = Java.IO.File;
 
-namespace ImageEditorAPK
+namespace ToolBoxAPK
 {
     [Activity(Label = "Editor")]
     public class EditActivity : AppCompatActivity

@@ -15,7 +15,7 @@ using DrawerLayout = Android.Support.V4.Widget.DrawerLayout;
 using Android.Support.V7.App;
 using Android.Support.Design.Widget;
 
-namespace ImageEditorAPK
+namespace ToolBoxAPK
 {
     [Activity(Label = "MonitorActivity")]
     public class MonitorActivity : AppCompatActivity

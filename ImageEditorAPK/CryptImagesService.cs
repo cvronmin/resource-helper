@@ -11,7 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V4.Provider;
 
-namespace ImageEditorAPK
+namespace ToolBoxAPK
 {
     [Service]
     public class CryptImagesService : IntentService

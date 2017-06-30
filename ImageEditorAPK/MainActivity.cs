@@ -10,7 +10,7 @@ using DrawerLayout = Android.Support.V4.Widget.DrawerLayout;
 using Android.Support.Design.Widget;
 using Android.Views;
 
-namespace ImageEditorAPK
+namespace ToolBoxAPK
 {
     [Activity(Label = "Image Editor", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : AppCompatActivity
@@ -56,6 +56,9 @@ namespace ImageEditorAPK
                         break;
                     case Resource.Id.nav_namegen:
                         intent = new Intent(this, typeof(MonitorActivity));
+                        break;
+                    case Resource.Id.nav_launch:
+                        intent = new Intent(this, typeof(LaunchingActivity));
                         break;
                     case Resource.Id.nav_phyqbank:
                         intent = new Intent(this, typeof(PhyQBankActivity));
